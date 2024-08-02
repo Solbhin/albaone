@@ -6,7 +6,7 @@ public class employmentcontract
 	private String parttimename; //알바생명
 	private String period_start; //근무 시작 날짜
 	private String period_end; //근무 종료 날짜
-	private String plcae; //근무 장소
+	private String place; //근무 장소
 	private String workdetail; //업무 내용
 	private String workinghours_start;// 근무 시작 시간
 	private String workinghours_end; //근무 종료 시간
@@ -53,12 +53,12 @@ public class employmentcontract
 		this.period_end = period_end;
 	}
 
-	public String getPlcae() {
-		return plcae;
+	public String getPlace() {
+		return place;
 	}
 
-	public void setPlcae(String plcae) {
-		this.plcae = plcae;
+	public void setPlace(String plcae) {
+		this.place = plcae;
 	}
 
 	public String getWorkdetail() {

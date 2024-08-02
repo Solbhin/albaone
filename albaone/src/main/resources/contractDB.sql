@@ -13,8 +13,8 @@ CREATE TABLE employmentcontract
     workinghours_start varchar(5) not null,-- 근로 시작 시간
     workinghours_end varchar(5) not null,-- 근로 종료 시간
     workday int not null, -- 주당 근무일
-    money long not null, -- 임금 - 시급, 일급, 월급을 정하거나 미리 데이터베이스를 여러개 만들고 따로 저장하는 것으로 함
-    bonus long, -- 상여금
+    money bigint not null, -- 임금 - 시급, 일급, 월급을 정하거나 미리 데이터베이스를 여러개 만들고 따로 저장하는 것으로 함
+    bonus bigint , -- 상여금
     insurance varchar(25),-- 보험
     createdate date-- 작성 날짜
 );
