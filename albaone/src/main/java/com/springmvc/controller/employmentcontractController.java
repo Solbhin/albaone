@@ -79,10 +79,30 @@ public class employmentcontractController
 	}
 
 	
-	//해당 계약서 삭제-일단 리드가 되야됨
-	@GetMapping("/employmentcontractDelete")
-	public String employmentcontractUpdate()
+	//해당 계약서 삭제-어떤 폼을 삭제할지 폼 부터
+	@GetMapping("/deletecontract")
+	public String employmentcontractdeleteform()
 	{
-		return "redirect:home";
+		return "contractdelete";
+	}
+		
+	// 알바생명으로 계약서 삭제 처리
+	@PostMapping("/deleteContract")
+	public String deleteContractsByPartTimeName(@RequestParam("parttimename") String parttimename, Model model)
+	{
+	System.out.println("이력서 삭제 메서드");
+	int deletedCount = employmentcontractService.deleteContractsByPartTimeName(parttimename);
+	        
+	if (deletedCount > 0)
+	{
+		model.addAttribute("message", "삭제가 완료되었습니다.");
+	}
+	else
+	{
+		model.addAttribute("message", "해당 알바생명은 존재하지 않습니다.");
+	}
+	
+	return "resultdeleteContract"; // 결과 JSP 페이지
+	
 	}
 }
