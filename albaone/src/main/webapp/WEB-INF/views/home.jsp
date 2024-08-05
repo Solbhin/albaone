@@ -50,9 +50,14 @@
         </div>
     </div>
 
+<!-- 근로 계약서 a태그, 임시 -->
 <p><a href="employmentcontract">근로계약서 테스트</a>
 <p><a href="employmentcontractUpdate">근로계약서 재작성 테스트</a>
 <p><a href="searchcontract">근로계약서 조회</a>
 <p><a href="deletecontract">근로계약서 삭제</a>
+
+<!-- QR a태크, 임시 -->
+<p><a href="QRform">QR 생성 폼</a>
+<p><a href="QRread">QR 조회</a>
 </body>
 </html>
