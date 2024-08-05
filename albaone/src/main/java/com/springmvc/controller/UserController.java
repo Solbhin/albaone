@@ -43,18 +43,25 @@ public class UserController {
 		}
 	}
 	
-//	회원 정보 수정
+//	회원 정보 수정 양식
 	@GetMapping("/update")
-	public String editUserForm(HttpSession session, Model model) {
+	public String updateUserForm(HttpSession session, Model model) {
 		String id = (String) session.getAttribute("id");
 		String BusinessNumber = userService.findBusinessNumber(id);
 		User user = userService.findUserById(id);
 		model.addAttribute("user", user);
 		if(BusinessNumber==null) {
-			return "registerPersonal";
+			return "updatePersonal";
 		} else {
-			return "registerBusiness";
+			return "updateBusiness";
 		}
+	}
+	
+//	회원 정보 수정
+	@PostMapping("/update")
+	public String updateUser(@ModelAttribute("user") User user) {
+		userService.updateUser(user);
+		return "redirect:/home";
 	}
 	
 //	로그아웃
@@ -98,6 +105,14 @@ public class UserController {
 		count = userService.idcheck(userId);
 		map.put("cnt", count);
 		return map;
+	}
+	
+//	회원 탈퇴
+	@GetMapping("/delete")
+	public String deleteUser(@RequestParam("id") String id, HttpSession session) {
+		userService.deleteUser(id);
+		session.invalidate();
+		return "redirect:/home";
 	}
 	
 }

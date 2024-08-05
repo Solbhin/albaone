@@ -36,6 +36,16 @@ public class UserServiceImpl implements UserService{
 		return userRepository.idcheck(userId);
 	}
 
+	@Override
+	public void updateUser(User user) {
+		userRepository.updateUser(user);
+	}
+
+	@Override
+	public void deleteUser(String id) {
+		userRepository.deleteUser(id);
+	}
+
 
 
 }

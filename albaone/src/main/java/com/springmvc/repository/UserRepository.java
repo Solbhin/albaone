@@ -9,4 +9,5 @@ public interface UserRepository {
 	void updateUser(User user);
 	public User finUserById(String id);
 	int idcheck(String userId);
+	void deleteUser(String id);
 }

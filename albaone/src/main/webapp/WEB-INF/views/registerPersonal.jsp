@@ -14,7 +14,7 @@
         margin-left: -1px; /* 버튼과 경계가 겹치지 않도록 조정 */
     }
 </style>
-<title>개인회원 회원가입</title>
+<title>개인회원</title>
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100">
