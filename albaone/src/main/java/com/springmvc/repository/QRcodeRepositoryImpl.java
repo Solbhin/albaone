@@ -25,11 +25,10 @@ public class QRcodeRepositoryImpl implements QRcodeRepository
 	{
 		System.out.println("QR 코드 create 메서드 실행");
 		
-		String sql = "insert into QRtable values (?,?,?)";//넣을 값이 2개뿐임, url과 id
+		String sql = "insert into QRtable values (?,?)";//넣을 값이 2개뿐임, url과 id
 		template.update
 		(
 				sql,
-				qrdto.getQRurl(),
 				qrdto.getId(),
 				qrdto.getToday()
 		);
@@ -40,12 +39,11 @@ public class QRcodeRepositoryImpl implements QRcodeRepository
 	@Override
 	public QRdto read(String id)
 	{
-		String sql = "SELECT QRurl, id, todaytime FROM QRtable WHERE id = ?";
+		String sql = "SELECT id, todaytime FROM QRtable WHERE id = ?";
 
 		return template.queryForObject(sql, new Object[]{id}, (rs, rowNum) ->
 		{
 			QRdto qrDto = new QRdto();
-			qrDto.setQRurl(rs.getString("QRurl"));
 			qrDto.setId(rs.getString("id"));
 			qrDto.setToday(rs.getString("todaytime")); // setToday 메서드 사용
 	        return qrDto;

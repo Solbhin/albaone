@@ -12,8 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -28,6 +26,7 @@ public class QRCodeController
     @Autowired
     private QRCodeService qrCodeService;
 
+    //QR 생성 폼 제공
     @GetMapping("/QRform")
     public String QRform()
     {
@@ -35,23 +34,17 @@ public class QRCodeController
         return "QRform";
     }
 
+    //QR 생성 -아이디, 시간 생성용
     @PostMapping("/QRcreate")
     public String QRcreate(@ModelAttribute("QRcreate") QRdto qrdto, BindingResult result, Model model)
     {
         System.out.println("QR 생성 메서드");
-        
-        // 현재 URL + 알바생 ID 생성
-        String baseUrl = "http://localhost:8080"; //사이트 주소 - 바뀌면 수정이 필요
-        String qrUrl = baseUrl + "/" + qrdto.getId(); // QR URL 생성
 
-        // QRdto에 생성한 URL 설정
-        qrdto.setQRurl(qrUrl);
-        
         qrCodeService.create(qrdto); // QR 코드 생성 및 DB 저장
         return "redirect:home"; // QR read로 이동 - read 완성시 수정
     }
     
-    //read메서드
+    //read메서드 - QR read 폼 제공
     @GetMapping("/QRread")
     public String QRreadform()
     {
@@ -61,19 +54,25 @@ public class QRCodeController
     //폼에서 읽은 알바생 아이디 기본키를 이용하여 데이터베이스url을 이용하여 qr 생성
     //id를 읽으면, 해당 아이디로 QR 데이터베이스의 URL열을 가져와 사용
     @PostMapping("/QRread")
-    public String QRread(@ModelAttribute("QRread") QRdto qrdto, BindingResult result, HttpServletResponse response, Model model)
-    {
+    public String QRread(@ModelAttribute("QRread") QRdto qrdto, BindingResult result, HttpServletResponse response, Model model) {
         System.out.println("QR 조회하기");
 
         try
         {
-            //조회할 id
+            // ID를 사용하여 QR 정보를 조회
             QRdto retrievedQRdto = qrCodeService.read(qrdto.getId());
 
             if (retrievedQRdto != null)
             {
+                // ID와 시간을 사용하여 URL 생성
+                String id = retrievedQRdto.getId();
+                String time = retrievedQRdto.getToday(); // 데이터베이스에서 가져온 시간
+
+                // URL 생성
+                String qrUrl = String.format("http://localhost:8080/albaone/QRread?id=%s&time=%s", id, time);
+
                 // QR 코드를 Base64 형식으로 생성
-                String base64QRCode = generateQRCodeAsBase64(retrievedQRdto.getQRurl());
+                String base64QRCode = generateQRCodeAsBase64(qrUrl);
                 model.addAttribute("qrCodeUrl", "data:image/png;base64," + base64QRCode);
                 return "QRview"; // QRview로 이동
             }
@@ -96,6 +95,7 @@ public class QRCodeController
         }
         return "home";
     }
+
 
     //QR 만드는 메서드
     private String generateQRCodeAsBase64(String text) throws WriterException, IOException

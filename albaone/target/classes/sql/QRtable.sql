@@ -2,12 +2,10 @@
 
 use albaoneDB;
 
-CREATE TABLE QRtable
+create table QRtable
 (
-    -- QR의 url을 저장하기 위한 변수
-    QRurl varchar(200) NOT NULL,
-    id varchar(10) PRIMARY KEY,
-    todaytime varchar(20) NOT NULL
+    id varchar(10) primary key,
+    todaytime varchar(20) not null
 );
 
 

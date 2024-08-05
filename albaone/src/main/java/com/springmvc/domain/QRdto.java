@@ -2,19 +2,10 @@ package com.springmvc.domain;
 
 public class QRdto
 {
-	private String QRurl;
 	private String id;
 	private String todaytime;
 	
 	public QRdto() {}
-
-	public String getQRurl() {
-		return QRurl;
-	}
-
-	public void setQRurl(String qRurl) {
-		QRurl = qRurl;
-	}
 
 	public String getId() {
 		return id;

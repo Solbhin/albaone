@@ -39,7 +39,8 @@ public class QRCodeServiceImpl implements QRCodeService
 	}
 
 	@Override
-	public QRdto read(String id) {
+	public QRdto read(String id)
+	{
 	    return QRcodeRepositoryImpl.read(id); // 리포지토리에서 ID로 QR 정보를 조회
 	}
 
