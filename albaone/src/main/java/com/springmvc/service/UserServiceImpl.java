@@ -31,4 +31,11 @@ public class UserServiceImpl implements UserService{
 		return userRepository.finUserById(id);
 	}
 
+	@Override
+	public int idcheck(String userId) {
+		return userRepository.idcheck(userId);
+	}
+
+
+
 }

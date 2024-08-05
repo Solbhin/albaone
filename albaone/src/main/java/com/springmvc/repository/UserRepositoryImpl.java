@@ -57,5 +57,12 @@ public class UserRepositoryImpl implements UserRepository{
 		});
 	}
 
+	@Override
+	public int idcheck(String userId) {
+		String SQL = "SELECT COUNT(*) FROM user WHERE id = ?";
+		System.out.println(template.queryForObject(SQL, Integer.class, userId));
+		return template.queryForObject(SQL, Integer.class, userId);
+	}
+
 	
 }

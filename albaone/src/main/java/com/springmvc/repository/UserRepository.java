@@ -8,4 +8,5 @@ public interface UserRepository {
 	String findBusinessNumber(String id);
 	void updateUser(User user);
 	public User finUserById(String id);
+	int idcheck(String userId);
 }

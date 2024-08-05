@@ -7,4 +7,5 @@ public interface UserService {
 	boolean loginUser(String id, String password);
 	String findBusinessNumber(String id);
 	public User findUserById(String id);
+	int idcheck(String userId);
 }

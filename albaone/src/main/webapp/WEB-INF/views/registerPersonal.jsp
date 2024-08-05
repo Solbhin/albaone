@@ -5,7 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+    .input-group {
+        width: 100%;
+    }
+    .input-group-append {
+        margin-left: -1px; /* 버튼과 경계가 겹치지 않도록 조정 */
+    }
+</style>
+<title>개인회원 회원가입</title>
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100">
@@ -15,7 +24,10 @@
                 <form action="./" method="post" modelAttribute="user">
                     <div class="form-group">
                         <label for="username">아이디</label>
-                        <input type="text" class="form-control" name="id" placeholder="아이디" required>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="id" value="${user.id}" placeholder="아이디" required>
+                            <button type="button" class="btn btn-secondary" onclick="checkId()">중복 체크</button>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="password">비밀번호</label>
@@ -37,7 +49,7 @@
                         <label for="phone">휴대폰</label>
                         <input type="text" class="form-control" name="phone" placeholder="휴대폰" required>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block mt-3">회원가입</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-3" id="submitButton" disabled>회원가입</button>
                 </form>
                 <div class="text-center mt-3">
                     <a href="/albaone/login" class="btn btn-link">로그인 페이지로</a>
@@ -45,5 +57,34 @@
             </div>
         </div>
     </div>
+    
+    <script>
+   	var idck = 0;
+   	const submitButton = document.getElementById('submitButton');
+    function checkId() {
+        var userId = document.querySelector('input[name="id"]').value;
+        
+        $.ajax({
+        	url : "idcheck.do",
+        	type : "post",
+        	data : userId,
+        	dataType : "json",
+        	contentType : "application/json; charset=UTF-8",
+        	success : function(data) {
+        		if(data.cnt > 0) {
+        			alert("아이디가 존재합니다. 다른 아이디를 입력해주세요");
+        			submitButton.disabled = true;
+        		} else {
+        			alert("사용 가능한 아이디입니다.");
+        			idck = 1;
+        			submitButton.disabled = false;
+        		}
+        	},
+        	error : function(error) {
+        		alert("error : " + error);		
+        	}
+        });
+    }
+</script>
 </body>
 </html>
