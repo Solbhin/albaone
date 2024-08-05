@@ -1,9 +1,14 @@
 package com.springmvc.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.employmentcontract;
@@ -84,5 +89,32 @@ public class employmentcontractRepositoryImpl implements employmentcontractRepos
 	    );
 	    return;
 	}
-
+	
+	@Override
+    public List<employmentcontract> findAllByPartTimeName(String parttimename)
+	{
+        String sql = "SELECT * FROM employmentcontract WHERE parttimename = ?";
+        return template.query(sql, new Object[]{parttimename}, new RowMapper<employmentcontract>()
+        {
+            @Override
+            public employmentcontract mapRow(ResultSet rs, int rowNum) throws SQLException
+            {
+            	employmentcontract employmentcontract = new employmentcontract();
+            	employmentcontract.setOwnername(rs.getString("ownername"));
+            	employmentcontract.setParttimename(rs.getString("parttimename"));
+            	employmentcontract.setPeriod_start(rs.getString("period_start"));
+            	employmentcontract.setPeriod_end(rs.getString("period_end"));
+            	employmentcontract.setPlace(rs.getString("place"));
+            	employmentcontract.setWorkdetail(rs.getString("workdetail"));
+            	employmentcontract.setWorkinghours_start(rs.getString("workinghours_start"));
+            	employmentcontract.setWorkinghours_end(rs.getString("workinghours_end"));
+            	employmentcontract.setWorkday(rs.getInt("workday"));
+            	employmentcontract.setMoney(rs.getInt("money"));
+            	employmentcontract.setBonus(rs.getInt("bonus"));
+            	employmentcontract.setInsurance(rs.getString("insurance"));
+            	employmentcontract.setDate(rs.getString("createdate"));
+                return employmentcontract;
+            }
+        });
+    }
 }

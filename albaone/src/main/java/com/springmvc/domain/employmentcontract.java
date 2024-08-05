@@ -124,6 +124,11 @@ public class employmentcontract
 	public void setData(String date) {
 		this.date = date;
 	}
+
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 	
 	
 }

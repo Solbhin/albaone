@@ -50,5 +50,8 @@
         </div>
     </div>
 
+<p><a href="employmentcontract">근로계약서 테스트</a>
+<p><a href="employmentcontractUpdate">근로계약서 재작성 테스트</a>
+<p><a href="searchcontract">근로계약서 조회</a>
 </body>
 </html>

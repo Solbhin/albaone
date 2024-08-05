@@ -1,5 +1,7 @@
 package com.springmvc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,10 @@ public class employmentcontractServiceImpl implements employmentcontractService
 	{
 		employmentcontractRepository.update(employmentcontract);
 	}
-
+	
+	// 알바생명으로 계약서 조회
+	public List<employmentcontract> findAllByPartTimeName(String parttimename)
+	{
+		return employmentcontractRepository.findAllByPartTimeName(parttimename);
+	}
 }
