@@ -4,7 +4,7 @@ create table user(
     password varchar(20) not null,
     name varchar(10) not null,
     phone char(13),
-    eamil varchar(20),
+    email varchar(20),
     businessNumber varchar(20)
     );
 select * from User;
@@ -33,3 +33,17 @@ CREATE TABLE Resume (
 drop table Resume;
 
 select * from Resume;
+
+CREATE TABLE if not exists jobpost(
+	postNumber INT AUTO_INCREMENT,
+	companyName VARCHAR(20) NOT NULL,
+    workLocation VARCHAR(50) NOT NULL,
+    contactNumber CHAR(15) NOT NULL,
+    salary INT NOT NULL,
+    workHours VARCHAR(30) default "시간협의",
+    workDays VARCHAR(5) default "요일협의",
+    workDuration varchar(10) not null,
+    jobDescription varchar(200)
+);
+    
+    

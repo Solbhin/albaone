@@ -21,7 +21,7 @@
         <div class="card" style="width: 30rem;">
             <div class="card-body">
                 <h5 class="card-title text-center">개인회원 가입</h5>
-                <form action="./" method="post" modelAttribute="user">
+                <form action="./" method="post" modelAttribute="user" onsubmit="return validateForm()">
                     <div class="form-group">
                         <label for="username">아이디</label>
                         <div class="input-group">
@@ -31,11 +31,11 @@
                     </div>
                     <div class="form-group">
                         <label for="password">비밀번호</label>
-                        <input type="password" class="form-control" name="password" placeholder="비밀번호" required>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호" required>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">비밀번호 확인</label>
-                        <input type="password" class="form-control" name="confirmPassword" placeholder="비밀번호 확인" required>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="비밀번호 확인" required>
                     </div>
                     <div class="form-group">
                         <label for="name">이름</label>
@@ -84,6 +84,17 @@
         		alert("error : " + error);		
         	}
         });
+    }
+    
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+            alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+            return false; // 제출 요청을 거절
+        }
+        return true; // 제출 요청 허용
     }
 </script>
 </body>

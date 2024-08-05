@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
@@ -21,8 +22,13 @@
 	                		<p class="nav-link">안녕하세요 <strong>${id}님</strong></p>
 	                	</li>
 	                </c:if>
+	                <c:if test="${not empty sessionScope.businessNumber}">
+	                    <li class="nav-item">
+	                        <a class="nav-link" href="/albaone/jobposting">공고등록</a>
+	                    </li>
+	                </c:if>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">구인 게시글 조회</a>
+                        <a class="nav-link" href="/albaone/jobposts">구인 게시글 조회</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">근태 관리</a>

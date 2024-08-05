@@ -36,6 +36,8 @@ public class UserController {
 		System.out.println("로그인");
 		if(userService.loginUser(id, password)) {
 			session.setAttribute("id", id);
+			String businessNumber = userService.findBusinessNumber(id);
+			session.setAttribute("businessNumber", businessNumber);
 			return "redirect:/home";
 		} else {
 			model.addAttribute("error", "로그인 실패");
@@ -89,7 +91,7 @@ public class UserController {
 		return "registerBusiness";
 	}
 	
-//	회원 데이터 생성
+//	회원 가입 처리
 	@PostMapping("/register")
 	public String registerUser(@ModelAttribute("user") User user, BindingResult result) {
 		userService.setNewUser(user);

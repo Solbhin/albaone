@@ -6,7 +6,5 @@ import com.springmvc.domain.Resume;
 
 @Repository
 public interface ResumeRespository {
-
 	void setmyImg(Resume resume);
-
 }
