@@ -48,7 +48,8 @@ public class UserRepositoryImpl implements UserRepository{
 		return template.queryForObject(SQL, new Object[] {id}, (rs, rowNum)->{
 			User user = new User();
 			user.setId(rs.getString("id"));
-			user.setPassword(rs.getString("password"));
+			//user.setPassword(rs.getString("password"));
+			user.setPassword(rs.getString("pw"));
 			user.setName(rs.getString("name"));
 			user.setPhone(rs.getString("phone"));
 			user.setEmail(rs.getString("email"));

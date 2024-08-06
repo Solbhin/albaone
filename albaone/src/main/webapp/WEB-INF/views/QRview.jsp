@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>QR 코드 보기</title>
+    <title>QR 뷰</title>
 </head>
 <body>
     <h1>QR 코드</h1>
-    <img src="data:image/png;base64,${qrCode}" alt="QR Code">
-    <p><a href="QRform">다시 입력</a></p>
+    <c:if test="${not empty qrCodeUrl}">
+        <img src="${qrCodeUrl}" alt="QR Code" />
+    </c:if>
+    
+    <p><a href="./">홈으로 돌아가기</a>
 </body>
 </html>

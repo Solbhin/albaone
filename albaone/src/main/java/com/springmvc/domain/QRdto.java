@@ -2,10 +2,8 @@ package com.springmvc.domain;
 
 public class QRdto
 {
-	private String id; //아이디
-	private String today; //날짜
-	private String intime; //출근시간
-	private String quittime; //퇴근시간
+	private String id;
+	private String todaytime;
 	
 	public QRdto() {}
 
@@ -18,28 +16,12 @@ public class QRdto
 	}
 
 	public String getToday() {
-		return today;
+		return todaytime;
 	}
 
-	public void setToday(String today) {
-		this.today = today;
+	public void setToday(String todaytime) {
+		this.todaytime = todaytime;
 	}
-
-	public String getIntime() {
-		return intime;
-	}
-
-	public void setIntime(String intime) {
-		this.intime = intime;
-	}
-
-	public String getQuittime() {
-		return quittime;
-	}
-
-	public void setQuittime(String quittime) {
-		this.quittime = quittime;
-	}
-
+	
 	
 }

@@ -57,7 +57,7 @@
 <p><a href="deletecontract">근로계약서 삭제</a>
 
 <!-- QR a태크, 임시 -->
-<p><a href="QRform">QR 생성 출퇴근</a>
-
+<p><a href="QRform">QR 생성 폼</a>
+<p><a href="QRread">QR 조회</a>
 </body>
 </html>
