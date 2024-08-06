@@ -103,5 +103,6 @@ public class employmentcontractController
 	}
 	
 	return "resultdeleteContract"; // 결과 JSP 페이지
+	
 	}
 }
