@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form action="Severance" method="post" modelAttrubute="Severance">
-		<p>알바생명 : <input type="text" name="partname">
+		<p>알바생명 : <input type="text" name="partname" maxlength="5">
 		<p><input type="submit" value="지급">
 	</form>
 </body>

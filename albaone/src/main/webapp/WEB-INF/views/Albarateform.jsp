@@ -7,7 +7,7 @@
 </head>
 <body>
 <form action="writeAlbarate" method="post" modelAttribute="Albarate">
-	<p>알바명 : <input type="text" name="parttimename">
+	<p>알바명 : <input type="text" name="parttimename" maxlength="5">
 	<p>
 		긍정적<input type="radio" name="rating" value="positive" id="positive"> 
 		부정적<input type="radio" name="rating" value="negative" id="negative">
