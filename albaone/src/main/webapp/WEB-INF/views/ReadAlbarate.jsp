@@ -7,10 +7,12 @@
 <title>등급 조회</title>
 </head>
 <body>
+	<a href="./">홈으로</a>
 	<!-- 변수에 EL 담기 -->
 	<c:set var="commute" value="${read.commute}" />
 	<c:set var="absent" value="${read.absent}" />
 	<c:set var="blinking" value="${read.blinking}" />
+	<c:set var="company" value="${read.company}" />
 
 	<table border="1">
 	<tbody>
@@ -41,19 +43,18 @@
 			<td>${ read.company }</td>
 				<!-- 20보다 작으면 -->
 				<c:if test="${company >= 20}">
-					<c:set var="companyresult" value="우수알바" />
+			    	<c:set var="companyresult" value="우수알바" />
 				</c:if>
-				<!-- -5 이상, 20 이하 -->
 				<c:if test="${company < 20 and company >= -5}">
-					<c:set var="companyresult" value="일반알바" />
+				    <c:set var="companyresult" value="일반알바" />
 				</c:if>
-				<!-- -5 이상 -->
 				<c:if test="${company < -5}">
-					<c:set var="companyresult" value="노력필요" />
+				    <c:set var="companyresult" value="노력필요" />
 				</c:if>
+
 			<td><c:out value="${companyresult}" /></td>
 		</tr>
-	</tbody>
-</table>
+		</tbody>
+	</table>
 </body>
 </html>
