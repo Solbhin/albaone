@@ -1,5 +1,7 @@
 package com.springmvc.domain;
 
+import java.util.Date;
+
 public class employmentcontract
 {
 	private String ownername; //사업주명
@@ -14,13 +16,11 @@ public class employmentcontract
 	private long money;//임금 - 시급, 일급, 월급을 정하거나 미리 데이터베이스를 여러개 만들고 따로 저장하는 것으로 함
 	private long bonus; // 상여금
 	private String insurance; //보험
-	private String date; //작성 날짜
+	private String createdate; //작성 날짜
 	
 	//기본생성자
 	public employmentcontract(){}
 
-	
-	//getter, setter
 	public String getOwnername() {
 		return ownername;
 	}
@@ -117,19 +117,14 @@ public class employmentcontract
 		this.insurance = insurance;
 	}
 
-	public String getDate() {
-		return date;
+	public String getCreatedate() {
+		return createdate;
 	}
 
-	public void setData(String date) {
-		this.date = date;
+	public void setCreatedate(String createdate) {
+		this.createdate = createdate;
 	}
 
 
-	public void setDate(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
+
 }

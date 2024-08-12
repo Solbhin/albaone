@@ -31,8 +31,9 @@ public class employmentcontractController
 	@PostMapping("/employmentcontract")
 	public String employmentcontractend(@ModelAttribute("employment") employmentcontract employmentcontract, BindingResult result)
 	{
+		System.out.println(employmentcontract.getCreatedate());
 		System.out.println("근로계약서 폼 도착");
-		System.out.println(employmentcontract);
+
 		employmentcontractService.create(employmentcontract);
 		return "redirect:home";
 	}
@@ -103,6 +104,5 @@ public class employmentcontractController
 		}
 	
 		return "resultdeleteContract"; // 결과 JSP 페이지
-	
 	}
 }

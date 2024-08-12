@@ -42,7 +42,7 @@
                         <td>${contract.money}</td>
                         <td>${contract.bonus}</td>
                         <td>${contract.insurance}</td>
-                        <td>${contract.date}</td>
+                        <td>${contract.createdate}</td>
                     </tr>
                 </c:forEach>
             </tbody>

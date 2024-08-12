@@ -46,7 +46,7 @@ public class employmentcontractRepositoryImpl implements employmentcontractRepos
 				employmentcontract.getMoney(),
 				employmentcontract.getBonus(),
 				employmentcontract.getInsurance(),
-				employmentcontract.getDate()	
+				employmentcontract.getCreatedate()
 		);
 		return;
 	}
@@ -84,7 +84,7 @@ public class employmentcontractRepositoryImpl implements employmentcontractRepos
 	        employmentcontract.getMoney(),
 	        employmentcontract.getBonus(),
 	        employmentcontract.getInsurance(),
-	        employmentcontract.getDate(),
+	        employmentcontract.getCreatedate(),
 	        employmentcontract.getParttimename()
 	    );
 	    return;
@@ -114,7 +114,7 @@ public class employmentcontractRepositoryImpl implements employmentcontractRepos
             	employmentcontract.setMoney(rs.getInt("money"));
             	employmentcontract.setBonus(rs.getInt("bonus"));
             	employmentcontract.setInsurance(rs.getString("insurance"));
-            	employmentcontract.setDate(rs.getString("createdate"));
+            	employmentcontract.setCreatedate(rs.getString("createdate"));
                 return employmentcontract;
             }
         });
