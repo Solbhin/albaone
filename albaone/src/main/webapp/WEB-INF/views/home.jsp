@@ -21,9 +21,11 @@
 	<p><a href="Severance">퇴직금 계산</a>
 	<p><a href="SeveranceRead">퇴직금 조회</a>
 	
+	<!-- 회원가입시 insert -> 사장도 등급이 생기는 문제점이 생김 -->
 	<!-- 사장 알바 평가 작성 테스트 --세션에 사업자 등록번호가 있을경우 뜨도록 변경 -->
 	<p><a href="writeAlbarate">알바 평가 작성</a>
 	<!-- 사장용 등급보기와 알바용 등급보기가 따로 있어야 됨 -->
+	<!-- 알바만 볼수 있도록 수정 -->
 	<p><a href="ReadAlbarate">등급보기</a>
 </body>
 </html>
