@@ -2,7 +2,6 @@ package com.springmvc.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.Base64;
 
 import javax.servlet.http.HttpServletResponse;
@@ -52,7 +51,7 @@ public class QRCodeController
 		return "QRread";
     }
     
-    //폼에서 읽은 알바생 아이디 기본키를 이용하여 데이터베이스url을 이용하여 QR 생성
+    //폼에서 읽은 알바생 아이디 기본키를 이용하여 데이터베이스url을 이용하여 qr 생성
     //id를 읽으면, 해당 아이디로 QR 데이터베이스의 URL열을 가져와 사용
     @PostMapping("/QRread")
     public String QRread(@ModelAttribute("QRread") QRdto qrdto, BindingResult result, HttpServletResponse response, Model model) {
@@ -60,7 +59,7 @@ public class QRCodeController
 
         try
         {
-        	// ID를 사용하여 QR 정보를 조회
+            // ID를 사용하여 QR 정보를 조회
             QRdto retrievedQRdto = qrCodeService.read(qrdto.getId());
 
             if (retrievedQRdto != null)
@@ -69,12 +68,8 @@ public class QRCodeController
                 String id = retrievedQRdto.getId();
                 String time = retrievedQRdto.getToday(); // 데이터베이스에서 가져온 시간
 
-                // ID를 URL 인코딩
-                String encodedId = URLEncoder.encode(id, "UTF-8");
-                String encodedTime = URLEncoder.encode(time, "UTF-8");
-
                 // URL 생성
-                String qrUrl = String.format("http://localhost:8080/albaone/QRread?id=%s&time=%s", encodedId, encodedTime);
+                String qrUrl = String.format("http://localhost:8080/albaone/QRread?id=%s&time=%s", id, time);
 
                 // QR 코드를 Base64 형식으로 생성
                 String base64QRCode = generateQRCodeAsBase64(qrUrl);

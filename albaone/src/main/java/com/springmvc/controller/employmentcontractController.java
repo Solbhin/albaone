@@ -90,19 +90,19 @@ public class employmentcontractController
 	@PostMapping("/deleteContract")
 	public String deleteContractsByPartTimeName(@RequestParam("parttimename") String parttimename, Model model)
 	{
-	System.out.println("이력서 삭제 메서드");
-	int deletedCount = employmentcontractService.deleteContractsByPartTimeName(parttimename);
+		System.out.println("이력서 삭제 메서드");
+		int deletedCount = employmentcontractService.deleteContractsByPartTimeName(parttimename);
 	        
-	if (deletedCount > 0)
-	{
-		model.addAttribute("message", "삭제가 완료되었습니다.");
-	}
-	else
-	{
-		model.addAttribute("message", "해당 알바생명은 존재하지 않습니다.");
-	}
+		if (deletedCount > 0)
+		{
+			model.addAttribute("message", "삭제가 완료되었습니다.");
+		}
+		else
+		{
+			model.addAttribute("message", "해당 알바생명은 존재하지 않습니다.");
+		}
 	
-	return "resultdeleteContract"; // 결과 JSP 페이지
+		return "resultdeleteContract"; // 결과 JSP 페이지
 	
 	}
 }

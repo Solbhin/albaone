@@ -57,8 +57,8 @@ public class employmentcontract
 		return place;
 	}
 
-	public void setPlace(String plcae) {
-		this.place = plcae;
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
 	public String getWorkdetail() {
@@ -126,8 +126,9 @@ public class employmentcontract
 	}
 
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setDate(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

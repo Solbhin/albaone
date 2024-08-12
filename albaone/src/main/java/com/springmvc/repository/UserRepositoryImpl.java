@@ -38,8 +38,8 @@ public class UserRepositoryImpl implements UserRepository{
 		
 	@Override
 	public void updateUser(User user) {
-		String SQL = "UPDATE user SET ";
-		
+		String SQL = "UPDATE user SET password=?, name=?, email=?, phone=?, businessNumber=? WHERE id=?";
+		template.update(SQL, user.getPassword(), user.getName(), user.getEmail(), user.getPhone(), user.getBusinessNumber(), user.getId());
 	}
 	
 	@Override
@@ -48,14 +48,26 @@ public class UserRepositoryImpl implements UserRepository{
 		return template.queryForObject(SQL, new Object[] {id}, (rs, rowNum)->{
 			User user = new User();
 			user.setId(rs.getString("id"));
-			//user.setPassword(rs.getString("password"));
-			user.setPassword(rs.getString("pw"));
+			user.setPassword(rs.getString("password"));
 			user.setName(rs.getString("name"));
 			user.setPhone(rs.getString("phone"));
 			user.setEmail(rs.getString("email"));
 			user.setBusinessNumber(rs.getString("businessNumber"));
 			return user;
 		});
+	}
+
+	@Override
+	public int idcheck(String userId) {
+		String SQL = "SELECT COUNT(*) FROM user WHERE id = ?";
+		System.out.println(template.queryForObject(SQL, Integer.class, userId));
+		return template.queryForObject(SQL, Integer.class, userId);
+	}
+
+	@Override
+	public void deleteUser(String id) {
+		String SQL = "DELETE FROM user WHERE id = ?";
+		template.update(SQL, id);
 	}
 
 	

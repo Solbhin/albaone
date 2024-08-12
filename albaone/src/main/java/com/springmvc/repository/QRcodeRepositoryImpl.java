@@ -47,7 +47,7 @@ public class QRcodeRepositoryImpl implements QRcodeRepository
 			qrDto.setId(rs.getString("id"));
 			qrDto.setToday(rs.getString("todaytime")); // setToday 메서드 사용
 	        return qrDto;
-	        });
-	    }
+	    });
+	}
 
 }

@@ -90,6 +90,8 @@ public class employmentcontractRepositoryImpl implements employmentcontractRepos
 	    return;
 	}
 	
+	//계약서 조회
+	@SuppressWarnings("deprecation")
 	@Override
     public List<employmentcontract> findAllByPartTimeName(String parttimename)
 	{
@@ -117,4 +119,14 @@ public class employmentcontractRepositoryImpl implements employmentcontractRepos
             }
         });
     }
+
+	
+    @Override
+	public int deleteContractsByPartTimeName(String parttimename)
+    {
+    	String sql = "delete from employmentcontract where parttimename = ?";
+        // 삭제된 행 수 반환
+        return template.update(sql, parttimename); 
+	}
+
 }
