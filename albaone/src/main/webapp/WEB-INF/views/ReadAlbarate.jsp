@@ -41,13 +41,15 @@
 		<tr>
 			<td>회사 평가</td>
 			<td>${ read.company }</td>
-				<!-- 20보다 작으면 -->
-				<c:if test="${company >= 20}">
+				<!-- 5이상 -->
+				<c:if test="${company >= 5}">
 			    	<c:set var="companyresult" value="우수알바" />
 				</c:if>
-				<c:if test="${company < 20 and company >= -5}">
+				<!-- -5~4 -->
+				<c:if test="${company < 5 and company >= -5}">
 				    <c:set var="companyresult" value="일반알바" />
 				</c:if>
+				<!-- -5 미만 -->
 				<c:if test="${company < -5}">
 				    <c:set var="companyresult" value="노력필요" />
 				</c:if>
