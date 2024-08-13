@@ -51,9 +51,10 @@
                         <label for="phone">휴대폰</label>
                         <input type="text" class="form-control" name="phone" value="${user.phone}" placeholder="휴대폰" required>
                     </div>
-					<div class="form-group">
+					 <div class="form-group">
                         <label for="businessNumber">사업자 등록번호</label>
-                        <input type="text" class="form-control" name="businessNumber" value="${user.businessNumber}" placeholder="사업자 등록번호" required maxlength="10">
+                        <input type="text" class="form-control" name="businessNumber" id="businessNumber" value="${user.businessNumber}" placeholder="사업자 등록번호(-빼고 입력)" required maxlength="10">
+                        <small id="businessNumberMessage" class="text-danger"></small>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mt-3" id="submitButton" disabled>회원가입</button>
                 </form>
@@ -104,9 +105,7 @@
         }
 	</script>
 	
-	<!-- 공공 데이터 IP를 이용한 사업자 번호 유효성 검사 - ajax 다른 테스트에 불편해서 주석처리-->
-	<!--
-	<script type="text/javascript">
+	<script>
     var isBusinessNumberValid = false;
 
     function checkBusinessNumber() {
@@ -169,6 +168,5 @@
         });
     });
 	</script>
-	-->
 </body>
 </html>

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import com.springmvc.domain.Apply;
 
 @Repository
-public interface ApplyRespository
-{
+public interface ApplyRespository {
+
 	void insertApplication(String id,String resume_number, String resumeTitle, int postNumber, 
             String companyName, String workLocation, int salary, 
             String workHours, String workDays, String jobDescription, 
@@ -24,4 +24,5 @@ public interface ApplyRespository
 
 	List<Apply> getbusinesview(int postNumber, int apply_id);
 
+	void updateApplyStatus(int apply_id,String status,int postNumber);
 }

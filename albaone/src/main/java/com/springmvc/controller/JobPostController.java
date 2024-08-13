@@ -16,31 +16,27 @@ import com.springmvc.domain.JobPost;
 import com.springmvc.service.JobPostServiceImpl;
 
 @Controller
-public class JobPostController
-{
+public class JobPostController {
 	@Autowired
 	private JobPostServiceImpl jobPostService;
 
-	//채용 공고글 양식 제공
+//	채용 공고글 양식 제공
 	@GetMapping("/jobposting")
-	public String jobPostForm()
-	{
+	public String jobPostForm() {
 		return "jobPostForm";
 	}
 
-	//채용 공고 등록
+//	채용 공고 등록
 	@PostMapping("/jobposting")
-	public String jobPosting(@ModelAttribute("jobPost") JobPost jobPost, HttpSession session)
-	{
+	public String jobPosting(@ModelAttribute("jobPost") JobPost jobPost, HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		jobPostService.jobPosting(jobPost, id);
 		return "redirect:/jobposts?page=1"; // 전체 조회 페이지
 	}
 
-	//채용 공고 조회
+//	채용 공고 조회
 	@GetMapping("/jobposts")
-	public String jobPostList(@RequestParam int page, Model model)
-	{
+	public String jobPostList(@RequestParam int page, Model model) {
 		List<JobPost> jobPosts = jobPostService.getAllPosts(page);
 		int totalPosts = jobPostService.getTotalPosts();
 		model.addAttribute("jobPosts", jobPosts);
@@ -49,10 +45,9 @@ public class JobPostController
 		return "jobPostList";
 	}
 
-	//상세보기
+//	상세보기
 	@GetMapping("/jobpost")
-	public String jobPost(@RequestParam int postNumber, Model model)
-	{
+	public String jobPost(@RequestParam int postNumber, Model model) {
 		JobPost jobPost = jobPostService.getPostDetail(postNumber);
 		model.addAttribute("jobPost", jobPost);
 		return "jobPost";

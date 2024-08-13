@@ -1,7 +1,6 @@
 package com.springmvc.domain;
 
-public class Apply
-{
+public class Apply {
 	private String id;
 	private String resume_number;
 	private int apply_id;
@@ -17,6 +16,7 @@ public class Apply
 	private String email;
 	private String address;
 	private int postNumber;
+	private String status;
 	
 	
 	public String getId() {
@@ -108,6 +108,12 @@ public class Apply
 	}
 	public void setResumetitle(String resumetitle) {
 		this.resumetitle = resumetitle;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

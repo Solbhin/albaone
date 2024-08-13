@@ -12,14 +12,12 @@ import com.springmvc.domain.Empolyee;
 import com.springmvc.service.empolyeeServiceImpl;
 
 @Controller
-public class empolyeeController
-{
+public class empolyeeController {
 	@Autowired
 	private empolyeeServiceImpl empolyeeService;
 	
 	@GetMapping("empolyeeList")
-	public String empolyeeList(@RequestParam String businessNumber, Model model)
-	{
+	public String empolyeeList(@RequestParam String businessNumber, Model model) {
 		List<Empolyee> empolyeeList = empolyeeService.getAllEmpolyee(businessNumber);
 		model.addAttribute("empolyeeList", empolyeeList);
 		return "empolyeeList";

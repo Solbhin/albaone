@@ -5,8 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Attendance
-{
+public class Attendance {
 	private String id; 					// 개인회원 식별
 	private String companyName; 		// 근무지 식별
 	private String name; 				// 알바생 식별

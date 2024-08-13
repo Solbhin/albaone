@@ -46,7 +46,7 @@ public class employmentcontractRepositoryImpl implements employmentcontractRepos
 				employmentcontract.getMoney(),
 				employmentcontract.getBonus(),
 				employmentcontract.getInsurance(),
-				employmentcontract.getCreatedate()
+				employmentcontract.getDate()	
 		);
 		return;
 	}
@@ -84,13 +84,12 @@ public class employmentcontractRepositoryImpl implements employmentcontractRepos
 	        employmentcontract.getMoney(),
 	        employmentcontract.getBonus(),
 	        employmentcontract.getInsurance(),
-	        employmentcontract.getCreatedate(),
+	        employmentcontract.getDate(),
 	        employmentcontract.getParttimename()
 	    );
 	    return;
 	}
 	
-	//계약서 조회
 	@SuppressWarnings("deprecation")
 	@Override
     public List<employmentcontract> findAllByPartTimeName(String parttimename)
@@ -114,19 +113,10 @@ public class employmentcontractRepositoryImpl implements employmentcontractRepos
             	employmentcontract.setMoney(rs.getInt("money"));
             	employmentcontract.setBonus(rs.getInt("bonus"));
             	employmentcontract.setInsurance(rs.getString("insurance"));
-            	employmentcontract.setCreatedate(rs.getString("createdate"));
+            	employmentcontract.setDate(rs.getString("createdate"));
                 return employmentcontract;
             }
         });
     }
-
-	
-    @Override
-	public int deleteContractsByPartTimeName(String parttimename)
-    {
-    	String sql = "delete from employmentcontract where parttimename = ?";
-        // 삭제된 행 수 반환
-        return template.update(sql, parttimename); 
-	}
 
 }

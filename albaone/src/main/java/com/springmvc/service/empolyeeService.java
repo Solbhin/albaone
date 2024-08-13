@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.springmvc.domain.Empolyee;
 
-public interface empolyeeService
-{
+public interface empolyeeService {
+
 	List<Empolyee> getAllEmpolyee(String businessNumber);
+
 }

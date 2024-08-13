@@ -1,7 +1,6 @@
 package com.springmvc.domain;
 
-public class Empolyee
-{
+public class Empolyee {
 	private String id;
 	private String businessNumber;
 	private String name;

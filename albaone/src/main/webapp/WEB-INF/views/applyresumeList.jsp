@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>이력서 목록</title>
+    <title>지원할 이력서 목록</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <%@include file="menu.jsp" %>
 <div class="container mt-5">
-    <h2 class="text-center">이력서 목록</h2>
+    <h2 class="text-center">지원할 이력서 목록</h2>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -31,13 +31,11 @@
                 <th>희망 시급</th>
                 <th>희망 휴일</th>
                 <th>사진</th>
-                <th>상세보기</th>
-                <th>수정</th>
-                <th>삭제</th>
+                <th>지원하기</th>
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="resume" items="${resumeList}">
+            <c:forEach var="resume" items="${resumes}">
                 <tr>
                     <td>${resume.name}</td>
                     <td>${resume.birthdate}</td>
@@ -55,23 +53,19 @@
                     <td>${resume.work_hours}</td>
                     <td>${resume.desired_salary}</td>
                     <td>${resume.desired_days}</td>
-                    <td><img src="resources/images/${resume.myimgName}" alt="사진" width="100"></td>
+                    <td>${joppost.postNumber}</td>
+                    <td><img src="${pageContext.request.contextPath}/resources/images/${resume.myimgName}" alt="사진" width="100"></td>
                     <td>
-                        <a href="resumeread?number=${resume.number}" class="btn btn-primary">상세보기</a>
-                    </td>
-                    <td>
-                        <a href="resumeupdate?number=${resume.number}" class="btn btn-primary">수정</a>
-                    </td>
-                    <td>
-                        <a href="resumedelete?number=${resume.number}" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+                        <td>
+    					<a href="${pageContext.request.contextPath}/apply?postNumber=${postNumber}&resume_id=${resume.resume_id}">지원하기</a>
+						</td>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
     <div class="text-center">
-        <a href="resume" class="btn btn-primary">새 이력서 작성</a>
-        <a href="home" class="btn btn-secondary">홈으로</a>
+        <button onclick="window.history.back();" class="btn btn-secondary">뒤로가기</button>
     </div>
 </div>
 </body>

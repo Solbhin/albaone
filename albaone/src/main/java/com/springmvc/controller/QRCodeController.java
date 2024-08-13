@@ -20,18 +20,17 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.springmvc.domain.Attendance;
+import com.springmvc.domain.QRCode;
 import com.springmvc.service.QRCodeServiceImpl;
 
 @Controller
-public class QRCodeController
-{
+public class QRCodeController {
 	@Autowired
 	private QRCodeServiceImpl QRCodeService;
 
 	// QR만들고 보여주기
 	@GetMapping("/QR")
-	public String QRcreate(HttpServletResponse response, Model model, HttpSession session)
-	{
+	public String QRcreate(HttpServletResponse response, Model model, HttpSession session) {
 		// 세션과 현재 시간 - 파라미터 확보
 		String id = (String) session.getAttribute("id"); // 아이디
 		LocalDateTime timeStamp = LocalDateTime.now();
@@ -41,13 +40,13 @@ public class QRCodeController
 		String stringTimeStamp = timeStamp.format(formatter);
 
 		// 인코딩
-		try
-		{
+		try {
 			String encodedId = URLEncoder.encode(id, "UTF-8");
 			String encodedDateTime = URLEncoder.encode(stringTimeStamp, "UTF-8");
 
 			// URL 생성
-			String qrUrl = String.format("http://localhost:8080/albaone/QRcheck?id=%s&datetime=%s", encodedId,encodedDateTime);
+			String qrUrl = String.format("http://localhost:8080/albaone/QRcheck?id=%s&datetime=%s", encodedId,
+					encodedDateTime);
 
 			// QR 코드를 Base64 형식으로 생성
 			String base64QRCode = generateQRCodeAsBase64(qrUrl);
@@ -56,9 +55,7 @@ public class QRCodeController
 			model.addAttribute("id", encodedId);
 			model.addAttribute("datetime", encodedDateTime);
 
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			return "home";
 		}
@@ -66,26 +63,18 @@ public class QRCodeController
 		return "QRview";
 	}
 
-	//QR URL을 찍었을 때 출퇴근 확인 - 일단은 a태그로 확인
+//    QR URL을 찍었을 때 출퇴근 확인 - 일단은 a태그로 확인
 	@GetMapping("/QRcheck")
 	public String QRcheck(Model model, @RequestParam String id, // 아이디
-		@RequestParam String datetime)
-	{ 
+			@RequestParam String datetime) { 
 		Attendance attendance = QRCodeService.getLastAttendance(id);
-		if (attendance == null)
-		{
-			// 첫 출근
+		if (attendance == null) { // 첫 출근
 			QRCodeService.checkIn(id, datetime);
-		}
-		else
-		{
+		} else {
 			LocalDateTime CheckOutTime = attendance.getCheckOutTime();
-			if (CheckOutTime == null)
-			{
+			if (CheckOutTime == null) {
 				QRCodeService.checkOut(id, datetime);
-			}
-			else
-			{
+			} else {
 				QRCodeService.checkIn(id, datetime);
 			}
 		}
@@ -93,8 +82,7 @@ public class QRCodeController
 	}
 
 	// QR 만드는 메서드
-	private String generateQRCodeAsBase64(String text) throws Exception
-	{
+	private String generateQRCodeAsBase64(String text) throws Exception {
 		// UTF-8로 인코딩 - 한글 깨짐 방지
 		String encodedText = new String(text.getBytes("UTF-8"), "UTF-8");
 

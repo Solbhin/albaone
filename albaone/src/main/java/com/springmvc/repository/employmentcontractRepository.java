@@ -9,5 +9,5 @@ public interface employmentcontractRepository
 	void create(employmentcontract employmentcontract);
 	void update(employmentcontract employmentcontract);
 	List<employmentcontract> findAllByPartTimeName(String parttimename);
-	int deleteContractsByPartTimeName(String parttimename);
+
 }

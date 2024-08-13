@@ -3,8 +3,7 @@ package com.springmvc.repository;
 import com.springmvc.domain.Attendance;
 import com.springmvc.domain.QRCode;
 
-public interface QRcodeRepository
-{
+public interface QRcodeRepository {
 //	void create(QRCode qrdto);
 
 //	QRCode read(String id);

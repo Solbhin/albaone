@@ -13,12 +13,15 @@
         <h2 class="text-center mb-4">아르바이트 지원서</h2>
         <div class="row">
             <div class="col-md-8 offset-md-2">
+            	<form action="applyok?number=${resume.number}" method="post">
+            		<input type="text" class="form-control" id="resumetitle" name="resumetitle" placeholder="제목을 입력하세요" required>
                 <table class="table table-bordered resume-table">
                     <tbody>
                         <tr>
                             <th>항목</th>
                             <th>정보</th>
                         </tr>
+                        	
                         <tr>
                             <td>성명</td>
                             <td>${resume.name}</td>
@@ -86,10 +89,9 @@
                         	<img src="resources/images/${resume.myimgName}" alt="사진" width="100">
                     </tbody>
                 </table>
-                     <a href="resume" class="btn btn-primary">새 이력서 작성</a>
-       				 <a href="home" class="btn btn-secondary">홈으로</a>
-       				  <a href="resumeupdate?number=${resume.number}" class="btn btn-primary">수정</a>
-       				 <a href="resumedelete?number=${resume.number}" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
+       				 <button onclick="window.history.back();" class="btn btn-secondary">뒤로가기</button>
+       				  <button type="submit">지원하기</button>
+       			</form>
             </div>
         </div>
     </div>

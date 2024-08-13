@@ -12,7 +12,7 @@ import com.springmvc.repository.JobPostRepositoryImpl;
 public class JobPostServiceImpl implements JobPostService {
 	@Autowired
 	private JobPostRepositoryImpl jobPostRepository;
-
+	
 	@Override
 	public void jobPosting(JobPost jobPost, String id) {
 		jobPostRepository.jobPosting(jobPost, id);
@@ -47,5 +47,7 @@ public class JobPostServiceImpl implements JobPostService {
 	public List<JobPost> getMyPosts(int page, String id) {
 		return jobPostRepository.getMyPosts(page, id);
 	}
+
+
 
 }

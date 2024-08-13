@@ -16,8 +16,7 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 	private JdbcTemplate template;
 	
 	@Autowired
-	public void setJdbctemplate(DataSource dataSource)
-	{
+	public void setJdbctemplate(DataSource dataSource) {
 		this.template = new JdbcTemplate(dataSource);
 	}
 	@Override
@@ -32,10 +31,8 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 	}
 
 
-	@SuppressWarnings("deprecation")
 	@Override
-	public List<Apply> getApplicaionts(String userId)
-	{
+	public List<Apply> getApplicaionts(String userId) {
 		String sql = "SELECT a.apply_id, a.resumetitle, j.companyName, j.workLocation, j.salary, j.workHours, j.workDays, j.jobDescription, a.resume_id, r.name, r.contact, r.email, r.address " +
                 "FROM apply a " +
                 "JOIN Resume r ON a.resume_id = r.resume_id " +
@@ -43,40 +40,51 @@ public class ApplyRespositoryImpl implements ApplyRespository{
                 "WHERE r.resume_id = ?";
 		return template.query(sql, new Object[]{userId}, new ApplyRowMapper());
 	}
-	
 	@Override
-	public List<Apply> getAllapplys(String id)
-	{
+	public List<Apply> getAllapplys(String id) {
 		String SQL="SELECT * FROM Apply where id= ? ";
-		@SuppressWarnings("deprecation")
 		List<Apply> listOfApply = template.query(SQL,new Object[] {id},new ApplyRowMapper());
 		System.out.println(listOfApply);
 		return listOfApply;
 	}
-	
 	@Override
-	public List<Apply> getAllbusinesapplys(int postNumber)
-	{
+	public List<Apply> getAllbusinesapplys(int postNumber) {
 		String SQL="SELECT * FROM apply where postNumber = ? ";
 		System.out.println(postNumber);
-		@SuppressWarnings("deprecation")
 		List<Apply> listOfbusinesApply=template.query(SQL,new Object[] {postNumber},new ApplyRowMapper());
 		return listOfbusinesApply;
 	}
-	
 	@Override
-	public void setDeleteApply(String apply_id)
-	{
+	public void setDeleteApply(String apply_id) {
 		String SQL="DELETE FROM Apply where apply_id=?";
 		this.template.update(SQL,apply_id);
 		
 	}
-	
 	@Override
-	public List<Apply> getbusinesview(int postNumber, int apply_id)
-	{
+	public List<Apply> getbusinesview(int postNumber, int apply_id) {
 		String SQL ="SELECT * FROM Apply WHERE postNumber = ? AND apply_id =?";
 		return template.query(SQL,new Object[] {postNumber,apply_id},new ApplyRowMapper());
 	}
+	@Override
+	public void updateApplyStatus(int apply_id, String status, int postNumber) {
+	    // status 값을 ENUM 값으로 변환
+	    String statusEnum = convertToEnumStatus(status);
+
+	    String SQL = "UPDATE Apply SET status = ? WHERE apply_id = ? AND postNumber = ?";
+	    template.update(SQL, statusEnum, apply_id, postNumber);
+	}
+
+	private String convertToEnumStatus(String status) {
+	    switch (status) {
+	        case "accepted":
+	            return "수락";
+	        case "rejected":
+	            return "거절";
+	        default:
+	            return "지원 중";
+	    }
+	}
+
+	
 }
 

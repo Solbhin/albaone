@@ -21,8 +21,7 @@ import com.springmvc.service.JobPostService;
 import com.springmvc.service.ResumeService;
 
 @Controller
-public class ApplyforController
-{
+public class ApplyforController {
 
     @Autowired
     private ResumeService resumeService;

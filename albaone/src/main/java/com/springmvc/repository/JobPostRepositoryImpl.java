@@ -11,19 +11,16 @@ import org.springframework.stereotype.Repository;
 import com.springmvc.domain.JobPost;
 
 @Repository
-public class JobPostRepositoryImpl implements JobPostRepository
-{
+public class JobPostRepositoryImpl implements JobPostRepository {
 	private JdbcTemplate template;
 
 	@Autowired
-	public void setJdbcTemplate(DataSource dataSource)
-	{
+	public void setJdbcTemplate(DataSource dataSource) {
 		this.template = new JdbcTemplate(dataSource);
 	}
 
 	@Override
-	public void jobPosting(JobPost jobPost, String id)
-	{
+	public void jobPosting(JobPost jobPost, String id) {
 		String SQL = "insert into jobpost(companyName, workLocation, contactNumber, salary, workHours, workDays, workDuration, jobDescription, id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		template.update(SQL, jobPost.getCompanyName(), jobPost.getWorkLocation(), jobPost.getContactNumber(),
 				jobPost.getSalary(), jobPost.getWorkHours(), jobPost.getWorkDays(), jobPost.getWorkDuration(),

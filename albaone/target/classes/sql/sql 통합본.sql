@@ -1,4 +1,8 @@
 CREATE database albaoneDB;
+drop database albaoneDB;
+use albaoneDB;
+
+-- 사용자 테이블
 create table user(
 	id varchar(10) primary key,
     password varchar(20) not null,
@@ -10,73 +14,11 @@ create table user(
 select * from User;
 select id, pw from user;
 drop table user;
------------------------------------
 
-CREATE TABLE Resume (
-    name VARCHAR(10),           -- 성명
-    birthdate DATE,             -- 생년월일
-    gender VARCHAR(10),         -- 성별
-    contact VARCHAR(15),        -- 연락처 (Tel/H.P.)
-    email VARCHAR(50),          -- 이메일
-    address VARCHAR(100),       -- 현 주소
-    school VARCHAR(100),        -- 학교명
-    period VARCHAR(50),         -- 기간
-    major VARCHAR(50),          -- 전공
-    job_title VARCHAR(100),     -- 직장명
-    experience_period VARCHAR(50), -- 경력 기간
-    main_work VARCHAR(100),     -- 주요 업무
-    reason TEXT,                 -- 지원 동기
-    work_hours VARCHAR(20),     -- 근무 시간
-    desired_salary VARCHAR(20), -- 희망 시급
-    desired_days VARCHAR(20),     -- 희망 휴일
-    MyimgName VARCHAR(20)         -- 이미지 이름
-);
-
-drop table Resume;
-
-select * from Resume;
--------------------------------------------
-CREATE TABLE if not exists jobpost(
-	postNumber INT AUTO_INCREMENT primary key,  -- 게시글 번호
-	companyName VARCHAR(20) NOT NULL,			-- 상호명
-    workLocation VARCHAR(50) NOT NULL,			-- 근무지 주소
-    contactNumber CHAR(15) NOT NULL,			-- 연락처
-    salary INT NOT NULL,						-- 급여
-    workHours VARCHAR(30) default "시간협의",		-- 근무시간
-    workDays VARCHAR(5) default "요일협의",		-- 근무요일
-    workDuration varchar(10) not null,			-- 근무기간
-    jobDescription varchar(200),				-- 하는 일
-    id VARCHAR(20)								-- 작성자 아이디
-);
-SELECT * FROM jobpost;
-
-ALTER table jobpost add constraint chk check (salary >=10000);
-alter table jobpost drop check chk;
-drop table jobpost;
--------------------------------------------
--- create database albaoneDB;
-
-use albaoneDB;
-
-create table QRtable
+-- 이력서 테이블
+CREATE TABLE if not exists Resume
 (
-    id varchar(10) primary key,
-    todaytime varchar(20) not null
-);
-
-
-select * from QRtable;
-select * from QRtable where id = "알바생1";
-
--- 테이블을 잘못 만들었을 시 삭제용
-drop table QRtable;
----------------------------------------------
-CREATE database albaoneDB;
-
-use albaoneDB;
-
-CREATE TABLE Resume (
-
+	resume_id varchar(10),  		-- 아이디
 	number INT auto_increment PRIMARY KEY, -- 이력서 글 번호
     name VARCHAR(10),           -- 성명
     birthdate DATE,             -- 생년월일
@@ -93,16 +35,67 @@ CREATE TABLE Resume (
     reason TEXT,                 -- 지원 동기
     work_hours VARCHAR(20),     -- 근무 시간
     desired_salary VARCHAR(20), -- 희망 시급
-    desired_days VARCHAR(20),     -- 희망 휴일
     MyimgName VARCHAR(20)		 -- 이미지 이름
 );
-
 drop table Resume;
 delete from Resume;
 select * from Resume;
-------------------------------------------------------
-use albaoneDB;
 
+CREATE TABLE if not exists Apply(
+	id varchar(10),
+	resume_number varchar(10),
+	apply_id int auto_increment primary key,
+	resumetitle varchar(20),
+	companyName VARCHAR(20),
+	workLocation VARCHAR(50),
+	salary INT,
+	workHours VARCHAR(20),
+	workDays VARCHAR(5),
+	jobDescription varchar(200),
+	name  VARCHAR(10),
+	contact  VARCHAR(15),
+	email VARCHAR(50), 
+	address VARCHAR(100),
+    postNumber int,
+    status ENUM('지원 중', '수락', '거절') DEFAULT '지원 중'
+);
+select * from Apply;
+drop table Apply;
+
+SHOW COLUMNS FROM Apply LIKE 'status';
+
+-- 공고 테이블
+CREATE TABLE if not exists jobpost(
+	postNumber INT AUTO_INCREMENT primary key,  -- 게시글 번호
+	companyName VARCHAR(20) NOT NULL,			-- 상호명
+    workLocation VARCHAR(50) NOT NULL,			-- 근무지 주소
+    contactNumber CHAR(15) NOT NULL,			-- 연락처
+    salary INT NOT NULL,						-- 급여
+    workHours VARCHAR(30) default "시간협의",		-- 근무시간
+    workDays VARCHAR(5) default "요일협의",		-- 근무요일
+    workDuration varchar(10) not null,			-- 근무기간
+    jobDescription varchar(200),				-- 하는 일
+    id VARCHAR(20)								-- 작성자 아이디
+);
+select * from jobpost;
+truncate table jobpost;
+
+-- 근태 관리 테이블
+CREATE TABLE attendance(
+	id varchar(15),
+	companyName varchar(20),
+    businessNumber varchar(15),
+    name varchar(10),
+    check_in_time datetime,
+    check_out_time datetime,
+    FOREIGN KEY(id) REFERENCES user(id),
+    CONSTRAINT chk_time CHECK (check_in_time <> check_out_time)
+);
+
+select * from attendance;
+drop table attendance;
+
+-- 계약서 테이블
 create table employmentcontract
 (
     ownername varchar(10) not null, -- 사업주명 
@@ -119,17 +112,11 @@ create table employmentcontract
     insurance varchar(25),-- 보험
     createdate date-- 작성 날짜
 );
-
--- 테이블 조회
 select * from employmentcontract;
-
--- 테이블 삭제 용도
 truncate table employmentcontract;
 drop table employmentcontract;
 
----------------------------------------------------------
 -- 퇴직금 조회
-
 use albaoneDB;
 create table Severance
 (
@@ -139,13 +126,21 @@ create table Severance
     money bigint, -- 퇴직금
     companyNum char(10) -- 사업자 등록번호
 );
-
 select * from Severance;
 select * from Severance where companyNum = "사업자 번호"; -- 사장 알바 퇴직금 조회 확인용  
 select * from Severance where parttimename="알바생명"; -- 알바 퇴직금 조회 확인용 
 drop table Severance;
 
-------------------------------------------------------------
+CREATE TABLE empolyee(
+	businessNumber varchar(20),
+    id varchar(15)
+);
+select * from empolyee;
+insert into empolyee value(1, "알바생1");
+insert into empolyee value(1, "알바생2");
+insert into empolyee value(1, "알바생3");
+
+
 -- 등급 지정
 use albaoneDB;
 
@@ -162,25 +157,5 @@ select * from Albarate;
 -- read 테스트
 select parttimename,commute,absent,blinking,company
 				from Albarate where parttimename = "알바생1";
--- 테스트 값
-update Albarate set company=40
-	where parttimename = "알바생1";
-
-update Albarate set company=-20
-	where parttimename = "알바생1";
-
-update Albarate set company=-5
-	where parttimename = "알바생1";
-
 -- 테스트용
 drop table Albarate; -- 잘못 만들었을 경우 삭제용
-
-----------------------------------------------------
-CREATE TABLE empolyee(
-	businessNumber varchar(20),
-    id varchar(15)
-);
-select * from empolyee;
-insert into empolyee value(1, "알바생1");
-insert into empolyee value(1, "알바생2");
-insert into empolyee value(1, "알바생3");
