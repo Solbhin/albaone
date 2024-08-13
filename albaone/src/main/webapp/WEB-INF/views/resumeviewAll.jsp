@@ -14,6 +14,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
+            	<th>no.</th>
                 <th>성명</th>
                 <th>생년월일</th>
                 <th>성별</th>
@@ -39,6 +40,7 @@
         <tbody>
             <c:forEach var="resume" items="${resumeList}">
                 <tr>
+                	<td>${resume.number}</td>
                     <td>${resume.name}</td>
                     <td>${resume.birthdate}</td>
                     <td>${resume.gender}</td>

@@ -12,7 +12,6 @@ public class ResumeRowMapper implements RowMapper<Resume> {
 	@Override
 	public Resume mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Resume resume = new Resume();
-		resume.setResume_id(rs.getString("resume_id"));
 		resume.setNumber(Integer.valueOf(rs.getString("number")));
 		resume.setName(rs.getString("name"));
 		resume.setBirthdate(rs.getDate("birthdate"));

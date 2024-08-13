@@ -113,7 +113,7 @@ public class employmentcontractRepositoryImpl implements employmentcontractRepos
             	employmentcontract.setMoney(rs.getInt("money"));
             	employmentcontract.setBonus(rs.getInt("bonus"));
             	employmentcontract.setInsurance(rs.getString("insurance"));
-            	employmentcontract.setDate(rs.getString("createdate"));
+            	employmentcontract.setcreateData(rs.getString("createdate"));
                 return employmentcontract;
             }
         });

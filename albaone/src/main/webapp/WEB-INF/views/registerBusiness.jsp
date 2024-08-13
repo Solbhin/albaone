@@ -51,10 +51,9 @@
                         <label for="phone">휴대폰</label>
                         <input type="text" class="form-control" name="phone" value="${user.phone}" placeholder="휴대폰" required>
                     </div>
-					 <div class="form-group">
+					<div class="form-group">
                         <label for="businessNumber">사업자 등록번호</label>
-                        <input type="text" class="form-control" name="businessNumber" id="businessNumber" value="${user.businessNumber}" placeholder="사업자 등록번호(-빼고 입력)" required maxlength="10">
-                        <small id="businessNumberMessage" class="text-danger"></small>
+                        <input type="text" class="form-control" name="businessNumber" value="${user.businessNumber}" placeholder="사업자 등록번호" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mt-3" id="submitButton" disabled>회원가입</button>
                 </form>
@@ -103,70 +102,6 @@
             }
             return true; // 제출 요청 허용
         }
-	</script>
-	
-	<script>
-    var isBusinessNumberValid = false;
-
-    function checkBusinessNumber() {
-        var businessNumber = $('#businessNumber').val();
-        var businessNumberMessage = $('#businessNumberMessage');
-
-        // 사업자 등록번호 형식 검사 (10자리 숫자)
-        var businessNumberRegex = /^\d{10}$/;
-        if (!businessNumberRegex.test(businessNumber)) {
-            businessNumberMessage.text("올바른 사업자 등록번호를 입력하세요.");
-            businessNumberMessage.removeClass("text-success").addClass("text-danger");
-            isBusinessNumberValid = false;
-            return;
-        }
-
-        var data = { "b_no": [businessNumber] };
-
-        $.ajax({
-            url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=hJ4D%2F0pmhHozXC0XRoM5iOeccDvtvD0XdcRCaolcp5OGcxdpqyxqJj3wJuKkEQnBke%2F0NqLfl9W8CDCVvb7vOA%3D%3D",
-            type: "POST",
-            data: JSON.stringify(data),
-            dataType: "json",
-            contentType: "application/json",
-            accept: "application/json",
-            success: function(result) {
-                if (result.status_code === "OK") {
-                    if (result.data[0].tax_type !== "") {
-                        businessNumberMessage.text("유효한 사업자 등록번호입니다.");
-                        businessNumberMessage.removeClass("text-danger").addClass("text-success");
-                        isBusinessNumberValid = true;
-                    } else {
-                        businessNumberMessage.text("유효하지 않은 사업자 등록번호입니다.");
-                        businessNumberMessage.removeClass("text-success").addClass("text-danger");
-                        isBusinessNumberValid = false;
-                    }
-                } else {
-                    businessNumberMessage.text("사업자 등록번호 확인 중 오류가 발생했습니다.");
-                    businessNumberMessage.removeClass("text-success").addClass("text-danger");
-                    isBusinessNumberValid = false;
-                }
-            },
-            error: function(result) {
-                businessNumberMessage.text("서버와 통신 중 오류가 발생했습니다.");
-                businessNumberMessage.removeClass("text-success").addClass("text-danger");
-                isBusinessNumberValid = false;
-            }
-        });
-    }
-
-    $(document).ready(function() {
-        $('form').on('submit', function(e) {
-            if (!isBusinessNumberValid) {
-                e.preventDefault();
-                alert("유효한 사업자 등록번호를 입력하세요.");
-            }
-        });
-
-        $('#businessNumber').on('blur', function() {
-            checkBusinessNumber();
-        });
-    });
 	</script>
 </body>
 </html>

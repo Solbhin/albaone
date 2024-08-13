@@ -1,26 +1,25 @@
 package com.springmvc.domain;
 
-public class employmentcontract
-{
-	private String ownername; //사업주명
-	private String parttimename; //알바생명
-	private String period_start; //근무 시작 날짜
-	private String period_end; //근무 종료 날짜
-	private String place; //근무 장소
-	private String workdetail; //업무 내용
+public class employmentcontract {
+	private String ownername; // 사업주명
+	private String parttimename; // 알바생명
+	private String period_start; // 근무 시작 날짜
+	private String period_end; // 근무 종료 날짜
+	private String place; // 근무 장소
+	private String workdetail; // 업무 내용
 	private String workinghours_start;// 근무 시작 시간
-	private String workinghours_end; //근무 종료 시간
-	private int workday; //주당 근무일
-	private long money;//임금 - 시급, 일급, 월급을 정하거나 미리 데이터베이스를 여러개 만들고 따로 저장하는 것으로 함
+	private String workinghours_end; // 근무 종료 시간
+	private int workday; // 주당 근무일
+	private long money;// 임금 - 시급, 일급, 월급을 정하거나 미리 데이터베이스를 여러개 만들고 따로 저장하는 것으로 함
 	private long bonus; // 상여금
-	private String insurance; //보험
-	private String date; //작성 날짜
-	
-	//기본생성자
-	public employmentcontract(){}
+	private String insurance; // 보험
+	private String createdate; // 작성 날짜
 
-	
-	//getter, setter
+	// 기본생성자
+	public employmentcontract() {
+	}
+
+	// getter, setter
 	public String getOwnername() {
 		return ownername;
 	}
@@ -118,18 +117,11 @@ public class employmentcontract
 	}
 
 	public String getDate() {
-		return date;
+		return createdate;
 	}
 
-	public void setData(String date) {
-		this.date = date;
+	public void setcreateData(String createdate) {
+		this.createdate = createdate;
 	}
 
-
-	public void setDate(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 }

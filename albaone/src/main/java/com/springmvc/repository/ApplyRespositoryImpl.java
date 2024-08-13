@@ -65,26 +65,5 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 		String SQL ="SELECT * FROM Apply WHERE postNumber = ? AND apply_id =?";
 		return template.query(SQL,new Object[] {postNumber,apply_id},new ApplyRowMapper());
 	}
-	@Override
-	public void updateApplyStatus(int apply_id, String status, int postNumber) {
-	    // status 값을 ENUM 값으로 변환
-	    String statusEnum = convertToEnumStatus(status);
-
-	    String SQL = "UPDATE Apply SET status = ? WHERE apply_id = ? AND postNumber = ?";
-	    template.update(SQL, statusEnum, apply_id, postNumber);
-	}
-
-	private String convertToEnumStatus(String status) {
-	    switch (status) {
-	        case "accepted":
-	            return "수락";
-	        case "rejected":
-	            return "거절";
-	        default:
-	            return "지원 중";
-	    }
-	}
-
-	
 }
 

@@ -17,6 +17,4 @@ public interface ApplyService {
 	void setDeleteApply(String apply_id);
 
 	List<Apply> getbusinesview(int postNumber, int apply_id);
-	
-	void updateApplyStatus(int apply_id,String status,int postNumber);
 }

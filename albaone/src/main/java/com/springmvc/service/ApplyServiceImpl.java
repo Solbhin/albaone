@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springmvc.domain.Apply;
-import com.springmvc.repository.ApplyRespositoryImpl;
+import com.springmvc.repository.ApplyRespository;
 
 @Service
 public class ApplyServiceImpl implements ApplyService{
 	
 	@Autowired
-	private ApplyRespositoryImpl applyRespository;
+	private ApplyRespository applyRespository;
 
 	@Override
 	public void applyForJob(String id,String resume_number, String resumeTitle, int postNumber, String companyName, String workLocation, int salary, String workHours,String workDays, String jobDescription,String name, String contact, String email, String address) {
@@ -43,11 +43,6 @@ public class ApplyServiceImpl implements ApplyService{
 	@Override
 	public List<Apply> getbusinesview(int postNumber, int apply_id) {
 		return applyRespository.getbusinesview(postNumber,apply_id);
-	}
-
-	public void updateApplyStatus(int apply_id,String status,int postNumber) {
-		applyRespository.updateApplyStatus(apply_id,status,postNumber);
-		
 	}
 	
 }

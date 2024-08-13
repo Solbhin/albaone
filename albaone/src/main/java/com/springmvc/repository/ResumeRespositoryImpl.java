@@ -4,6 +4,7 @@ import com.springmvc.domain.Resume;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
