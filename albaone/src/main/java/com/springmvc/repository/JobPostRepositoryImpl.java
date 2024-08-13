@@ -11,39 +11,48 @@ import org.springframework.stereotype.Repository;
 import com.springmvc.domain.JobPost;
 
 @Repository
-public class JobPostRepositoryImpl implements JobPostRepository {
+public class JobPostRepositoryImpl implements JobPostRepository
+{
 	private JdbcTemplate template;
-	
+
 	@Autowired
-	public void setJdbcTemplate(DataSource dataSource) {
+	public void setJdbcTemplate(DataSource dataSource)
+	{
 		this.template = new JdbcTemplate(dataSource);
 	}
 
 	@Override
-	public void jobPosting(JobPost jobPost, String id) {
-		System.out.println(id);
+	public void jobPosting(JobPost jobPost, String id)
+	{
 		String SQL = "insert into jobpost(companyName, workLocation, contactNumber, salary, workHours, workDays, workDuration, jobDescription, id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		template.update(SQL, jobPost.getCompanyName(), jobPost.getWorkLocation(), jobPost.getContactNumber(), jobPost.getSalary(), jobPost.getWorkHours(), jobPost.getWorkDays(), jobPost.getWorkDuration(), jobPost.getJobDescription(), id);
+		template.update(SQL, jobPost.getCompanyName(), jobPost.getWorkLocation(), jobPost.getContactNumber(),
+				jobPost.getSalary(), jobPost.getWorkHours(), jobPost.getWorkDays(), jobPost.getWorkDuration(),
+				jobPost.getJobDescription(), id);
 	}
 
 	@Override
 	public List<JobPost> getAllPosts(int page) {
 		int pageSize = 9;
-		int offset = (page-1) * pageSize;
-		
+		int offset = (page - 1) * pageSize;
+
 		String SQL = "select * from jobpost order by postNumber DESC LIMIT ? OFFSET ?";
-		return template.query(SQL, new Object[] {pageSize, offset}, (rs, rowNum) -> new JobPost(rs.getInt("postNumber"), rs.getString("companyName"), rs.getString("workLocation"), rs.getInt("salary"), rs.getString("workHours"), rs.getString("workDays")));
+		return template.query(SQL, new Object[] { pageSize, offset },
+				(rs, rowNum) -> new JobPost(rs.getInt("postNumber"), rs.getString("companyName"),
+						rs.getString("workLocation"), rs.getInt("salary"), rs.getString("workHours"),
+						rs.getString("workDays")));
 	}
 
 	@Override
 	public List<JobPost> getMyPosts(int page, String id) {
 		int pageSize = 9;
-		int offset = (page-1) * pageSize;
-		System.out.println("리파지토리 메서드:"+id);
+		int offset = (page - 1) * pageSize;
 		String SQL = "SELECT * FROM jobpost WHERE id = ? ORDER BY postNumber DESC LIMIT ? OFFSET ?";
-		return template.query(SQL, new Object[] {id, pageSize, offset}, (rs, rowNum) -> new JobPost(rs.getInt("postNumber"), rs.getString("companyName"), rs.getString("workLocation"), rs.getInt("salary"), rs.getString("workHours"), rs.getString("workDays")));
+		return template.query(SQL, new Object[] { id, pageSize, offset },
+				(rs, rowNum) -> new JobPost(rs.getInt("postNumber"), rs.getString("companyName"),
+						rs.getString("workLocation"), rs.getInt("salary"), rs.getString("workHours"),
+						rs.getString("workDays")));
 	}
-	
+
 	@Override
 	public int getTotalPosts() {
 		String SQL = "SELECT COUNT(*) FROM jobpost";
@@ -53,7 +62,7 @@ public class JobPostRepositoryImpl implements JobPostRepository {
 	@Override
 	public JobPost getPostDetail(int postNumber) {
 		String SQL = "SELECT * FROM jobpost WHERE postNumber=?";
-		return template.queryForObject(SQL, new Object[] {postNumber}, (rs, rowNum)->{
+		return template.queryForObject(SQL, new Object[] { postNumber }, (rs, rowNum) -> {
 			JobPost jobPost = new JobPost();
 			jobPost.setPostNumber(rs.getInt("postNumber"));
 			jobPost.setCompanyName(rs.getString("companyName"));
@@ -78,10 +87,9 @@ public class JobPostRepositoryImpl implements JobPostRepository {
 	@Override
 	public void updatePost(JobPost jobPost) {
 		String SQL = "UPDATE jobpost SET companyName = ?, workLocation = ?, contactNumber = ?, salary = ?, workHours = ?, workDays = ?, workDuration = ?, jobDescription = ? WHERE postNumber = ?";
-		template.update(SQL, jobPost.getCompanyName(), jobPost.getWorkLocation(), jobPost.getContactNumber(), jobPost.getSalary(), jobPost.getWorkHours(), jobPost.getWorkDays(), jobPost.getWorkDuration(), jobPost.getJobDescription(), jobPost.getPostNumber());
+		template.update(SQL, jobPost.getCompanyName(), jobPost.getWorkLocation(), jobPost.getContactNumber(),
+				jobPost.getSalary(), jobPost.getWorkHours(), jobPost.getWorkDays(), jobPost.getWorkDuration(),
+				jobPost.getJobDescription(), jobPost.getPostNumber());
 	}
-
-	
-	
 
 }

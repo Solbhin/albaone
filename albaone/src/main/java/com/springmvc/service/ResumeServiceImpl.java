@@ -15,14 +15,14 @@ public class ResumeServiceImpl implements ResumeService{
 	private ResumeRespository resumeRespository;
 
 	@Override
-	public void setmyImg(Resume resume) {
-		resumeRespository.setmyImg(resume);
+	public void setmyImg(Resume resume,String id) {
+		resumeRespository.setmyImg(resume,id);
 		
 	}
 
 	@Override
-	public List<Resume> getAllresumeList() {
-		return resumeRespository.getAllresumeList();
+	public List<Resume> getAllresumeList(String id) {
+		return resumeRespository.getAllresumeList(id);
 	}
 
 	@Override
@@ -40,6 +40,11 @@ public class ResumeServiceImpl implements ResumeService{
 	public void setDeleteResume(String number) {
 		resumeRespository.setDeleteResume(number);
 		
+	}
+	
+	@Override
+	public List<Resume> getfindResumesByUserId(String userId) {
+		return resumeRespository.getfindResumesByUserId(userId);
 	}
 
 }

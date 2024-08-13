@@ -4,6 +4,7 @@ import com.springmvc.domain.Resume;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class ResumeRespositoryImpl implements ResumeRespository {
 	}
 	
 	@Override
-	public void setmyImg(Resume resume) {
-		String SQL = "INSERT INTO Resume(number,name, birthdate, gender, contact, email, address, school, period, major, job_title, experience_period, main_work, reason, work_hours, desired_salary, desired_days, MyimgName) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	public void setmyImg(Resume resume,String id) {
+		String SQL = "INSERT INTO Resume(number,name, birthdate, gender, contact, email, address, school, period, major, job_title, experience_period, main_work, reason, work_hours, desired_salary, desired_days, MyimgName,resume_id) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 		template.update(SQL,
 			resume.getNumber(),
 		    resume.getName(),
@@ -41,7 +42,8 @@ public class ResumeRespositoryImpl implements ResumeRespository {
 		    resume.getWork_hours(),
 		    resume.getDesired_salary(),
 		    resume.getDesired_days(),
-		    resume.getMyimgName()
+		    resume.getMyimgName(),
+		    id
 		);
 
 
@@ -49,12 +51,14 @@ public class ResumeRespositoryImpl implements ResumeRespository {
 	}
 
 	@Override
-	public List<Resume> getAllresumeList() {
-		String SQL="SELECT * FROM Resume";
-		List<Resume> listOfResume = template.query(SQL, new ResumeRowMapper());
+	public List<Resume> getAllresumeList(String id) {
+		String SQL="SELECT * FROM Resume WHERE resume_id = ?";
+		@SuppressWarnings("deprecation")
+		List<Resume> listOfResume = template.query(SQL,new Object[]{id}, new ResumeRowMapper());
 		return listOfResume;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Resume getResumeNumber(String number) {
 		Resume ResumeInfo = null;
@@ -66,6 +70,12 @@ public class ResumeRespositoryImpl implements ResumeRespository {
 		}
 		return ResumeInfo;
 	}
+	
+	@SuppressWarnings("deprecation")
+	public List<Resume> getfindResumesByUserId(String userId) {
+        String sql = "SELECT * FROM Resume WHERE resume_id = ?";
+        return template.query(sql, new Object[]{userId}, new ResumeRowMapper());
+    }
 
 	@Override
 	public void setUpdateResume(Resume resume) {

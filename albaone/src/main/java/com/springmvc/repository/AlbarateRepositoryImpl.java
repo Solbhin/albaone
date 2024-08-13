@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.Albarate;
-import com.springmvc.domain.QRdto;
 
 @Repository
 public class AlbarateRepositoryImpl implements AlbarateRepository

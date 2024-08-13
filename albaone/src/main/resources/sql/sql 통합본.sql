@@ -1,14 +1,12 @@
 CREATE database albaoneDB;
-use albaoneDB;
-create table user
-(
+create table user(
 	id varchar(10) primary key,
     password varchar(20) not null,
     name varchar(10) not null,
     phone char(13),
     email varchar(20),
     businessNumber varchar(20)
-);
+    );
 select * from User;
 select id, pw from user;
 drop table user;
@@ -47,9 +45,13 @@ CREATE TABLE if not exists jobpost(
     workHours VARCHAR(30) default "시간협의",		-- 근무시간
     workDays VARCHAR(5) default "요일협의",		-- 근무요일
     workDuration varchar(10) not null,			-- 근무기간
-    jobDescription varchar(200)					-- 하는 일
+    jobDescription varchar(200),				-- 하는 일
+    id VARCHAR(20)								-- 작성자 아이디
 );
-select * from jobpost;
+SELECT * FROM jobpost;
+
+ALTER table jobpost add constraint chk check (salary >=10000);
+alter table jobpost drop check chk;
 drop table jobpost;
 -------------------------------------------
 -- create database albaoneDB;
@@ -58,11 +60,10 @@ use albaoneDB;
 
 create table QRtable
 (
-    id varchar(10) primary key, -- 아이디
-    today varchar(20), -- 날짜
-    todayintime varchar(20), -- 출근 시간
-    todayquittime varchar(20) -- 퇴근 시간 
+    id varchar(10) primary key,
+    todaytime varchar(20) not null
 );
+
 
 select * from QRtable;
 select * from QRtable where id = "알바생1";
@@ -99,10 +100,7 @@ CREATE TABLE Resume (
 drop table Resume;
 delete from Resume;
 select * from Resume;
-
-
----------------------------------------------------
-
+------------------------------------------------------
 use albaoneDB;
 
 create table employmentcontract
@@ -176,4 +174,13 @@ update Albarate set company=-5
 
 -- 테스트용
 drop table Albarate; -- 잘못 만들었을 경우 삭제용
- 
+
+----------------------------------------------------
+CREATE TABLE empolyee(
+	businessNumber varchar(20),
+    id varchar(15)
+);
+select * from empolyee;
+insert into empolyee value(1, "알바생1");
+insert into empolyee value(1, "알바생2");
+insert into empolyee value(1, "알바생3");

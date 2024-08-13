@@ -21,6 +21,11 @@
 	<p><a href="Severance">퇴직금 계산</a>
 	<p><a href="SeveranceRead">퇴직금 조회</a>
 	
+	<p><a href="QR">QR 생성</a></p>
+	<p>${id}${name}${businessNumber}</p>
+	
+	<p><a href="empolyeeList?businessNumber=${sessionScope.businessNumber}">내 사업장 알바생 조회</a></p>
+	
 	<!-- 회원가입시 insert -> 사장도 등급이 생기는 문제점이 생김 -->
 	<!-- 사장 알바 평가 작성 테스트 --세션에 사업자 등록번호가 있을경우 뜨도록 변경 -->
 	<p><a href="writeAlbarate">알바 평가 작성</a>

@@ -1,7 +1,5 @@
 package com.springmvc.domain;
 
-import java.util.Date;
-
 public class employmentcontract
 {
 	private String ownername; //사업주명
