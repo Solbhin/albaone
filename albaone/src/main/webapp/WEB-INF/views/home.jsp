@@ -13,7 +13,7 @@
 	<!-- 근로 계약서 a태그, 임시 -->
 	<p><a href="employmentcontract">근로계약서 테스트</a>
 	<p><a href="employmentcontractUpdate">근로계약서 재작성 테스트</a>
-	<p><a href="searchcontract">근로계약서 조회</a>
+	<p><a href="contracts">근로계약서 조회</a>
 	<p><a href="deletecontract">근로계약서 삭제</a>
 
 	<p><a href="QR">QR 생성</a></p>

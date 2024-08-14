@@ -39,6 +39,13 @@
 	<%@include file="menu.jsp" %>
 	
     <div class="container mt-4">
+    	<c:if test="${not empty sessionScope.businessNumber}">
+	    	<div class="mb-3 text-center">
+	            <a href="./jobposting" class="btn btn-success">공고 등록</a>
+	            <a href="./myJobPost?page=1" class="btn btn-info">내가 쓴 글 조회</a>
+	            <a href="./jobposts?page=1" class="btn btn-primary">전체 게시글 조회</a>
+	        </div>
+	    </c:if>
         <div class="row">
        		<c:forEach items="${jobPosts}" var="jobpost">
 	            <div class="col-md-4 mb-3">

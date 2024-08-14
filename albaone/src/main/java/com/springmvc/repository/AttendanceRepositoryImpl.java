@@ -11,12 +11,14 @@ import org.springframework.stereotype.Repository;
 import com.springmvc.domain.Attendance;
 
 @Repository
-public class AttendanceRepositoryImpl implements AttendanceRepository {
+public class AttendanceRepositoryImpl implements AttendanceRepository
+{
 
 	private JdbcTemplate template;
 
 	@Autowired
-	public void setJdbctemplate(DataSource dataSource) {
+	public void setJdbctemplate(DataSource dataSource)
+	{
 		this.template = new JdbcTemplate(dataSource);
 	}
 

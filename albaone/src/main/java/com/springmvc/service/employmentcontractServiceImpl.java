@@ -1,5 +1,7 @@
 package com.springmvc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,18 @@ public class employmentcontractServiceImpl implements employmentcontractService
 	public void update(employmentcontract employmentcontract)
 	{
 		employmentcontractRepository.update(employmentcontract);
+	}
+
+	@Override
+	public List<employmentcontract> findAllByPartTimeName(String parttimename)
+	{
+		return employmentcontractRepository.findAllByPartTimeName(parttimename);
+	}
+
+	@Override
+	public int deleteContractsByPartTimeName(String parttimename)
+	{
+		return employmentcontractRepository.deleteContractsByPartTimeName(parttimename);
 	}
 
 }

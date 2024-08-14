@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.springmvc.domain.Albarate;
 import com.springmvc.service.AlbarateServiceImpl;
+import com.springmvc.service.AttendanceServiceImpl;
 
 @Controller
 public class rateController
 {
 	@Autowired
 	private AlbarateServiceImpl AlbarateServiceImpl;
+	
+	@Autowired
+	private AttendanceServiceImpl attendanceService;
 	
 	//알바등급 폼 제공 - 사장 전용
 	@GetMapping("/writeAlbarate")
@@ -52,9 +56,8 @@ public class rateController
 		//세션쪽 확인
 		String id = (String) session.getAttribute("id");
 		System.out.println(id);
-		//근태값 - 몇번찍었는지
-		//얼마나 깜빡했는지
-		AlbarateServiceImpl.update(null); 
+
+		model.addAttribute("attend", attendanceService.getAllAttendances(id));//근태 관리 read
 		model.addAttribute("read",AlbarateServiceImpl.read(id));
 		return "ReadAlbarate";
 	}

@@ -1,6 +1,7 @@
 package com.springmvc.domain;
 
-public class employmentcontract {
+public class employmentcontract
+{
 	private String ownername; // 사업주명
 	private String parttimename; // 알바생명
 	private String period_start; // 근무 시작 날짜
@@ -16,10 +17,8 @@ public class employmentcontract {
 	private String createdate; // 작성 날짜
 
 	// 기본생성자
-	public employmentcontract() {
-	}
+	public employmentcontract() {}
 
-	// getter, setter
 	public String getOwnername() {
 		return ownername;
 	}
@@ -116,12 +115,14 @@ public class employmentcontract {
 		this.insurance = insurance;
 	}
 
-	public String getDate() {
+	public String getCreatedate() {
 		return createdate;
 	}
 
-	public void setcreateData(String createdate) {
+	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
 	}
+
+
 
 }
