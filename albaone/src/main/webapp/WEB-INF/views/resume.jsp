@@ -78,7 +78,7 @@
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary">저장</button>
-            <a href="resume_cancel" class="btn btn-danger">취소</a>
+            <a href="resumecancel" class="btn btn-danger">취소</a>
         </div>
     </form>
 </div>

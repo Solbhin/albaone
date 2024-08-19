@@ -6,6 +6,8 @@
 <title>근로계약서</title>
 </head>
 <body>
+	<%@include file="menu.jsp" %>
+	
     <form action="employmentcontract" method="post" modelAttribute="employment">
         <p>사업주명 : <input type="text" name="ownername"></p>
         <p>알바생명 : <input type="text" name="parttimename"></p>
@@ -17,8 +19,11 @@
         <p>임금 : <input type="text" name="money"></p>
         <p>상여금 : <input type="text" name="bonus"></p>
         <p>보험 : <input type="text" name="insurance"></p>
-        <p>작성 날짜 : <input type="date" name="data"></p>
+        <p>작성 날짜 : <input type="date" name="createdate"></p>
         <p><input type="submit" value="등록"></p>
+        <input type="hidden" value="${apply_id}" name="apply_id">
+        <input type="hidden" value="${status}" name="status">
+        <input type="hidden" value="${postNumber}" name="postNumber">
     </form>
 </body>
 </html>

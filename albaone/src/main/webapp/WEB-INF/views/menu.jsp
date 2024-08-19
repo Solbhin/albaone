@@ -22,20 +22,28 @@
 	                		<p class="nav-link">안녕하세요 <strong>${id}님</strong></p>
 	                	</li>
 	                </c:if>
-	                <c:if test="${not empty sessionScope.businessNumber}">
-	                    <li class="nav-item">
-	                        <a class="nav-link" href="/albaone/jobposting">공고등록</a>
+	                <c:if test="${not empty sessionScope.businessNumber && not empty sessionScope.id}">
+						<li class="nav-item">
+							<a class="nav-link" href="/albaone/jobposts?page=1">구인 정보</a>	                
+	               		</li>
+              	        <li class="nav-item">
+	                        <a class="nav-link" href="/albaone/attendanceCalendar">직원 근태 관리</a>
 	                    </li>
 	                </c:if>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/albaone/jobposts">구인 게시글 조회</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">근태 관리</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">급여 조회</a>
-                    </li>
+                   	<c:if test="${empty sessionScope.businessNumber && not empty sessionScope.id}">
+                	    <li class="nav-item">
+	                    	<a class="nav-link" href="resumereadAll">이력서</a>
+	                    </li>
+	                    <li class="nav-item">
+	                        <a class="nav-link" href="/albaone/attendanceCalendar">근태 관리</a>
+	                    </li>
+	                    <li class="nav-item">
+	                        <a class="nav-link" href="#">급여 조회</a>
+	                    </li>
+	                    <li class="nav-item">
+	                    	<a class="nav-link" href="/albaone/jobposts?page=1">구직 정보</a>
+	                    </li>
+					</c:if>
                 	<c:if test="${not empty sessionScope.id}">
 	                    <li class="nav-item">
 	                        <a class="nav-link" href="/albaone/update">회원 정보 수정</a>
@@ -45,6 +53,9 @@
 	                    </li>
 	                </c:if>
 	                <c:if test="${empty sessionScope.id}">
+         		        <li class="nav-item">
+	                    	<a class="nav-link" href="/albaone/jobposts?page=1">구직 정보</a>
+	                    </li>
 	                    <li class="nav-item">
 	                        <a class="nav-link" href="/albaone/login">로그인</a>
 	                    </li>
