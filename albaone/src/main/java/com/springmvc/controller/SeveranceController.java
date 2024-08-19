@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.springmvc.domain.Employmentcontract;
 import com.springmvc.domain.Severance;
-import com.springmvc.domain.employmentcontract;
-import com.springmvc.repository.employmentcontractRepositoryImpl;
+import com.springmvc.repository.EmploymentcontractRepositoryImpl;
 import com.springmvc.service.SeveranceServiceImpl;
 
 @Controller
@@ -24,7 +24,7 @@ public class SeveranceController
 {
 	//퇴직금 계산을 위해 계약서 연결
 	@Autowired
-	private employmentcontractRepositoryImpl employmentcontractService;
+	private EmploymentcontractRepositoryImpl employmentcontractService;
 	
 	@Autowired
 	private SeveranceServiceImpl SeveranceService;
@@ -45,12 +45,12 @@ public class SeveranceController
 	    
 	    if (parttimename != null && !parttimename.isEmpty())
 	    {
-	        List<employmentcontract> contracts = employmentcontractService.findAllByPartTimeName(parttimename);
+	        List<Employmentcontract> contracts = employmentcontractService.findAllByPartTimeName(parttimename);
 	        
 	        if (!contracts.isEmpty())
 	        {
 	            // 첫 번째 계약서의 정보 가져오기
-	            employmentcontract inputContract = contracts.get(0);
+	        	Employmentcontract inputContract = contracts.get(0);
 	            
 	            // 알바생명, 금액, 시작일, 종료일 변수에 담기
 	            String retrievedPartTimeName = inputContract.getParttimename();

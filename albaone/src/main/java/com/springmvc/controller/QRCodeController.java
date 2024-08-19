@@ -78,7 +78,7 @@ public class QRCodeController {
 				QRCodeService.checkIn(id, datetime);
 			}
 		}
-		return "redirect:/personalAttendance";
+		return "redirect:/attendanceCalendar";
 	}
 
 	// QR 만드는 메서드

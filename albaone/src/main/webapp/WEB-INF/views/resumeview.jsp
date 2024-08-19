@@ -20,10 +20,6 @@
                             <th>정보</th>
                         </tr>
                         <tr>
-                            <td>이력서 번호</td>
-                            <td>${resume.number}</td>
-                        </tr>
-                        <tr>
                             <td>성명</td>
                             <td>${resume.name}</td>
                         </tr>

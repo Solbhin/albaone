@@ -13,11 +13,6 @@
 	<c:set var="absent" value="${read.absent}" />
 	<c:set var="blinking" value="${read.blinking}" />
 	<c:set var="company" value="${read.company}" />
-	
-	<c:set var="attendin" value="${attend.check_in_time}" />
-	<c:set var="attendout" value="${read.company.check_out_time}" />
-	<c:set var="" value="${read.company}" />
-	<c:set var="" value="${read.company}" />
 
 	<table border="1">
 	<tbody>

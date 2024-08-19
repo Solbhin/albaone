@@ -6,6 +6,10 @@ public class Empolyee {
 	private String name;
 	
 	Empolyee(){}
+
+	public Empolyee(String businessNumber) {
+		this.businessNumber = businessNumber;
+	}
 	
 	public Empolyee(String id, String name){
 		this.id = id;

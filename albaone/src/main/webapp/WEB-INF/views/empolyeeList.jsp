@@ -14,5 +14,9 @@
 	<c:forEach var="empolyee" items="${empolyeeList}">
 		<p>${empolyee.id}</p>
 	</c:forEach>
+	
+	<c:forEach var="company" items="${companyList}">
+		<p>${company.businessNumber}</p>
+	</c:forEach>
 </body>
 </html>

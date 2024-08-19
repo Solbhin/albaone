@@ -53,13 +53,10 @@
                     <td>${resume.work_hours}</td>
                     <td>${resume.desired_salary}</td>
                     <td>${resume.desired_days}</td>
-                    <td>${joppost.postNumber}</td>
                     <td><img src="${pageContext.request.contextPath}/resources/images/${resume.myimgName}" alt="사진" width="100"></td>
-                    <td>
-                        <td>
-    					<a href="${pageContext.request.contextPath}/apply?postNumber=${postNumber}&resume_id=${resume.resume_id}">지원하기</a>
-						</td>
-                    </td>
+                  	<td>
+   						<a href="${pageContext.request.contextPath}/apply?postNumber=${postNumber}&resume_id=${resume.resume_id}">지원하기</a>
+					</td>
                 </tr>
             </c:forEach>
         </tbody>

@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.Severance;
-import com.springmvc.domain.employmentcontract;
+
 
 @Repository
 public class SeveranceRepositoryImpl implements SeveranceRepository

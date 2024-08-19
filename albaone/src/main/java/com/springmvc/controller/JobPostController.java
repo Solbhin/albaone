@@ -62,7 +62,7 @@ public class JobPostController {
 		model.addAttribute("jobPosts", jobPosts);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPosts", totalPosts);
-		return "myJobPosts";
+		return "jobPostList";
 	}
 
 //	게시글 수정

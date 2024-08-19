@@ -26,33 +26,43 @@ public class ResumeController {
 	@Autowired
 	private ResumeServiceImpl resumeService;
 	
-//	이력서 작성하러 가기
+	//이력서 작성하러 가기
 	@GetMapping("/resume")
-	public String resumeform(@ModelAttribute("ResumeAdd") Resume resume) {
+	public String resumeform(@ModelAttribute("ResumeAdd") Resume resume)
+	{
 		return "resume";
 	}
-//	이력서 작성
+	//이력서 작성
 	@PostMapping("/resume")
-	public String resumeadd(@ModelAttribute("ResumeAdd") Resume resume,BindingResult result, HttpServletRequest req,HttpSession session) {
+	public String resumeadd(@ModelAttribute("ResumeAdd") Resume resume,BindingResult result, HttpServletRequest req,HttpSession session)
+	{
 		String id =(String)session.getAttribute("id");
-		if(result.hasErrors()) {return "resume";}
+		if(result.hasErrors())
+		{return "resume";}
 		String root = req.getServletContext().getRealPath("/resources/images");
 		MultipartFile myimg = resume.getMyimg();
 		String saveName = myimg.getOriginalFilename();
 		File saveFile = new File(root ,saveName);
 		
 		if(myimg !=null && !myimg.isEmpty())
-		try {myimg.transferTo(saveFile);resume.setMyimgName(saveName);}
-		catch(Exception e) {}
+		try 
+		{
+			myimg.transferTo(saveFile);
+			resume.setMyimgName(saveName);
+		}
+		catch(Exception e)
+		{}
 		resumeService.setmyImg(resume,id);
 		return "redirect:/resumereadAll";
 	}
-//	이력서 작성 취소
+	
+	//이력서 작성 취소
 	@GetMapping("/resumecancel")
 	public String resumecancel() {
 		return "home";
 	}
-//	작성한 이력서 전부 조회
+	
+	//작성한 이력서 전부 조회
 	@GetMapping("/resumereadAll")
 	public String resumereadviewAll(Model model,HttpSession session) {
 		String id =(String)session.getAttribute("id");

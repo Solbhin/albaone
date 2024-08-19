@@ -91,11 +91,12 @@
         </tbody>
     </table>
     
-    <div class="text-center mt-3">
-	    <a href="addAttendance" class="btn btn-primary">추가</a>
-	    <button onclick="showEditModal()" class="btn btn-warning">수정</button>
-	</div>
-    
+    <c:if test="${not empty sessionScope.businessNumber}">
+	    <div class="text-center mt-3">
+		    <a href="addAttendance" class="btn btn-primary">추가</a>
+		    <button onclick="showEditModal()" class="btn btn-warning">수정</button>
+		</div>
+	</c:if>
 
 </body>
 </html>

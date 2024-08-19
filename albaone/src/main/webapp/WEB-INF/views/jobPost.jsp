@@ -37,9 +37,16 @@
                 <p><strong>근무기간:</strong> ${jobPost.workDuration}</p>
                 <p><strong>업무내용:</strong> ${jobPost.jobDescription}</p>
             </div>
+             <c:if test="${empty sessionScope.businessNumber}">
             <div class="card-footer text-center">
-            	<button>지원하기</button>
+            	<a href="applyresumeList?postNumber=${jobPost.postNumber}">지원하기</a>
             </div>
+            </c:if>
+            <c:if test="${not empty sessionScope.businessNumber}">
+            <div class="card-footer text-center">
+            	<a href="businesApplylist?postNumber=${jobPost.postNumber}">지원 내역 조회</a>
+            </div>
+            </c:if>
         </div>
             <div class="text-center">
                 <button onclick="window.history.back();" class="btn btn-secondary">목록으로 돌아가기</button>

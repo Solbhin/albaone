@@ -24,5 +24,12 @@ public class empolyeeRepositoryImpl implements empolyeeRepository {
 		String SQL = "SELECT empolyee.id, user.name FROM empolyee INNER JOIN user ON empolyee.id = user.id WHERE empolyee.businessNumber = ?";
 		return template.query(SQL, new Object[] {businessNumber},(rs, rowNum) -> new Empolyee(rs.getString("id"), rs.getString("name")));
 	}
+	
+	@Override
+	public List<Empolyee> getMyCompany(String id) {
+		String SQL = "SELECT businessNumber from empolyee where id = ?";
+		return template.query(SQL, new Object[] {id},(rs, rowNum) -> new Empolyee(rs.getString("businessNumber")));
+		
+	}
 
 }

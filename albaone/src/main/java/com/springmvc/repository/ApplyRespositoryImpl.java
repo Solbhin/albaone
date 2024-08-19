@@ -16,9 +16,11 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 	private JdbcTemplate template;
 	
 	@Autowired
-	public void setJdbctemplate(DataSource dataSource) {
+	public void setJdbctemplate(DataSource dataSource)
+	{
 		this.template = new JdbcTemplate(dataSource);
 	}
+	
 	@Override
 	public void insertApplication(String id,String resume_number, String resumeTitle, int postNumber, 
 	                              String companyName, String workLocation, int salary, 
@@ -50,7 +52,6 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 	@Override
 	public List<Apply> getAllbusinesapplys(int postNumber) {
 		String SQL="SELECT * FROM apply where postNumber = ? ";
-		System.out.println(postNumber);
 		List<Apply> listOfbusinesApply=template.query(SQL,new Object[] {postNumber},new ApplyRowMapper());
 		return listOfbusinesApply;
 	}
@@ -65,5 +66,26 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 		String SQL ="SELECT * FROM Apply WHERE postNumber = ? AND apply_id =?";
 		return template.query(SQL,new Object[] {postNumber,apply_id},new ApplyRowMapper());
 	}
+	@Override
+	public void updateApplyStatus(int apply_id, String status, int postNumber) {
+	    // status 값을 ENUM 값으로 변환
+	    String statusEnum = convertToEnumStatus(status);
+
+	    String SQL = "UPDATE Apply SET status = ? WHERE apply_id = ? AND postNumber = ?";
+	    template.update(SQL, statusEnum, apply_id, postNumber);
+	}
+
+	private String convertToEnumStatus(String status) {
+	    switch (status) {
+	        case "accepted":
+	            return "수락";
+	        case "rejected":
+	            return "거절";
+	        default:
+	            return "지원 중";
+	    }
+	}
+
+	
 }
 

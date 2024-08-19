@@ -13,7 +13,6 @@
     <h2 class="text-center">이력서 수정</h2>
     <form action="resumeupdate?number=${resume.number}" method="post" enctype="multipart/form-data" modelAttribute="updateResume">
         <div class="form-row">
-        	<input type="text" class="form-control" id="number" name="number" value="${resume.number}" >
             <div class="form-group col-md-6">
                 <label for="name">성명</label>
                 <input type="text" class="form-control" id="name" name="name" value="${resume.name}" required>

@@ -18,4 +18,9 @@ public class empolyeeServiceImpl implements empolyeeService {
 		return empolyeeRepository.getAllEmpolyee(businessNumber);
 	}
 
+	@Override
+	public List<Empolyee> getMyCompany(String id) {
+		return empolyeeRepository.getMyCompany(id);
+	}
+
 }

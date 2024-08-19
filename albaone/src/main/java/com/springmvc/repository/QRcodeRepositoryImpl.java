@@ -23,38 +23,6 @@ public class QRcodeRepositoryImpl implements QRcodeRepository {
 		this.template = new JdbcTemplate(dataSource);
 	}
 
-//	// QR 생성
-//	@Override
-//	public void create(QRCode qrdto) {
-//		System.out.println("QR 코드 create 메서드 실행");
-//
-//		String sql = "insert into QRtable values (?,?,?)";
-//
-//		template.update(sql, qrdto.getId(), qrdto.getTodaytime(), qrdto.getTime());
-//		return;
-//	}
-
-//	@SuppressWarnings("deprecation")
-//	@Override
-//	public QRCode read(String id) {
-//		String sql = "SELECT id,today,todayintime FROM QRtable WHERE id = ?";
-//
-//		return template.queryForObject(sql, new Object[] { id }, (rs, rowNum) -> {
-//			QRCode qrDto = new QRCode();
-//			qrDto.setId(rs.getString("id"));
-//			qrDto.setTodaytime(rs.getString("today"));
-//			qrDto.setTime(rs.getString("todayintime"));
-//
-//			return qrDto;
-//		});
-//	}
-
-//	@Override
-//	public void update(QRCode qrdto) {
-//		String sql = "update QRtable set todayintime = ?, todayquittime = ? where id = ? and today = ?";
-//		template.update(sql, qrdto.getTime(), qrdto.getTime(), qrdto.getId(), qrdto.getTodaytime());
-//	}
-
 	@Override
 	public void checkIn(String id, String datetime) {
 		String SQL = "INSERT INTO attendance (id, check_in_time) VALUES(?, ?)";

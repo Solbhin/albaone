@@ -40,6 +40,12 @@
 	                    <li class="nav-item">
 	                    	<a class="nav-link" href="/albaone/jobposts?page=1">구직 정보</a>
 	                    </li>
+	                    <li class="nav-item">
+	                    	<a class="nav-link" href="resumereadAll">이력서</a>
+	                    </li>
+	                    <!-- <li>
+	               			<a class="nav-link" href="/albaone/Applyread">지원 목록</a>
+	               		</li> -->
 					</c:if>
                 	<c:if test="${not empty sessionScope.id}">
 	                    <li class="nav-item">
