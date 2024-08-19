@@ -46,13 +46,16 @@
                         <td>${contract.money}</td>
                         <td>${contract.bonus}</td>
                         <td>${contract.insurance}</td>
-                        <!-- 실제 이미지 -->
+                        <!-- 사인 파일 경로 -->
                         <td><img src="resources/images/${contract.sinefilename}" alt="사인" width="100"></td>
-                        <!-- 임시 -->
-                        <!-- <td>사인 파일 경로</td> -->
-                        <td>${contract.createdate}</td>
+                      
                         <!-- 클릭시 PDF 다운로드 미완성 - 다운만 가능 디자인 안됨 -->
                         <td><a href="downloadPDF?num=${contract.num}">다운로드 테스트</a></td>
+                        
+                        <!--
+                        	해고 되고 3년간 의무 보관 - 해고되고 3년 뒤부터 삭제 가능하도록
+                        	데이터 테이블에 퇴직 날짜가 없어 나중에 구현하는 것으로 함
+                        -->
                         <td><a href="empcomdel?num=${contract.num}">삭제</a></td>
                     </tr>
                 </c:forEach>
