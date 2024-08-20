@@ -13,9 +13,9 @@
         <p>사업자 번호 : <input type="text" name="businessNumber" value="${BusinessNumber}" readonly></p>
         <p>사업주 전화번호 : <input type="text" name="ownerPhone" value="${ user.phone }">
         <p>사업주 주소 : <input type="text" name="owneraddr" maxlength="40">
-        <p>알바생명 : <input type="text" name="parttimename" maxlength="5" required></p>
-        <p>알바생 전화번호 : <input type="text" name="parttimePhone" maxlength="11">
-        <p>알바생 주소 : <input type="text" name="parttimeaddr" maxlength="40">
+        <p>알바생명 : <input type="text" name="parttimename" value="${parttimename }"></p>
+        <p>알바생 전화번호 : <input type="text" name="parttimePhone" value="${parttimephone}" maxlength="11">
+        <p>알바생 주소 : <input type="text" name="parttimeaddr" value="${parttimeaddress}" maxlength="40">
         <p>근무 날짜 :
         	<input type="date" name="period_start">
         	<input type="date" name="period_end" required>
@@ -27,20 +27,21 @@
         	<input type="checkbox" id="startCheckbox" onchange="toggleWorkingHoursStart()"> 직접 입력
 	        <select id="workinghours_start" name="workinghours_start">
 				<option value="00:00">00:00</option>
-				<option value="00:10">00:30</option>
+				<option value="00:30">00:30</option>
 				<option value="01:00">01:00</option>
 				<option value="02:30">02:30</option>
 				<option value="02:00">02:00</option>
 				<option value="03:30">03:30</option>
 				<option value="03:00">03:00</option>
+				<option value="04:00">04:00</option>
 				<option value="04:30">04:30</option>
-				<option value="00:40">04:00</option>
-				<option value="04:00">05:30</option>
 				<option value="05:00">05:00</option>
+				<option value="05:30">05:30</option>
 				<option value="06:30">06:30</option>
 				<option value="06:00">06:00</option>
-				<option value="07:30">07:30</option>
 				<option value="07:00">07:00</option>
+				<option value="07:30">07:30</option>
+				<option value="08:00">08:00</option>
 				<option value="08:30">08:30</option>
 				<option value="09:00">09:00</option>
 				<option value="09:30">09:30</option>
@@ -53,6 +54,8 @@
 				<option value="13:00">13:00</option>
 				<option value="13:30">13:30</option>
 				<option value="14:00">14:00</option>
+				<option value="14:30">14:30</option>
+				<option value="15:00">15:00</option>
 				<option value="15:30">15:30</option>
 				<option value="16:00">16:00</option>
 				<option value="16:30">16:30</option>
@@ -76,20 +79,21 @@
         	<input type="checkbox" id="endCheckbox" onchange="toggleWorkingHoursEnd()"> 직접 입력
         	<select id="workinghours_end" name="workinghours_end">
 				<option value="00:00">00:00</option>
-				<option value="00:10">00:30</option>
+				<option value="00:30">00:30</option>
 				<option value="01:00">01:00</option>
 				<option value="02:30">02:30</option>
 				<option value="02:00">02:00</option>
 				<option value="03:30">03:30</option>
 				<option value="03:00">03:00</option>
+				<option value="04:00">04:00</option>
 				<option value="04:30">04:30</option>
-				<option value="00:40">04:00</option>
-				<option value="04:00">05:30</option>
 				<option value="05:00">05:00</option>
+				<option value="05:30">05:30</option>
 				<option value="06:30">06:30</option>
 				<option value="06:00">06:00</option>
-				<option value="07:30">07:30</option>
 				<option value="07:00">07:00</option>
+				<option value="07:30">07:30</option>
+				<option value="08:00">08:00</option>
 				<option value="08:30">08:30</option>
 				<option value="09:00">09:00</option>
 				<option value="09:30">09:30</option>
@@ -102,6 +106,8 @@
 				<option value="13:00">13:00</option>
 				<option value="13:30">13:30</option>
 				<option value="14:00">14:00</option>
+				<option value="14:30">14:30</option>
+				<option value="15:00">15:00</option>
 				<option value="15:30">15:30</option>
 				<option value="16:00">16:00</option>
 				<option value="16:30">16:30</option>
@@ -120,14 +126,14 @@
 				<option value="23:00">23:00</option>
 				<option value="23:30">23:30</option>
 			</select>
-			<input type="text" id="workinghours_end_input" name="workinghours_start" placeholder="근무 종료 시간" style="display:none">
+			<input type="text" id="workinghours_end_input" name="workinghours_end" placeholder="근무 종료 시간" style="display:none">
         <p>주당 근무일 : <input type="text" name="workday" required></p>
-        <p>임금 : <input type="number" name="money" required></p>
+        <p>임금 : <input type="number" name="money" min="9860" required></p>
         <p>상여금 : <input type="number" name="bonus"></p>
         <p>보험 : <input type="text" name="insurance"></p>
         <p>작성 날짜 : <input type="date" name="createdate" required></p>
         <p>사업주 사인 : <input type="file" name="sinefileowner" required></p>
-        <!-- 사업주가 알바생 사인 파일을 바로 받기 힘들기 때문에 required는 뺌 -->
+        <!-- 사업주가 알바생 사인을 바로 받기는 힘들기 때문에 required 속성은 뺌 -->
         <p>알바생 사인 : <input type="file" name="sinefileparttime"></p>
         <p><input type="submit" value="등록"></p>
 

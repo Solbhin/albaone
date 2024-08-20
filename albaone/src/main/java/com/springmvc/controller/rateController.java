@@ -53,8 +53,10 @@ public class rateController
 		String id = (String) session.getAttribute("id");
 		System.out.println(id);
 		//근태값 - 몇번찍었는지
-		//얼마나 깜빡했는지
-		AlbarateServiceImpl.update(null); 
+		//얼마나 깜빡했는지와 결근 출퇴근을 업데이트 - attendance에서 가져와야 함
+		//attendace에서 깜빡했는지 체크하기 위한 열을 하나 더 만든다.
+		//attandancecontoller에서 사장이 수정을 하게 될 경우 갱신 발생
+		//AlbarateServiceImpl.update(null); 
 		model.addAttribute("read",AlbarateServiceImpl.read(id));
 		return "ReadAlbarate";
 	}

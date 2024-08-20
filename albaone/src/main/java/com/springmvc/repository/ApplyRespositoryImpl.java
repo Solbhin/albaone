@@ -34,7 +34,8 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 
 
 	@Override
-	public List<Apply> getApplicaionts(String userId) {
+	public List<Apply> getApplicaionts(String userId)
+	{
 		String sql = "SELECT a.apply_id, a.resumetitle, j.companyName, j.workLocation, j.salary, j.workHours, j.workDays, j.jobDescription, a.resume_id, r.name, r.contact, r.email, r.address " +
                 "FROM apply a " +
                 "JOIN Resume r ON a.resume_id = r.resume_id " +
@@ -42,13 +43,16 @@ public class ApplyRespositoryImpl implements ApplyRespository{
                 "WHERE r.resume_id = ?";
 		return template.query(sql, new Object[]{userId}, new ApplyRowMapper());
 	}
+	
 	@Override
-	public List<Apply> getAllapplys(String id) {
+	public List<Apply> getAllapplys(String id)
+	{
 		String SQL="SELECT * FROM Apply where id= ? ";
 		List<Apply> listOfApply = template.query(SQL,new Object[] {id},new ApplyRowMapper());
 		System.out.println(listOfApply);
 		return listOfApply;
 	}
+	
 	@Override
 	public List<Apply> getAllbusinesapplys(int postNumber) {
 		String SQL="SELECT * FROM apply where postNumber = ? ";

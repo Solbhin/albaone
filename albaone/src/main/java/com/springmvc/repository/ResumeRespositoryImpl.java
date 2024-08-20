@@ -12,17 +12,19 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ResumeRespositoryImpl implements ResumeRespository {
-	
+public class ResumeRespositoryImpl implements ResumeRespository
+{
 	private JdbcTemplate template;
 	
 	@Autowired
-	public void setJdbctemplate(DataSource dataSource) {
+	public void setJdbctemplate(DataSource dataSource)
+	{
 		this.template = new JdbcTemplate(dataSource);
 	}
 	
 	@Override
-	public void setmyImg(Resume resume,String id) {
+	public void setmyImg(Resume resume,String id)
+	{
 		String SQL = "INSERT INTO Resume(number,name, birthdate, gender, contact, email, address, school, period, major, job_title, experience_period, main_work, reason, work_hours, desired_salary, desired_days, MyimgName,resume_id) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 		template.update(SQL,
 			resume.getNumber(),
@@ -51,14 +53,16 @@ public class ResumeRespositoryImpl implements ResumeRespository {
 	}
 
 	@Override
-	public List<Resume> getAllresumeList(String id) {
+	public List<Resume> getAllresumeList(String id)
+	{
 		String SQL="SELECT * FROM Resume WHERE resume_id = ?";
 		List<Resume> listOfResume = template.query(SQL,new Object[]{id}, new ResumeRowMapper());
 		return listOfResume;
 	}
 
 	@Override
-	public Resume getResumeNumber(String number) {
+	public Resume getResumeNumber(String number)
+	{
 		Resume ResumeInfo = null;
 		String SQL = "SELECT count(*) FROM resume where Number=?";
 		int rowCount = template.queryForObject(SQL,Integer.class,number);
@@ -75,9 +79,11 @@ public class ResumeRespositoryImpl implements ResumeRespository {
     }
 
 	@Override
-	public void setUpdateResume(Resume resume) {
+	public void setUpdateResume(Resume resume)
+	{
 	    String SQL;
-	    if (resume.getMyimgName() != null) {
+	    if (resume.getMyimgName() != null)
+	    {
 	        SQL = "UPDATE Resume SET name = ?, birthdate = ?, gender = ?, contact = ?, email = ?, address = ?, school = ?, period = ?, major = ?, job_title = ?, experience_period = ?, main_work = ?, reason = ?, work_hours = ?, desired_salary = ?, desired_days = ?, MyimgName = ? WHERE number = ?";
 	        template.update(SQL,
 	            resume.getName(),
@@ -99,7 +105,9 @@ public class ResumeRespositoryImpl implements ResumeRespository {
 	            resume.getMyimgName(),
 	            resume.getNumber()
 	        );
-	    } else {
+	    }
+	    else
+	    {
 	        SQL = "UPDATE Resume SET name = ?, birthdate = ?, gender = ?, contact = ?, email = ?, address = ?, school = ?, period = ?, major = ?, job_title = ?, experience_period = ?, main_work = ?, reason = ?, work_hours = ?, desired_salary = ?, desired_days = ? WHERE number = ?";
 	        template.update(SQL,
 	            resume.getName(),

@@ -49,6 +49,7 @@ public class EmploymentcontractController
     @Autowired
     private ServletContext servletContext;
     
+    
 	//get 요청 발생시 계약서 create 폼 제공
 	@GetMapping("/employmentcontract")
 	public String employmentcontractform
@@ -56,6 +57,9 @@ public class EmploymentcontractController
 			@RequestParam("apply_id")int apply_id,
 			@RequestParam("status")String status,
 			@RequestParam("postNumber")int postNumber,
+			@RequestParam("parttimename")String parttimename,
+			@RequestParam("parttimephone")String parttimephone,
+			@RequestParam("parttimeaddress")String parttimeaddress,
 			Model model,
 			HttpSession session
 	)
@@ -66,7 +70,19 @@ public class EmploymentcontractController
 		model.addAttribute("postNumber", postNumber);
 		model.addAttribute("user", UserServiceImpl.findUserById(id));
 		model.addAttribute("BusinessNumber",UserServiceImpl.findBusinessNumber(id));
-		
+		if(parttimename != null)
+		{
+			model.addAttribute("parttimename",parttimename);
+		}
+		if(parttimephone != null)
+		{
+			model.addAttribute("parttimephone",parttimephone);
+		}
+		if(parttimeaddress != null)
+		{
+			model.addAttribute("parttimeaddress",parttimeaddress);
+		}
+				
 		return "employmentcontractform";
 	}
 	
