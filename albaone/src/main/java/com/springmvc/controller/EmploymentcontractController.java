@@ -42,7 +42,6 @@ public class EmploymentcontractController
     @Autowired
     private ApplyServiceImpl applyService;
 	
-    //사업자 번호 조회를 위해 리파지토리가져옴
     @Autowired
     private UserServiceImpl UserServiceImpl;
     
@@ -65,7 +64,7 @@ public class EmploymentcontractController
 		model.addAttribute("apply_id", apply_id);
 		model.addAttribute("status", status);
 		model.addAttribute("postNumber", postNumber);
-		model.addAttribute("id", id);
+		model.addAttribute("user", UserServiceImpl.findUserById(id));
 		model.addAttribute("BusinessNumber",UserServiceImpl.findBusinessNumber(id));
 		
 		return "employmentcontractform";
@@ -82,24 +81,42 @@ public class EmploymentcontractController
 			BindingResult result,
 			HttpServletRequest req)
 	{
-		if(result.hasErrors())
-		{return "resume";}
-		String root = req.getServletContext().getRealPath("/resources/images");//저장 경로
-		//sineName - 파일명, 파라미터
-		MultipartFile sineName = employmentcontract.getSinefile();//멀티 파츠로 파일 생성
-		System.out.println(sineName);
-		String saveName = sineName.getOriginalFilename();//원래 파일명
-		File saveFile = new File(root ,saveName);
+		if(result.hasErrors()){return "resume";}
 		
-		if(sineName !=null && !sineName.isEmpty())
+		String root = req.getServletContext().getRealPath("/resources/images");//저장 경로
+		
+		//sineName - 파일명, 파라미터
+		MultipartFile sineNameowner = employmentcontract.getSinefileowner();//멀티 파츠로 파일 생성
+		MultipartFile sineNameparttime = employmentcontract.getSinefileparttime();
+		System.out.println(sineNameowner);
+		System.out.println(sineNameparttime);
+		
+		String saveNameowner = sineNameowner.getOriginalFilename();//원래 파일명
+		String saveNameparttime = sineNameparttime.getOriginalFilename();
+		
+		File saveFileowner = new File(root ,saveNameowner);
+		File saveFileparttime = new File(root ,saveNameparttime);
+		
+		if(sineNameowner !=null && !sineNameowner.isEmpty())
 		try
 		{
-			sineName.transferTo(saveFile);
-			employmentcontract.setSinefilename(saveName);
+			sineNameowner.transferTo(saveFileowner);
+			employmentcontract.setSinefilenameowner(saveNameowner);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
+		}
+		
+		if(sineNameparttime !=null && !sineNameparttime.isEmpty())
+		try
+		{
+			sineNameparttime.transferTo(saveFileparttime);
+			employmentcontract.setSinefilenameparttime(saveNameparttime);
+		}
+		catch(Exception e)
+		{
+				e.printStackTrace();
 		}
 		
 		employmentcontractService.create(employmentcontract);
@@ -182,11 +199,17 @@ public class EmploymentcontractController
             document.add(new Paragraph("작성 날짜: " + contract.getCreatedate()));
 
             // 사인 이미지 추가
-            String signaturePath = servletContext.getRealPath("/resources/images/" + contract.getSinefilename());
-            ImageData imageData = ImageDataFactory.create(signaturePath);
-            Image signatureImage = new Image(imageData);
-            signatureImage.setWidth(100); // 이미지 너비 설정
-            document.add(signatureImage);
+            String signaturePathowner = servletContext.getRealPath("/resources/images/" + contract.getSinefilenameowner());
+            ImageData imageDataowner = ImageDataFactory.create(signaturePathowner);
+            Image signatureImageowner  = new Image(imageDataowner);
+            signatureImageowner.setWidth(100); // 이미지 너비 설정
+            document.add(signatureImageowner);
+            
+            String signaturePathparttime = servletContext.getRealPath("/resources/images/" + contract.getSinefilenameparttime());
+            ImageData imageDataparttime = ImageDataFactory.create(signaturePathparttime);
+            Image signatureImageparttime = new Image(imageDataparttime);
+            signatureImageparttime.setWidth(100); // 이미지 너비 설정
+            document.add(signatureImageparttime);
             
             document.close();
 

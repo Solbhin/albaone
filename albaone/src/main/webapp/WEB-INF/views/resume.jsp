@@ -14,8 +14,8 @@
     <form action="resume" method="post" enctype="multipart/form-data" modelAttribute="ResumeAdd">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="name">성명</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <label for="name">성명</abel>
+                <input type="text" class="form-control" id="name" name="name" value="${ name.name }" required readonly>
             </div>
             <div class="form-group col-md-6">
                 <label for="photo">사진 (최근 6개월 이내)</label>
@@ -44,7 +44,7 @@
         </div>
         <div class="form-group">
             <label for="address">현 주소 (우편번호: - )</label>
-            <input type="text" class="form-control" id="address" name="address" required>
+            <input type="text" class="form-control" id="address" name="address" required maxlength="100">
         </div>
         <div class="form-group">
             <label for="education">학력사항</label>
@@ -65,7 +65,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="work_hours">근무시간</label>
-                <input type="text" class="form-control" id="work_hours" name="work_hours" placeholder="예: 09:00 ~ 18:00" required>
+                <input type="text" class="form-control" id="work_hours" name="work_hours" placeholder="예: 09:00 ~ 18:00" required maxlength="20">
             </div>
             <div class="form-group col-md-6">
                 <label for="desired_salary">희망시급</label>
@@ -74,7 +74,7 @@
         </div>
         <div class="form-group">
             <label for="desired_days">희망휴일</label>
-            <input type="text" class="form-control" id="desired_days" name="desired_days" required>
+            <input type="text" class="form-control" id="desired_days" name="desired_days" required maxlength="20">
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary">저장</button>

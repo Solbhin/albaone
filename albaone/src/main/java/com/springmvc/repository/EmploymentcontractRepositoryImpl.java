@@ -29,7 +29,8 @@ public class EmploymentcontractRepositoryImpl implements EmploymentcontractRepos
 	public void create(Employmentcontract Employmentcontract)
 	{
 		System.out.println("근로계약서 리파지토리 create");
-		String sql = "insert into employmentcontract values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql =
+				"insert into employmentcontract values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		template.update
 		(
@@ -37,7 +38,11 @@ public class EmploymentcontractRepositoryImpl implements EmploymentcontractRepos
 				Employmentcontract.getNum(),
 				Employmentcontract.getOwnername(),
 				Employmentcontract.getBusinessNumber(),
+				Employmentcontract.getOwnerPhone(),
+				Employmentcontract.getOwneraddr(),
 				Employmentcontract.getParttimename(),
+				Employmentcontract.getParttimePhone(),
+				Employmentcontract.getParttimeaddr(),
 				Employmentcontract.getPeriod_start(),
 				Employmentcontract.getPeriod_end(),
 				Employmentcontract.getPlace(),
@@ -48,7 +53,8 @@ public class EmploymentcontractRepositoryImpl implements EmploymentcontractRepos
 				Employmentcontract.getMoney(),
 				Employmentcontract.getBonus(),
 				Employmentcontract.getInsurance(),
-				Employmentcontract.getSinefilename(),
+				Employmentcontract.getSinefilenameowner(),
+				Employmentcontract.getSinefilenameparttime(),
 				Employmentcontract.getCreatedate()
 				
 		);
@@ -70,7 +76,11 @@ public class EmploymentcontractRepositoryImpl implements EmploymentcontractRepos
             	Employmentcontract.setNum(rs.getInt("num"));
             	Employmentcontract.setOwnername(rs.getString("ownername"));
             	Employmentcontract.setBusinessNumber(rs.getString("businessNumber"));
+            	Employmentcontract.setOwnerPhone(rs.getString("ownerPhone"));
+            	Employmentcontract.setOwneraddr(rs.getString("owneraddr"));
             	Employmentcontract.setParttimename(rs.getString("parttimename"));
+            	Employmentcontract.setParttimeaddr(rs.getString("parttimePhone"));
+            	Employmentcontract.setParttimePhone(rs.getString("parttimeaddr"));
             	Employmentcontract.setPeriod_start(rs.getString("period_start"));
             	Employmentcontract.setPeriod_end(rs.getString("period_end"));
             	Employmentcontract.setPlace(rs.getString("place"));
@@ -81,7 +91,8 @@ public class EmploymentcontractRepositoryImpl implements EmploymentcontractRepos
             	Employmentcontract.setMoney(rs.getInt("money"));
             	Employmentcontract.setBonus(rs.getInt("bonus"));
             	Employmentcontract.setInsurance(rs.getString("insurance"));
-            	Employmentcontract.setSinefilename(rs.getString("sinefilename"));
+            	Employmentcontract.setSinefilenameowner(rs.getString("sinefilenameowner"));
+            	Employmentcontract.setSinefilenameparttime(rs.getString("sinefilenameparttime"));
             	Employmentcontract.setCreatedate(rs.getString("createdate"));
                 return Employmentcontract;
             }
@@ -108,24 +119,29 @@ public class EmploymentcontractRepositoryImpl implements EmploymentcontractRepos
             @Override
             public Employmentcontract mapRow(ResultSet rs, int rowNum) throws SQLException
             {
-                Employmentcontract employmentcontract = new Employmentcontract();
-                employmentcontract.setNum(rs.getInt("num"));
-                employmentcontract.setOwnername(rs.getString("ownername"));
-                employmentcontract.setBusinessNumber(rs.getString("businessNumber"));
-                employmentcontract.setParttimename(rs.getString("parttimename"));
-                employmentcontract.setPeriod_start(rs.getString("period_start"));
-                employmentcontract.setPeriod_end(rs.getString("period_end"));
-                employmentcontract.setPlace(rs.getString("place"));
-                employmentcontract.setWorkdetail(rs.getString("workdetail"));
-                employmentcontract.setWorkinghours_start(rs.getString("workinghours_start"));
-                employmentcontract.setWorkinghours_end(rs.getString("workinghours_end"));
-                employmentcontract.setWorkday(rs.getString("workday"));
-                employmentcontract.setMoney(rs.getInt("money"));
-                employmentcontract.setBonus(rs.getInt("bonus"));
-                employmentcontract.setInsurance(rs.getString("insurance"));
-                employmentcontract.setSinefilename(rs.getString("sinefilename"));
-                employmentcontract.setCreatedate(rs.getString("createdate"));
-                return employmentcontract;
+            	Employmentcontract Employmentcontract = new Employmentcontract();
+            	Employmentcontract.setNum(rs.getInt("num"));
+            	Employmentcontract.setOwnername(rs.getString("ownername"));
+            	Employmentcontract.setBusinessNumber(rs.getString("businessNumber"));
+            	Employmentcontract.setOwnerPhone(rs.getString("ownerPhone"));
+            	Employmentcontract.setOwneraddr(rs.getString("owneraddr"));
+            	Employmentcontract.setParttimename(rs.getString("parttimename"));
+            	Employmentcontract.setParttimeaddr(rs.getString("parttimePhone"));
+            	Employmentcontract.setParttimePhone(rs.getString("parttimeaddr"));
+            	Employmentcontract.setPeriod_start(rs.getString("period_start"));
+            	Employmentcontract.setPeriod_end(rs.getString("period_end"));
+            	Employmentcontract.setPlace(rs.getString("place"));
+            	Employmentcontract.setWorkdetail(rs.getString("workdetail"));
+            	Employmentcontract.setWorkinghours_start(rs.getString("workinghours_start"));
+            	Employmentcontract.setWorkinghours_end(rs.getString("workinghours_end"));
+            	Employmentcontract.setWorkday(rs.getString("workday"));
+            	Employmentcontract.setMoney(rs.getInt("money"));
+            	Employmentcontract.setBonus(rs.getInt("bonus"));
+            	Employmentcontract.setInsurance(rs.getString("insurance"));
+            	Employmentcontract.setSinefilenameowner(rs.getString("sinefilenameowner"));
+            	Employmentcontract.setSinefilenameparttime(rs.getString("sinefilenameparttime"));
+            	Employmentcontract.setCreatedate(rs.getString("createdate"));
+                return Employmentcontract;
             }
         });
     }

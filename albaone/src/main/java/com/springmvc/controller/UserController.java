@@ -22,7 +22,8 @@ import com.springmvc.service.AttendanceServiceImpl;
 import com.springmvc.service.AlbarateServiceImpl;
 
 @Controller
-public class UserController {
+public class UserController
+{
 	@Autowired
 	private UserServiceImpl userService;
 
@@ -34,7 +35,8 @@ public class UserController {
 
 	// 로그인 양식
 	@GetMapping("/login")
-	public String loginForm() {
+	public String loginForm()
+	{
 		return "login";
 	}
 

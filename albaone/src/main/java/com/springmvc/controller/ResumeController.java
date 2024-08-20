@@ -18,25 +18,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.springmvc.domain.Resume;
-import com.springmvc.service.ResumeServiceImpl;
+import com.springmvc.service.*;
 
 @Controller
-public class ResumeController {
-	
+public class ResumeController
+{
 	@Autowired
 	private ResumeServiceImpl resumeService;
 	
+	@Autowired
+	private UserServiceImpl UserServiceImpl;
+	
 	//이력서 작성하러 가기
 	@GetMapping("/resume")
-	public String resumeform(@ModelAttribute("ResumeAdd") Resume resume)
+	public String resumeform(@ModelAttribute("ResumeAdd") Resume resume, HttpSession session, Model model)
 	{
+		String id =(String)session.getAttribute("id");
+		
+		//데이터베이스에서 이름 가져가기
+		model.addAttribute("name", UserServiceImpl.findUserById(id));
 		return "resume";
 	}
+	
 	//이력서 작성
 	@PostMapping("/resume")
 	public String resumeadd(@ModelAttribute("ResumeAdd") Resume resume,BindingResult result, HttpServletRequest req,HttpSession session)
 	{
 		String id =(String)session.getAttribute("id");
+		
 		if(result.hasErrors())
 		{return "resume";}
 		String root = req.getServletContext().getRealPath("/resources/images");
@@ -52,13 +61,15 @@ public class ResumeController {
 		}
 		catch(Exception e)
 		{}
+		
 		resumeService.setmyImg(resume,id);
 		return "redirect:/resumereadAll";
 	}
 	
 	//이력서 작성 취소
 	@GetMapping("/resumecancel")
-	public String resumecancel() {
+	public String resumecancel()
+	{
 		return "home";
 	}
 	
@@ -74,20 +85,23 @@ public class ResumeController {
 		return "resumeviewAll";
 		
 	}
-//	이력서 상세보기 
+	
+	//이력서 상세보기 
 	@GetMapping("/resumeread")
 	public String resumereadview(@RequestParam("number")String number,Model model) {
 		Resume resumeNumber=resumeService.getResumeNumber(number);
 		model.addAttribute("resume",resumeNumber);
 		return "resumeview";
 	}
-//	이력서 수정
+	
+	//이력서 수정
 	@GetMapping("/resumeupdate")
 	public String resumeupdate(@ModelAttribute("updateResume")Resume resume,@RequestParam("number")String number,Model model) {
 		Resume resumeNumber=resumeService.getResumeNumber(number);
 		model.addAttribute("resume",resumeNumber);
 		return "updateResume";
 	}
+	
 	@PostMapping("/resumeupdate")
 	public String resumeupdate(@ModelAttribute("updateResume")Resume resume, @RequestParam int number) {
 		MultipartFile Image = resume.getMyimg();
@@ -101,7 +115,8 @@ public class ResumeController {
 		resumeService.setUpdateResume(resume);
 		return "redirect:/resumereadAll";
 	}
-//	이력서 삭제
+	
+	//이력서 삭제
 	@RequestMapping(value = "/resumedelete")
 	public String resumedelete(@RequestParam("number")String number) {
 		resumeService.setDeleteResume(number);
