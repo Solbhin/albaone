@@ -143,6 +143,7 @@
     </form>
     
     <script type="text/javascript">
+    	//파일 확장자 유효성 검사
        function validateFile()
        {
            var fileInput = document.querySelector('input[name="sinefileowner"]');
@@ -152,27 +153,40 @@
            if (!allowedExtensions.exec(filePath))
            {
                alert('유효한 이미지 파일만 업로드할 수 있습니다. (png, jpg, jpeg)');
-               fileInput.value = ''; // 선택된 파일 초기화
-               return false; // 제출 방지
+               // 선택된 파일 초기화
+               fileInput.value = '';
+               
+               // 제출 방지
+               return false; 
            }
-           return true; // 제출 허용
+           // 제출 허용
+           return true; 
        }
-        
+
+    	//근무 시작 날짜 유효성 검사
        function validateDateStart()
        {
            var startDateInput = document.querySelector('input[name="period_start"]');
            var startDate = new Date(startDateInput.value);
            var today = new Date();
-           today.setHours(0, 0, 0, 0); // 현재 날짜의 시간 부분을 0으로 설정
+        
+           // 현재 날짜의 시간 부분을 0으로 설정
+           today.setHours(0, 0, 0, 0); 
+           
 
            if (startDate < today)
            {
                alert('근무 시작 날짜는 오늘 날짜 이후여야 합니다.');
-               return false; // 제출 방지
+               
+               // 제출 방지
+               return false; 
            }
-           return true; // 제출 허용
+           
+           // 제출 허용
+           return true; 
        }
 
+    	//계약 종료 날짜 유효성 검사
        function validateDateEnd()
        {
            var startDateInput = document.querySelector('input[name="period_start"]');
@@ -183,22 +197,30 @@
            if (endDate < startDate)
            {
                alert('계약 종료 날짜는 계약 날짜 이후여야 합니다.');
-               return false; // 제출 방지
+               
+               // 제출 방지
+               return false; 
            }
-           return true; // 제출 허용
+           
+           // 제출 허용
+           return true; 
        }
 
+       // 계약 날짜 유효성 검사
        function validateCreateDate()
        {
            var createDateInput = document.querySelector('input[name="createdate"]');
            var createDate = new Date(createDateInput.value);
            var today = new Date();
-           today.setHours(0, 0, 0, 0); // 현재 날짜의 시간 부분을 0으로 설정
+           
+           // 현재 날짜의 시간 부분을 0으로 설정
+           today.setHours(0, 0, 0, 0); 
 
            if (createDate < today)
            {
                alert('작성 날짜는 오늘 날짜 이후여야 합니다.');
-               return false; // 제출 방지
+               //제출 방지
+               return false; 
            }
            return true; // 제출 허용
        }
@@ -209,6 +231,7 @@
            return validateFile() && validateDateStart() && validateDateEnd() && validateCreateDate(); 
        };
        
+       //근무시간 체크박스 함수 - 시작시간
        function toggleWorkingHoursStart()
        {
            var startSelect = document.getElementById('workinghours_start');
@@ -227,6 +250,7 @@
            }
        }
        
+     	//근무시간 체크박스 함수 - 종료시간
        function toggleWorkingHoursEnd()
        {
            var endSelect = document.getElementById('workinghours_end');

@@ -29,7 +29,17 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="gender">성별</label>
-                <input type="text" class="form-control" id="gender" name="gender" required>
+                <!-- <input type="text" class="form-control" id="gender" name="gender" required> -->
+                <div class="d-flex">
+		            <div class="form-check mr-3">
+		                <input type="radio" class="form-check-input" id="genderMale" name="gender" value="남성" required>
+		                <label class="form-check-label" for="genderMale">남성</label>
+		            </div>
+		            <div class="form-check">
+		                <input type="radio" class="form-check-input" id="genderFemale" name="gender" value="여성" required>
+		                <label class="form-check-label" for="genderFemale">여성</label>
+		            </div>
+        		</div>
             </div>
         </div>
         <div class="form-row">
@@ -82,5 +92,27 @@
         </div>
     </form>
 </div>
+	
+	<script type="text/javascript">
+		//파일 확장자 유효성 검사
+	    function validateFile()
+	    {
+	        var fileInput = document.querySelector('input[name="myimg"]');
+	        var filePath = fileInput.value;
+	        var allowedExtensions = /(\.png|\.jpg|\.jpeg)$/i;
+	
+	        if (!allowedExtensions.exec(filePath))
+	        {
+	            alert('유효한 이미지 파일만 업로드할 수 있습니다. (png, jpg, jpeg)');
+	            // 선택된 파일 초기화
+	            fileInput.value = '';
+	            
+	            // 제출 방지
+	            return false; 
+	        }
+	        // 제출 허용
+	        return true; 
+	    }
+	</script>
 </body>
 </html>
