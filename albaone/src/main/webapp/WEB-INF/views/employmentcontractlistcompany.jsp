@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>근로 계약서 목록(사업주 전용 페이지)</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<%@include file="menu.jsp" %>
@@ -58,7 +59,7 @@
                         	해고 되고 3년간 의무 보관 - 해고되고 3년 뒤부터 삭제 가능하도록
                         	데이터 테이블에 퇴직 날짜가 없어 나중에 구현하는 것으로 함
                         -->
-                        <td><a href="empcomdel?num=${contract.num}">삭제</a></td>
+                        <td><a href="#" class="delete-link" data-num="${contract.num}">삭제</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -68,6 +69,33 @@
         <p>등록된 근로 계약서가 없습니다.</p>
     </c:if>
     
+    <script>
+	    $(document).ready(function() {
+	        $(".delete-link").on("click", function(event){
+	            event.preventDefault(); // 기본 링크 클릭 동작 방지
+	            var link = $(this);
+	            var num = link.data("num"); // 데이터 속성에서 num 가져오기
+	
+	            if (confirm('정말 삭제하시겠습니까?'))
+	            {
+	                $.ajax({
+	                    url: "empcomdel",
+	                    type: "GET",
+	                    data: { num: num },
+	                    success: function(response)
+	                    {
+	                        // 삭제가 성공적으로 이루어졌다면 해당 행을 삭제
+	                        link.closest("tr").remove(); // 삭제된 행을 테이블에서 제거
+	                    },
+	                    error: function()
+	                    {
+	                        alert('삭제 중 오류가 발생했습니다. 다시 시도해 주세요.');
+	                    }
+	                });
+	            }
+	        });
+	    });
+</script>
 </body>
 </html>
 

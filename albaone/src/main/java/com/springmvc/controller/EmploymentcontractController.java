@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itextpdf.io.font.PdfEncodings;
@@ -165,11 +166,11 @@ public class EmploymentcontractController
 		
 	//계약서 삭제
 	@GetMapping("/empcomdel")
-	public String delete(Model model, @RequestParam int num,HttpSession session)
+	@ResponseBody
+	public ResponseEntity<String> delete(@RequestParam int num, HttpSession session)
 	{
-		employmentcontractService.deleteContractsByPartTimeName(num);
-		//getContractsByPartTimeNameownername 메서드로 이동 - 사장 이름으로 조회
-		return "redirect:/home";
+	    employmentcontractService.deleteContractsByPartTimeName(num);
+	    return ResponseEntity.ok("삭제되었습니다."); // 성공 메시지 반환
 	}
 	
 	// PDF 다운로드 메서드
