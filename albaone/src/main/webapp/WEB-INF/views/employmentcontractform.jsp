@@ -23,7 +23,104 @@
         <p>근무장소 : <input type="text" name="place" required></p>
         <p>업무내용
         <p><textarea rows="2" cols="50" name="workdetail" placeholder="업무 내용을 입력하세요"></textarea>
-        <p>근무 시간 : <input type="text" name="workinghours_start"><input type="text" name="workinghours_end" required></p>
+        <p>근무 시작 시간
+        	<input type="checkbox" id="startCheckbox" onchange="toggleWorkingHoursStart()"> 직접 입력
+	        <select id="workinghours_start" name="workinghours_start">
+				<option value="00:00">00:00</option>
+				<option value="00:10">00:30</option>
+				<option value="01:00">01:00</option>
+				<option value="02:30">02:30</option>
+				<option value="02:00">02:00</option>
+				<option value="03:30">03:30</option>
+				<option value="03:00">03:00</option>
+				<option value="04:30">04:30</option>
+				<option value="00:40">04:00</option>
+				<option value="04:00">05:30</option>
+				<option value="05:00">05:00</option>
+				<option value="06:30">06:30</option>
+				<option value="06:00">06:00</option>
+				<option value="07:30">07:30</option>
+				<option value="07:00">07:00</option>
+				<option value="08:30">08:30</option>
+				<option value="09:00">09:00</option>
+				<option value="09:30">09:30</option>
+				<option value="10:00">10:00</option>
+				<option value="10:30">10:30</option>
+				<option value="11:00">11:00</option>
+				<option value="11:30">11:30</option>
+				<option value="12:00">12:00</option>
+				<option value="12:30">12:30</option>
+				<option value="13:00">13:00</option>
+				<option value="13:30">13:30</option>
+				<option value="14:00">14:00</option>
+				<option value="15:30">15:30</option>
+				<option value="16:00">16:00</option>
+				<option value="16:30">16:30</option>
+				<option value="17:00">17:00</option>
+				<option value="17:30">17:30</option>
+				<option value="18:00">18:00</option>
+				<option value="18:00">18:30</option>
+				<option value="19:00">19:00</option>
+				<option value="19:30">19:30</option>
+				<option value="20:00">20:00</option>
+				<option value="20:30">20:30</option>
+				<option value="21:00">21:00</option>
+				<option value="21:30">21:30</option>
+				<option value="22:00">22:00</option>
+				<option value="22:30">22:30</option>
+				<option value="23:00">23:00</option>
+				<option value="23:30">23:30</option>
+			</select>
+			<input type="text" id="workinghours_start_input" name="workinghours_start" placeholder="근무 시작 시간" style="display:none">
+        <p>근무 종료 시간
+        	<input type="checkbox" id="endCheckbox" onchange="toggleWorkingHoursEnd()"> 직접 입력
+        	<select id="workinghours_end" name="workinghours_end">
+				<option value="00:00">00:00</option>
+				<option value="00:10">00:30</option>
+				<option value="01:00">01:00</option>
+				<option value="02:30">02:30</option>
+				<option value="02:00">02:00</option>
+				<option value="03:30">03:30</option>
+				<option value="03:00">03:00</option>
+				<option value="04:30">04:30</option>
+				<option value="00:40">04:00</option>
+				<option value="04:00">05:30</option>
+				<option value="05:00">05:00</option>
+				<option value="06:30">06:30</option>
+				<option value="06:00">06:00</option>
+				<option value="07:30">07:30</option>
+				<option value="07:00">07:00</option>
+				<option value="08:30">08:30</option>
+				<option value="09:00">09:00</option>
+				<option value="09:30">09:30</option>
+				<option value="10:00">10:00</option>
+				<option value="10:30">10:30</option>
+				<option value="11:00">11:00</option>
+				<option value="11:30">11:30</option>
+				<option value="12:00">12:00</option>
+				<option value="12:30">12:30</option>
+				<option value="13:00">13:00</option>
+				<option value="13:30">13:30</option>
+				<option value="14:00">14:00</option>
+				<option value="15:30">15:30</option>
+				<option value="16:00">16:00</option>
+				<option value="16:30">16:30</option>
+				<option value="17:00">17:00</option>
+				<option value="17:30">17:30</option>
+				<option value="18:00">18:00</option>
+				<option value="18:00">18:30</option>
+				<option value="19:00">19:00</option>
+				<option value="19:30">19:30</option>
+				<option value="20:00">20:00</option>
+				<option value="20:30">20:30</option>
+				<option value="21:00">21:00</option>
+				<option value="21:30">21:30</option>
+				<option value="22:00">22:00</option>
+				<option value="22:30">22:30</option>
+				<option value="23:00">23:00</option>
+				<option value="23:30">23:30</option>
+			</select>
+			<input type="text" id="workinghours_end_input" name="workinghours_start" placeholder="근무 종료 시간" style="display:none">
         <p>주당 근무일 : <input type="text" name="workday" required></p>
         <p>임금 : <input type="number" name="money" required></p>
         <p>상여금 : <input type="number" name="bonus"></p>
@@ -105,6 +202,42 @@
            // 모든 유효성 검사를 통과해야 submit
            return validateFile() && validateDateStart() && validateDateEnd() && validateCreateDate(); 
        };
+       
+       function toggleWorkingHoursStart()
+       {
+           var startSelect = document.getElementById('workinghours_start');
+           var startInput = document.getElementById('workinghours_start_input');
+           var checkbox = document.getElementById('startCheckbox');
+
+           if (checkbox.checked)
+           {
+               startSelect.style.display = 'none';
+               startInput.style.display = 'inline';
+           }
+           else
+           {
+               startSelect.style.display = 'inline';
+               startInput.style.display = 'none';
+           }
+       }
+       
+       function toggleWorkingHoursEnd()
+       {
+           var endSelect = document.getElementById('workinghours_end');
+           var endInput = document.getElementById('workinghours_end_input');
+           var checkbox = document.getElementById('endCheckbox');
+
+           if (checkbox.checked)
+           {
+               endSelect.style.display = 'none';
+               endInput.style.display = 'inline';
+           }
+           else
+           {
+               endSelect.style.display = 'inline';
+               endInput.style.display = 'none';
+           }
+       }
    </script>
 </body>
 </html>
