@@ -93,6 +93,7 @@
 
             <!-- 상태와 상관없이 버튼을 항상 표시합니다. -->
             <div class="text-center mt-4">
+            	<!-- 계약서 폼 가기전 상태파라미터와 알바생 정보 파라미터 가지고 가기 -->
                 <a href="employmentcontract?apply_id=${businesview.apply_id}&status=accepted&postNumber=${postNumber}&parttimename=${businesview.name}&parttimephone=${businesview.contact}&parttimeaddress=${businesview.address}" class="btn btn-primary"  data-status="${businesview.status}" onclick="handleClick(event, this)">채용 하기</a>
                 <a href="updateStatus?apply_id=${businesview.apply_id}&status=rejected&postNumber=${postNumber}" class="btn btn-danger">채용 거절</a>
             </div>
