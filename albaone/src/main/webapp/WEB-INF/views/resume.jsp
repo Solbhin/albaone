@@ -14,7 +14,7 @@
     <form action="resume" method="post" enctype="multipart/form-data" modelAttribute="ResumeAdd">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="name">성명</abel>
+                <label for="name">성명</label>
                 <input type="text" class="form-control" id="name" name="name" value="${ name.name }" required readonly>
             </div>
             <div class="form-group col-md-6">
