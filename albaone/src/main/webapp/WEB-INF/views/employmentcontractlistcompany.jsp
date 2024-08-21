@@ -52,8 +52,9 @@
                         <!-- 사인 파일 경로 -->
                         <td><img src="resources/images/${contract.sinefilenameowner}" alt="사장 사인" width="50"></td>
                       	<td><img src="resources/images/${contract.sinefilenameparttime}" alt="알바생 사인" width="50"></td>
-                        <!-- 클릭시 PDF 다운로드 미완성 - 다운만 가능 디자인 안됨 -->
-                        <td><a href="downloadPDF?num=${contract.num}">다운로드 테스트</a></td>
+                        
+                        <!-- PDF 다운 양식 -->
+                        <td><a href="downloadcontractexam?num=${contract.num}">다운로드 샘플</a></td>
                         
                         <!--
                         	해고 되고 3년간 의무 보관 - 해고되고 3년 뒤부터 삭제 가능하도록

@@ -50,7 +50,6 @@ public class EmploymentcontractController
     @Autowired
     private ServletContext servletContext;
     
-    
 	//get 요청 발생시 계약서 create 폼 제공
 	@GetMapping("/employmentcontract")
 	public String employmentcontractform
@@ -173,9 +172,22 @@ public class EmploymentcontractController
 	    return ResponseEntity.ok("삭제되었습니다."); // 성공 메시지 반환
 	}
 	
+	//다운로드 샘플 보여주기
+	@GetMapping("/downloadcontractexam")
+	public String downloadcontractexam
+	(
+			Model model,
+			@RequestParam("num") int num
+	)
+	{
+		model.addAttribute("contract",employmentcontractService.findByNum(num));
+		return "downloadcontractexam";
+	}
+	
 	// PDF 다운로드 메서드
     @GetMapping("/downloadPDF")
-    public ResponseEntity<byte[]> downloadPDF(@RequestParam int num) {
+     public ResponseEntity<byte[]> downloadPDF(@RequestParam int num)
+    {
         Employmentcontract contract = employmentcontractService.findByNum(num);
         
         if (contract == null)
@@ -245,4 +257,5 @@ public class EmploymentcontractController
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
 }
