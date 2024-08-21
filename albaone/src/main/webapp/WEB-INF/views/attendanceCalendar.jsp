@@ -10,7 +10,6 @@
     <style>
         table {
             width: 100%;
-            border-collapse: collapse;
         }
         th, td {
             border: 1px solid black;
@@ -66,12 +65,23 @@
 	                        		<c:otherwise>
 	                        			<p>${attendance.companyName} |
 	                        		</c:otherwise>
-								</c:choose>                        	
-	                            근무시간 : ${attendance.formattedCheckInTime} ~ 
-	                            <c:if test="${attendance.checkOutTime!=null}">
-	                            	${attendance.formattedCheckOutTime} | 
-	                            	${attendance.workHours}</p>
-	                            </c:if>
+								</c:choose>
+								<c:choose>
+									<c:when test="${attendance.checkOutTime==null}">
+			                            근무시간 : ${attendance.formattedCheckInTime} ~
+			                            <c:if test="${not empty sessionScope.businessNumber}">
+				                            <a href="attendanceEdit?id=${attendance.id}&checkInTime=${attendance.checkInTime}" class="btn btn-warning">수정</a></p>
+				                        </c:if> 
+									</c:when>
+		                            <c:otherwise>
+			                            근무시간 : ${attendance.formattedCheckInTime} ~
+		                            	${attendance.formattedCheckOutTime} | 
+		                            	${attendance.time}
+		                            	<c:if test="${not empty sessionScope.businessNumber}">
+		                            		<a href="attendanceEdit?id=${attendance.id}&checkInTime=${attendance.checkInTime}" class="btn btn-warning">수정</a></p>
+		                            	</c:if>
+		                            </c:otherwise>
+								</c:choose>
 	                        </c:if>
                         </c:forEach>
                     </td>
@@ -94,9 +104,8 @@
     <c:if test="${not empty sessionScope.businessNumber}">
 	    <div class="text-center mt-3">
 		    <a href="addAttendance" class="btn btn-primary">추가</a>
-		    <button onclick="showEditModal()" class="btn btn-warning">수정</button>
 		</div>
 	</c:if>
-
+	
 </body>
 </html>

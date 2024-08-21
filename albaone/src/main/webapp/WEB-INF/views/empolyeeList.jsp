@@ -26,15 +26,18 @@
 						<tr>
 							<td>${empolyee.id}</td>
 							<td>${empolyee.name}</td>
-							<td><a href="QR?id=${empolyee.id}&businessNumber=${sessionScope.businessNumber}">QR</a></td>
+							<td><a
+								href="QR?id=${empolyee.id}&businessNumber=${sessionScope.businessNumber}">QR</a></td>
 						</tr>
-					</c:forEach>						
+					</c:forEach>
+					<c:forEach var="company" items="${companyList}">
+						<tr>
+							<td><p>${company.businessNumber}</p></td>
+						</tr>
+					</c:forEach>
 				</tbody>
-			</table>
+		</table>
 		</div>
 	
-	<c:forEach var="company" items="${companyList}">
-		<p>${company.businessNumber}</p>
-	</c:forEach>
 </body>
 </html>

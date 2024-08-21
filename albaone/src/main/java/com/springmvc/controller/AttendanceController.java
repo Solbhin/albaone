@@ -1,5 +1,6 @@
 package com.springmvc.controller;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -26,6 +27,7 @@ import com.mysql.cj.Session;
 import com.springmvc.domain.Attendance;
 import com.springmvc.domain.Empolyee;
 import com.springmvc.service.AttendanceServiceImpl;
+import com.springmvc.service.UserServiceImpl;
 import com.springmvc.service.empolyeeServiceImpl;
 
 @Controller
@@ -35,6 +37,10 @@ public class AttendanceController {
 	
 	@Autowired
 	private empolyeeServiceImpl empolyeeService;
+	
+	@Autowired
+	private UserServiceImpl userService;
+	
 
 //	근태 기록 조회
 	@GetMapping("/attendanceCalendar")
@@ -101,19 +107,85 @@ public class AttendanceController {
 	
 //	근태 기록 추가
 	@PostMapping("attendanceAdd")
-	public String addAttendance(@RequestParam String id, String selectDate, String inTime, String outTime) {
+	public String addAttendance(@RequestParam String id, String selectDate, String inTime, String outTime, HttpSession session) {
 //		String -> LocalDateTime 변환
 		Attendance attendance = new Attendance();
-		attendance.setId(id);
 		LocalDate localDate = LocalDate.parse(selectDate);
 		LocalTime checkinTime = LocalTime.parse(inTime);
 		LocalTime checkoutTime = LocalTime.parse(outTime);
 		LocalDateTime checkInDateTime = LocalDateTime.of(localDate, checkinTime);
 		LocalDateTime checkOutDateTime = LocalDateTime.of(localDate, checkoutTime);
+		long minutesWorked = Duration.between(checkInDateTime, checkOutDateTime).toMinutes();
+		long flooredMinutes = (minutesWorked/10)*10;
+		
+		attendance.setId(id);
+		attendance.setBusinessNumber(String.valueOf(session.getAttribute("businessNumber")));
 		attendance.setCheckInTime(checkInDateTime);
 		attendance.setCheckOutTime(checkOutDateTime);
+		attendance.setWorkHours(flooredMinutes);
+		
 		attendanceService.addAttendance(attendance);
 		
 		return "redirect:/attendanceCalendar";
+	}
+	
+//	근태 기록 수정 양식 제공
+	@GetMapping("attendanceEdit")
+	public String editAttendanceForm(@RequestParam String id, String checkInTime, Model model) {
+		LocalDateTime localDateTime = LocalDateTime.parse(checkInTime);
+		LocalDate localDate = localDateTime.toLocalDate();
+		LocalTime localTime = localDateTime.toLocalTime();
+		String name = userService.getUserName(id);
+		System.out.println(name);
+		System.out.println(localDate);
+		System.out.println(localTime);
+		System.out.println("기준:"+checkInTime);
+		
+		model.addAttribute("localDate", localDate);
+		model.addAttribute("id", id);
+		model.addAttribute("name", name);
+		model.addAttribute("localTime", localTime);
+		model.addAttribute("checkInTime", checkInTime);
+		
+		return "attendanceEditForm";
+	}
+	
+//	근태 기록 수정
+	@PostMapping("attendanceEdit")
+	public String editAttendance(String id, String selectDate, String inTime, String outTime, String checkInTime, HttpSession session) {
+		Attendance attendance = new Attendance();
+		LocalDate localDate = LocalDate.parse(selectDate);
+		LocalTime checkinTime = LocalTime.parse(inTime);
+		LocalDateTime checkInDateTime = LocalDateTime.of(localDate, checkinTime);
+		
+		attendance.setId(id);
+		attendance.setBusinessNumber(String.valueOf(session.getAttribute("businessNumber")));
+		attendance.setCheckInTime(checkInDateTime);
+		
+		if(outTime!=null && !outTime.isEmpty()) {
+			LocalTime checkoutTime = LocalTime.parse(outTime);
+			LocalDateTime checkOutDateTime = LocalDateTime.of(localDate, checkoutTime);
+			long minutesWorked = Duration.between(checkInDateTime, checkOutDateTime).toMinutes();
+			long flooredMinutes = (minutesWorked/10)*10;
+			
+			attendance.setCheckOutTime(checkOutDateTime);
+			attendance.setWorkHours(flooredMinutes);
+		} else {
+			attendance.setCheckOutTime(null);
+		}
+		
+		LocalDateTime ldtCheckInTime = LocalDateTime.parse(checkInTime);
+		
+		System.out.println("기준 :"+checkInTime);
+		
+		attendanceService.editAttendance(attendance, ldtCheckInTime);
+		
+		return "redirect:/attendanceCalendar";
+	}
+	
+//	계산기
+	@GetMapping("calculator")
+	public String calculator() {
+		return "calculator";
 	}
 }

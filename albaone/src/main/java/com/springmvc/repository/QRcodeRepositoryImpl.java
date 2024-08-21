@@ -59,9 +59,9 @@ public class QRcodeRepositoryImpl implements QRcodeRepository {
 	}
 
 	@Override
-	public void checkOut(String id, String time) {
-		String SQL = "UPDATE attendance SET check_out_time = ? WHERE id = ? AND check_out_time IS NULL";
-		template.update(SQL, time, id);
+	public void checkOut(String id, String time, long flooredMinutes) {
+		String SQL = "UPDATE attendance SET check_out_time = ?, workHours = ? WHERE id = ? AND check_out_time IS NULL";
+		template.update(SQL, time, flooredMinutes ,id);
 	}
 
 }

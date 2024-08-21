@@ -16,4 +16,6 @@ public interface UserRepository {
 	int idcheck(String userId);
 
 	void deleteUser(String id);
+
+	String getUserName(String id);
 }

@@ -30,9 +30,10 @@ public class QRCodeServiceImpl implements QRCodeService {
 	public Attendance getLastAttendance(String id) {
 		return QRCodeRepository.getLastAttendance(id);
 	}
-
-	public void checkOut(String id, String time) {
-		QRCodeRepository.checkOut(id, time);
+	
+	@Override
+	public void checkOut(String id, String time, long flooredMinutes) {
+		QRCodeRepository.checkOut(id, time, flooredMinutes);
 	}
 
 }

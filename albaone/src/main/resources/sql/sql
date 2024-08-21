@@ -31,7 +31,8 @@ CREATE TABLE attendance(
 );
 select * from attendance;
 drop table attendance;
-select sum(workHours) from attendance where id='q' and check_in_time >= '2024-08-01' and check_out_time < '2024-09-01';
+select sum(workHours) from attendance where id='q' and check_in_time >= '2024-08-01' and check_out_time <= '2024-08-31';
+select a.id, u.name, a.businessNumber, sum(a.workHours) from attendance a inner join user u on a.id = u.id group by a.id having businessNumber ="1";
 
 -- 이력서 테이블
 CREATE TABLE if not exists Resume
@@ -141,6 +142,7 @@ CREATE TABLE empolyee(
     id varchar(15)
 );
 select * from empolyee;
+delete from empolyee where id='q' limit 1;
 
 -- 등급 지정
 use albaoneDB;

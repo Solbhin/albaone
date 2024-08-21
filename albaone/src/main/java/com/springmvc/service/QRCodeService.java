@@ -9,7 +9,7 @@ public interface QRCodeService {
 
 	Attendance getLastAttendance(String id);
 
-	void checkOut(String id, String time);
-
 	void checkIn(String id, String datetime, String businessNumber);
+
+	void checkOut(String id, String time, long flooredMinutes);
 }

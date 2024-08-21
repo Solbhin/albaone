@@ -2,6 +2,7 @@ package com.springmvc.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.net.URLEncoder;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
@@ -69,11 +70,18 @@ public class QRCodeController {
 		Attendance attendance = QRCodeService.getLastAttendance(id);
 		if (attendance == null) { // 첫 출근
 			QRCodeService.checkIn(id, datetime, businessNumber);
-		} else {
+		} else { // 첫 출근 아닐 경우
 			LocalDateTime CheckOutTime = attendance.getCheckOutTime();
-			if (CheckOutTime == null) {
-				QRCodeService.checkOut(id, datetime);
-			} else {
+			if (CheckOutTime == null) { // 퇴근
+				LocalDateTime checkInTime = attendance.getCheckInTime();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+				LocalDateTime checkOutTime = LocalDateTime.parse(datetime, formatter);
+				long minutesWorked = Duration.between(checkInTime, checkOutTime).toMinutes();
+				long flooredMinutes = (minutesWorked/10)*10;
+				System.out.println("근무시간: "+flooredMinutes);
+				QRCodeService.checkOut(id, datetime, flooredMinutes);
+				
+			} else { // 출근
 				QRCodeService.checkIn(id, datetime, businessNumber);
 			}
 		}

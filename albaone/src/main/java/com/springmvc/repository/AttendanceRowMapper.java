@@ -15,6 +15,7 @@ public class AttendanceRowMapper implements RowMapper<Attendance> {
 	public Attendance mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Attendance attendance = new Attendance();
 		attendance.setId(rs.getString("id"));
+		attendance.setBusinessNumber(rs.getString("businessNumber"));
 		attendance.setCompanyName(rs.getString("companyName"));
 		attendance.setName(rs.getString("name"));
 		String checkInTimeString = rs.getString("check_in_time");

@@ -13,48 +13,6 @@
         max-width: 600px;
     }
 </style>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=44958d35fea409dd01c5a5b5f945ab12"></script>
-<script>
-    function initMap() {
-        // 주소를 가져옵니다.
-        var addr = document.getElementById("addr").value;
-
-        // 주소를 좌표로 변환하기 위한 geocoder 생성
-        var geocoder = new kakao.maps.services.Geocoder();
-
-        // 주소로 좌표 변환
-        geocoder.addressSearch(address, function(result, status) {
-            if (status === kakao.maps.services.Status.OK) {
-                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-                // 지도 생성
-                var map = new kakao.maps.Map(document.getElementById('map'), {
-                    center: coords, // 지도의 중심 좌표
-                    level: 3 // 지도의 확대 수준
-                });
-
-                // 마커 추가
-                var marker = new kakao.maps.Marker({
-                    position: coords
-                });
-                marker.setMap(map);
-            } else {
-                alert('주소 검색에 실패했습니다: ' + status);
-            }
-        });
-    }
-
-    // 페이지 로드 시 initMap 함수 호출
-        window.onload = function() {
-            // 카카오 객체가 준비되었는지 확인
-            if (typeof kakao !== 'undefined' && kakao.maps) {
-                initMap();
-            } else {
-                console.error('카카오 맵 API가 로드되지 않았습니다.');
-            }
-        };
-</script>
-
 </head>
 <body>
 
@@ -72,7 +30,7 @@
                 </div>
             </div>
             <div class="card-body">
-            	<div id="map" style="height: 400px; width: 100%;"></div>
+            	<div id="map" style="width:100%;height:400px;"></div>
                 <p id="addr"><strong>주소:</strong> ${jobPost.workLocation}</p>
                 <p><strong>연락처:</strong> ${jobPost.contactNumber}</p>
                 <p><strong>임금:</strong> ${jobPost.salary} 원</p>
@@ -96,6 +54,40 @@
                 <button onclick="window.history.back();" class="btn btn-secondary">목록으로 돌아가기</button>
             </div>
     </div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b93f1c67d88fac7ef8329a28850e92c&libraries=services,clusterer,drawing"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
 
+		var map = new kakao.maps.Map(container, options);
+		
+		var geocoder = new kakao.maps.services.Geocoder();
+		
+		var callback = function(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				
+				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+				
+				var marker = new kakao.maps.Marker({
+					position: coords
+				});
+				marker.setMap(map);
+				
+				var infowindow = new kakao.maps.InfoWindow({
+					content: '<div style="padding:10px; text-align:center; font-size:14px; line-height:1.5; display: flex; justify-content: center; align-items: center;">' + '${jobPost.companyName}' + '</div>'
+				});
+				
+				infowindow.open(map, marker);
+				
+				map.setCenter(coords);
+			}
+		};
+		
+		geocoder.addressSearch('${jobPost.workLocation}', callback);
+		
+	</script>
 </body>
 </html>

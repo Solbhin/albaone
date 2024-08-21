@@ -71,4 +71,10 @@ public class UserRepositoryImpl implements UserRepository {
 		template.update(SQL, id);
 	}
 
+	@Override
+	public String getUserName(String id) {
+		String SQL = "SELECT name FROM user WHERE id = ?";
+		return template.queryForObject(SQL, new Object[] {id}, String.class);
+	}
+
 }
