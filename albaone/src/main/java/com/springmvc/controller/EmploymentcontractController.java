@@ -154,12 +154,12 @@ public class EmploymentcontractController
 	    employmentcontract.setWorkinghours_start(workingHoursStart);
 	    employmentcontract.setWorkinghours_end(workingHoursEnd);
 	    
-	    // 체크박스로 받은 보험 항목을 문자열로 변환하여 employmentcontract에 설정
+	    // 체크박스로 받은 근로날짜 항목을 문자열로 변환하여 employmentcontract에 설정
 	    if (workday != null && !workday.isEmpty())
 	    {
 	    	// 리스트를 문자열로 변환
 	        String workdayString = String.join(", ", workday);
-	        employmentcontract.setInsurance(workdayString); 
+	        employmentcontract.setWorkday(workdayString); 
 	    }
 	    
 		employmentcontractService.create(employmentcontract);
