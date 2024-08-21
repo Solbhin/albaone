@@ -31,6 +31,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.properties.TextAlignment;
 import com.springmvc.domain.Employmentcontract;
 import com.springmvc.service.*;
 
@@ -211,77 +212,76 @@ public class EmploymentcontractController
 	}
 	
 	// PDF 다운로드 메서드
-    @GetMapping("/downloadPDF")
-     public ResponseEntity<byte[]> downloadPDF(@RequestParam int num)
-    {
-        Employmentcontract contract = employmentcontractService.findByNum(num);
-        
-        if (contract == null)
-        {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+	@GetMapping("/downloadPDF")
+	public ResponseEntity<byte[]> downloadPDF(@RequestParam int num)
+	{
+	    Employmentcontract contract = employmentcontractService.findByNum(num);
+	    
+	    if (contract == null)
+	    {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+	    }
 
-        try
-        {
-            // PDF 생성
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            PdfWriter writer = new PdfWriter(byteArrayOutputStream);
-            PdfDocument pdfDoc = new PdfDocument(writer);
-            Document document = new Document(pdfDoc);
+	    try
+	    {
+	        // PDF 생성
+	        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+	        PdfWriter writer = new PdfWriter(byteArrayOutputStream);
+	        PdfDocument pdfDoc = new PdfDocument(writer);
+	        Document document = new Document(pdfDoc);
 
-            // 한글 글꼴 설정
-            String fontPath = servletContext.getRealPath("/resources/fonts/NanumGothic.ttf");
-            PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);
-            
-            System.out.println(font);
-            document.setFont(font);
+	        // 한글 글꼴 설정
+	        String fontPath = servletContext.getRealPath("/resources/fonts/NanumGothic.ttf");
+	        PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);
+	        document.setFont(font);
 
-            // PDF 내용 작성
-            document.add(new Paragraph("근로 계약서"));
-            document.add(new Paragraph("사업주명: " + contract.getOwnername()));
-            document.add(new Paragraph("사업자 번호: " + contract.getBusinessNumber()));
-            document.add(new Paragraph("알바생명: " + contract.getParttimename()));
-            document.add(new Paragraph("근무 시작 날짜: " + contract.getPeriod_start()));
-            document.add(new Paragraph("근무 종료 날짜: " + contract.getPeriod_end()));
-            document.add(new Paragraph("근무 장소: " + contract.getPlace()));
-            document.add(new Paragraph("업무 내용: " + contract.getWorkdetail()));
-            document.add(new Paragraph("근무 시작 시간: " + contract.getWorkinghours_start()));
-            document.add(new Paragraph("근무 종료 시간: " + contract.getWorkinghours_end()));
-            document.add(new Paragraph("주당 근무일: " + contract.getWorkday()));
-            document.add(new Paragraph("임금: " + contract.getMoney()));
-            document.add(new Paragraph("상여금: " + contract.getBonus()));
-            document.add(new Paragraph("보험: " + contract.getInsurance()));
-            document.add(new Paragraph("작성 날짜: " + contract.getCreatedate()));
+	        // PDF 내용 작성 (JSP 내용을 반영)
+	        document.add(new Paragraph("표준 근로 계약서").setFontSize(30).setTextAlignment(TextAlignment.CENTER));
+	        document.add(new Paragraph("사업주 이름: " + contract.getOwnername()));
+	        document.add(new Paragraph("사업주 전화번호: " + contract.getOwnerPhone()));
+	        document.add(new Paragraph("사업주 주소: " + contract.getOwneraddr()));
+	        document.add(new Paragraph("알바생 이름: " + contract.getParttimename()));
+	        document.add(new Paragraph("알바생 전화번호: " + contract.getParttimePhone()));
+	        document.add(new Paragraph("알바생 주소: " + contract.getParttimeaddr()));
+	        document.add(new Paragraph("계약 기간: " + contract.getPeriod_start() + " ~ " + contract.getPeriod_end()));
+	        document.add(new Paragraph("근로 장소: " + contract.getPlace()));
+	        document.add(new Paragraph("근무 시간: " + contract.getWorkinghours_start() + " ~ " + contract.getWorkinghours_end()));
+	        document.add(new Paragraph("주당 근무일: " + contract.getWorkday()));
+	        document.add(new Paragraph("임금: " + contract.getMoney()));
+	        document.add(new Paragraph("상여금: " + contract.getBonus()));
+	        document.add(new Paragraph("보험: " + contract.getInsurance()));
+	        document.add(new Paragraph("사업주 사인:"));
+	        
+	        // 사인 이미지 추가
+	        String signaturePathowner = servletContext.getRealPath("/resources/images/" + contract.getSinefilenameowner());
+	        ImageData imageDataowner = ImageDataFactory.create(signaturePathowner);
+	        Image signatureImageowner = new Image(imageDataowner);
+	        signatureImageowner.setWidth(50); // 이미지 너비 설정
+	        document.add(signatureImageowner);
+	        
+	        document.add(new Paragraph("알바 사인:"));
+	        String signaturePathparttime = servletContext.getRealPath("/resources/images/" + contract.getSinefilenameparttime());
+	        ImageData imageDataparttime = ImageDataFactory.create(signaturePathparttime);
+	        Image signatureImageparttime = new Image(imageDataparttime);
+	        signatureImageparttime.setWidth(50); // 이미지 너비 설정
+	        document.add(signatureImageparttime);
+	        
+	        document.close();
 
-            // 사인 이미지 추가
-            String signaturePathowner = servletContext.getRealPath("/resources/images/" + contract.getSinefilenameowner());
-            ImageData imageDataowner = ImageDataFactory.create(signaturePathowner);
-            Image signatureImageowner  = new Image(imageDataowner);
-            signatureImageowner.setWidth(100); // 이미지 너비 설정
-            document.add(signatureImageowner);
-            
-            String signaturePathparttime = servletContext.getRealPath("/resources/images/" + contract.getSinefilenameparttime());
-            ImageData imageDataparttime = ImageDataFactory.create(signaturePathparttime);
-            Image signatureImageparttime = new Image(imageDataparttime);
-            signatureImageparttime.setWidth(100); // 이미지 너비 설정
-            document.add(signatureImageparttime);
-            
-            document.close();
+	        byte[] pdfBytes = byteArrayOutputStream.toByteArray();
 
-            byte[] pdfBytes = byteArrayOutputStream.toByteArray();
+	        // HTTP 응답 설정
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.add("Content-Type", "application/pdf");
+	        headers.add("Content-Disposition", "attachment; filename=contract_" + num + ".pdf");
 
-            // HTTP 응답 설정
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-Type", "application/pdf");
-            headers.add("Content-Disposition", "attachment; filename=contract_" + num + ".pdf");
-
-            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
+	        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+	    }
+	    catch (Exception e)
+	    {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+	    }
+	}
 
 }
