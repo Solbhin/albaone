@@ -168,16 +168,15 @@ public class EmploymentcontractController
 		return "redirect:/businesApplylist?postNumber="+postNumber;
 	}
 	
-	// 알바생명으로 모든 계약서 조회
+	// 사업자 번호로 계약서 조회
 	@GetMapping("/contracts")
 	public String getContractsByPartTimeName(HttpSession session , Model model)
 	{
-		
 		String id = (String) session.getAttribute("id");
 		String BusinessNumber =  UserServiceImpl.findBusinessNumber(id);
 		if (BusinessNumber != null && !BusinessNumber.isEmpty())
 		{
-			List<Employmentcontract> contracts = employmentcontractService.findAllByPartTimeName(BusinessNumber);
+			List<Employmentcontract> contracts = employmentcontractService.findAllByBusinessNumber(BusinessNumber);
 			if (!contracts.isEmpty())
 			{
 				model.addAttribute("contract", contracts);
@@ -231,7 +230,7 @@ public class EmploymentcontractController
             Document document = new Document(pdfDoc);
 
             // 한글 글꼴 설정
-            String fontPath = servletContext.getRealPath("/WEB-INF/resources/fonts/NanumGothic.ttf");
+            String fontPath = servletContext.getRealPath("/resources/fonts/NanumGothic.ttf");
             PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);
             
             System.out.println(font);

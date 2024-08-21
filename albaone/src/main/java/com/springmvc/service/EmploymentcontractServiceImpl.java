@@ -23,9 +23,9 @@ public class EmploymentcontractServiceImpl implements EmploymentcontractService
 	}
 
 	@Override
-	public List<Employmentcontract> findAllByPartTimeName(String parttimename)
+	public List<Employmentcontract> findAllByBusinessNumber(String BusinessNumber)
 	{
-		return employmentcontractRepository.findAllByPartTimeName(parttimename);
+		return employmentcontractRepository.findAllByBusinessNumber(BusinessNumber);
 	}
 
 	@Override

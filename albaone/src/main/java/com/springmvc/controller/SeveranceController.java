@@ -45,7 +45,7 @@ public class SeveranceController
 	    
 	    if (parttimename != null && !parttimename.isEmpty())
 	    {
-	        List<Employmentcontract> contracts = employmentcontractService.findAllByPartTimeName(parttimename);
+	        List<Employmentcontract> contracts = employmentcontractService.findAllByBusinessNumber(parttimename);
 	        
 	        if (!contracts.isEmpty())
 	        {

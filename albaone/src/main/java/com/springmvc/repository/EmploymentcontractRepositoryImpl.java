@@ -64,10 +64,10 @@ public class EmploymentcontractRepositoryImpl implements EmploymentcontractRepos
 	//사업자 번호로 계약서 조회
 	@SuppressWarnings("deprecation")
 	@Override
-    public List<Employmentcontract> findAllByPartTimeName(String parttimename)
+    public List<Employmentcontract> findAllByBusinessNumber(String BusinessNumber)
 	{
         String sql = "select * from employmentcontract where businessNumber = ?";
-        return template.query(sql, new Object[]{parttimename}, new RowMapper<Employmentcontract>()
+        return template.query(sql, new Object[]{BusinessNumber}, new RowMapper<Employmentcontract>()
         {
             @Override
             public Employmentcontract mapRow(ResultSet rs, int rowNum) throws SQLException
