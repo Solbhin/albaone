@@ -19,10 +19,9 @@
 	<p><a href="empolyeeList?businessNumber=${sessionScope.businessNumber}">내 사업장 알바생 조회</a></p>
 	<p><a href="companyList?id=${sessionScope.id}">개인 : 내 직장 조회</a></p>
 	
-		<!-- 이력서 테스트 -->
+	<!-- 이력서 테스트 -->
 	<p><a href="resume">이력서 작성</a>
 	<p><a href="resumereadAll">이력서 목록</a>
-    <p><a href="myApplications">신청 내역</a>
     
     <!-- 퇴직금 테스트 -->
     <p><a href="Severance">퇴직금 계산</a>

@@ -17,8 +17,8 @@
         <p>알바생 전화번호 : <input type="text" name="parttimePhone" value="${parttimephone}" maxlength="11">
         <p>알바생 주소 : <input type="text" name="parttimeaddr" value="${parttimeaddress}" maxlength="40">
         <p>근무 날짜 :
-        	<input type="date" name="period_start">
-        	<input type="date" name="period_end" required>
+        	<input type="date" name="period_start"required>
+        	<input type="date" name="period_end">
         </p>
         <p>근무장소 : <input type="text" name="place" required></p>
         <p>업무내용
@@ -127,12 +127,26 @@
 				<option value="23:30">23:30</option>
 			</select>
 			<input type="text" id="workinghours_end_input" name="workinghours_end" placeholder="근무 종료 시간" style="display:none">
-        <p>주당 근무일 : <input type="text" name="workday" required></p>
+        <p>주당 근무일
+        	월 <input type="checkbox" name="workday" value="월">
+        	화 <input type="checkbox" name="workday" value="화">
+        	수 <input type="checkbox" name="workday" value="수">
+        	목 <input type="checkbox" name="workday" value="목">
+        	금 <input type="checkbox" name="workday" value="금">
+        	토 <input type="checkbox" name="workday" value="토">
+        	일 <input type="checkbox" name="workday" value="일">
+        </p>
         <p>임금 : <input type="number" name="money" min="9860" required></p>
         <p>상여금 : <input type="number" name="bonus"></p>
-        <p>보험 : <input type="text" name="insurance"></p>
+        <p>보험
+        	고용보험<input type="checkbox" id="insurance" name="insurance" value="고용보험">
+        	산재보험<input type="checkbox" id="insurance" name="insurance" value="산재보험">
+        	국민연금<input type="checkbox" id="insurance" name="insurance" value="국민연금">
+        	건강보험<input type="checkbox" id="insurance" name="insurance" value="건강보험">
+        </p>
         <p>작성 날짜 : <input type="date" name="createdate" required></p>
         <p>사업주 사인 : <input type="file" name="sinefileowner" required></p>
+        
         <!-- 사업주가 알바생 사인을 바로 받기는 힘들기 때문에 required 속성은 뺌 -->
         <p>알바생 사인 : <input type="file" name="sinefileparttime"></p>
         <p><input type="submit" value="등록"></p>
@@ -143,10 +157,101 @@
     </form>
     
     <script type="text/javascript">
-    	//파일 확장자 유효성 검사
-       function validateFile()
+    	//시간 유효성 검사 - 직접 입력할 경우
+		function validateTimeFormat()
+	 	{
+		    var startInput = document.getElementById('workinghours_start_input');
+		    var endInput = document.getElementById('workinghours_end_input');
+		    var timePattern = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/; // HH:MM 형식 정규 표현식
+		
+		    // 시작 시간 유효성 검사
+		    if (startInput.style.display !== 'none')
+		    {
+		        if (!timePattern.test(startInput.value))
+		        {
+		            alert('근무 시작 시간은 HH:MM 형식이어야 합니다. (예: 12:00, 9:45)');
+		            return false;
+		        }
+			}
+		    // 종료 시간 유효성 검사
+		    if (endInput.style.display !== 'none')
+		    {
+		        if (!timePattern.test(endInput.value))
+		        {
+		            alert('근무 종료 시간은 HH:MM 형식이어야 합니다. (예: 12:00, 9:45)');
+		            return false;
+		        }
+		    }
+	
+	    	return true; // 모든 유효성 검사를 통과한 경우
+	    }
+    
+	  	//근무시간 체크박스 함수 - 시작시간
+	    function toggleWorkingHoursStart()
+	    {
+	        var startSelect = document.getElementById('workinghours_start');
+	        var startInput = document.getElementById('workinghours_start_input');
+	        var checkbox = document.getElementById('startCheckbox');
+	
+	        if (checkbox.checked)
+	        {
+	            startSelect.style.display = 'none';
+	            startInput.style.display = 'inline';
+	            startInput.value = ''; // 입력 필드 초기화
+	        }
+	        else
+	        {
+	            startSelect.style.display = 'inline';
+	            startInput.style.display = 'none';
+	            startSelect.selectedIndex = 0; // 선택된 항목 초기화
+	        }
+	    }
+	    
+	  	//근무시간 체크박스 함수 - 종료시간
+	    function toggleWorkingHoursEnd()
+	    {
+	        var endSelect = document.getElementById('workinghours_end');
+	        var endInput = document.getElementById('workinghours_end_input');
+	        var checkbox = document.getElementById('endCheckbox');
+	
+	        if (checkbox.checked)
+	        {
+	            endSelect.style.display = 'none';
+	            endInput.style.display = 'inline';
+	            startInput.value = ''; // 입력 필드 초기화
+	        }
+	        else
+	        {
+	            endSelect.style.display = 'inline';
+	            endInput.style.display = 'none';
+	            endSelect.selectedIndex = 0; // 선택된 항목 초기화
+	        }
+	    }
+	  	
+    	//파일 확장자 유효성 검사 - 사장
+       function validateFileowner()
        {
            var fileInput = document.querySelector('input[name="sinefileowner"]');
+           var filePath = fileInput.value;
+           var allowedExtensions = /(\.png|\.jpg|\.jpeg)$/i;
+
+           if (!allowedExtensions.exec(filePath))
+           {
+               alert('유효한 이미지 파일만 업로드할 수 있습니다. (png, jpg, jpeg)');
+               // 선택된 파일 초기화
+               fileInput.value = '';
+               
+               // 제출 방지
+               return false; 
+           }
+           // 제출 허용
+           return true; 
+       }
+    	
+     	//파일 확장자 유효성 검사 - 알바생
+       function validateFileparttime()
+       {
+           var fileInput = document.querySelector('input[name="sinefileparttime"]');
            var filePath = fileInput.value;
            var allowedExtensions = /(\.png|\.jpg|\.jpeg)$/i;
 
@@ -228,46 +333,8 @@
        document.querySelector('form').onsubmit = function()
        {
            // 모든 유효성 검사를 통과해야 submit
-           return validateFile() && validateDateStart() && validateDateEnd() && validateCreateDate(); 
+           return validateTimeFormat() && validateFileowner() && validateFileparttime() && validateDateStart() && validateDateEnd() && validateCreateDate(); 
        };
-       
-       //근무시간 체크박스 함수 - 시작시간
-       function toggleWorkingHoursStart()
-       {
-           var startSelect = document.getElementById('workinghours_start');
-           var startInput = document.getElementById('workinghours_start_input');
-           var checkbox = document.getElementById('startCheckbox');
-
-           if (checkbox.checked)
-           {
-               startSelect.style.display = 'none';
-               startInput.style.display = 'inline';
-           }
-           else
-           {
-               startSelect.style.display = 'inline';
-               startInput.style.display = 'none';
-           }
-       }
-       
-     	//근무시간 체크박스 함수 - 종료시간
-       function toggleWorkingHoursEnd()
-       {
-           var endSelect = document.getElementById('workinghours_end');
-           var endInput = document.getElementById('workinghours_end_input');
-           var checkbox = document.getElementById('endCheckbox');
-
-           if (checkbox.checked)
-           {
-               endSelect.style.display = 'none';
-               endInput.style.display = 'inline';
-           }
-           else
-           {
-               endSelect.style.display = 'inline';
-               endInput.style.display = 'none';
-           }
-       }
    </script>
 </body>
 </html>

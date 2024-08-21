@@ -94,6 +94,10 @@ public class EmploymentcontractController
 			@RequestParam("apply_id") int apply_id,
 			@RequestParam("status") String status,
 			@RequestParam("postNumber") int postNumber,
+			@RequestParam(value = "insurance", required = false) List<String> insurance,
+			@RequestParam("workinghours_start") String workingHoursStart,
+	        @RequestParam("workinghours_end") String workingHoursEnd,
+	        @RequestParam(value = "workday", required = false) String workday,
 			BindingResult result,
 			HttpServletRequest req)
 	{
@@ -135,6 +139,29 @@ public class EmploymentcontractController
 				e.printStackTrace();
 		}
 		
+		// 체크박스로 받은 보험 항목을 문자열로 변환하여 employmentcontract에 설정
+	    if (insurance != null && !insurance.isEmpty())
+	    {
+	    	// 리스트를 문자열로 변환
+	        String insuranceString = String.join(", ", insurance);
+	        employmentcontract.setInsurance(insuranceString); 
+	    }
+	    
+	    //리스트의 ,제거 - select로 넘어올 경우의 ,제거
+	    workingHoursStart = workingHoursStart.replace(",", "").trim();
+	    workingHoursEnd = workingHoursEnd.replace(",", "").trim();
+		
+	    employmentcontract.setWorkinghours_start(workingHoursStart);
+	    employmentcontract.setWorkinghours_end(workingHoursEnd);
+	    
+	    // 체크박스로 받은 보험 항목을 문자열로 변환하여 employmentcontract에 설정
+	    if (workday != null && !workday.isEmpty())
+	    {
+	    	// 리스트를 문자열로 변환
+	        String workdayString = String.join(", ", workday);
+	        employmentcontract.setInsurance(workdayString); 
+	    }
+	    
 		employmentcontractService.create(employmentcontract);
 		applyService.updateApplyStatus(apply_id,status,postNumber);
 		

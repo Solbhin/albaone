@@ -11,15 +11,15 @@
 <%@include file="menu.jsp" %>
 <div class="container mt-5">
     <h2 class="text-center">아르바이트 지원서</h2>
-    <form action="resume" method="post" enctype="multipart/form-data" modelAttribute="ResumeAdd">
+    <form action="resume" method="post" enctype="multipart/form-data" modelAttribute="ResumeAdd" onsubmit="return validateFile();">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">성명</label>
-                <input type="text" class="form-control" id="name" name="name" value="${ name.name }" required readonly>
+                <input type="text" class="form-control" id="name" name="name" value="${ name.name }" readonly>
             </div>
             <div class="form-group col-md-6">
                 <label for="photo">사진 (최근 6개월 이내)</label>
-                <input type="file" class="form-control" name="myimg" required>
+                <input type="file" class="form-control" name="myimg">
             </div>
         </div>
         <div class="form-row">
