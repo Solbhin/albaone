@@ -5,31 +5,31 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.springmvc.domain.employmentcontract;
-import com.springmvc.repository.employmentcontractRepositoryImpl;
+import com.springmvc.domain.Employmentcontract;
+import com.springmvc.repository.EmploymentcontractRepositoryImpl;
 
 
 @Service
-public class employmentcontractServiceImpl implements employmentcontractService
+public class EmploymentcontractServiceImpl implements EmploymentcontractService
 {
 	@Autowired
-	private employmentcontractRepositoryImpl employmentcontractRepository;
+	private EmploymentcontractRepositoryImpl employmentcontractRepository;
 	
 	@Override
-	public void create(employmentcontract employmentcontract)
+	public void create(Employmentcontract employmentcontract)
 	{
 		employmentcontractRepository.create(employmentcontract);
 		
 	}
 
 	@Override
-	public List<employmentcontract> findAllByPartTimeName(String parttimename)
+	public List<Employmentcontract> findAllByPartTimeName(String parttimename)
 	{
 		return employmentcontractRepository.findAllByPartTimeName(parttimename);
 	}
 
 	@Override
-	public List<employmentcontract> findAllByPartTimeNameownername(String ownername)
+	public List<Employmentcontract> findAllByPartTimeNameownername(String ownername)
 	{
 		return employmentcontractRepository.findAllByPartTimeNameownername(ownername);
 	}

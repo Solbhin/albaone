@@ -9,19 +9,21 @@ import com.springmvc.domain.Resume;
 import com.springmvc.repository.ResumeRespositoryImpl;
 
 @Service
-public class ResumeServiceImpl implements ResumeService{
-	
+public class ResumeServiceImpl implements ResumeService
+{
 	@Autowired
 	private ResumeRespositoryImpl resumeRespository;
 
 	@Override
-	public void setmyImg(Resume resume,String id) {
+	public void setmyImg(Resume resume,String id)
+	{
 		resumeRespository.setmyImg(resume,id);
 		
 	}
 
 	@Override
-	public List<Resume> getAllresumeList(String id) {
+	public List<Resume> getAllresumeList(String id)
+	{
 		return resumeRespository.getAllresumeList(id);
 	}
 

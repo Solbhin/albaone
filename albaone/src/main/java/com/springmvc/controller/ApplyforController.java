@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.springmvc.domain.Apply;
 import com.springmvc.domain.JobPost;
 import com.springmvc.domain.Resume;
-import com.springmvc.repository.employmentcontractRepositoryImpl;
 import com.springmvc.service.*;
 
 @Controller
@@ -127,5 +126,15 @@ public class ApplyforController
 		return "redirect:/businesApplylist";
 	}
 	
-}
 	
+	
+	//알바생 지원 메뉴 클릭시 지원 목록 조회
+//	@GetMapping("/Applyread")
+//	public String Applyread(Model model, HttpSession session)
+//	{
+//		String id = (String)session.getAttribute("id");
+//		//지원 목록
+//		model.addAttribute("read",applyService.getAllapplys(id));
+//		return "Applyread";
+//	}
+}  

@@ -1,24 +1,36 @@
+
 package com.springmvc.domain;
 
-public class employmentcontract
+import org.springframework.web.multipart.MultipartFile;
+
+public class Employmentcontract
 {
 	private int num; //조회 번호
 	private String ownername; // 사업주명
+	private String businessNumber; // 사업자 번호
+	private String ownerPhone; // 사업자 전화번호
+	private String owneraddr;//사업자 주소
 	private String parttimename; // 알바생명
+	private String parttimePhone;//알바생 전화번호
+	private String parttimeaddr; //알바생 주소
 	private String period_start; // 근무 시작 날짜
 	private String period_end; // 근무 종료 날짜
 	private String place; // 근무 장소
 	private String workdetail; // 업무 내용
 	private String workinghours_start;// 근무 시작 시간
 	private String workinghours_end; // 근무 종료 시간
-	private int workday; // 주당 근무일
+	private String workday; // 주당 근무일
 	private long money;// 임금 - 시급, 일급, 월급을 정하거나 미리 데이터베이스를 여러개 만들고 따로 저장하는 것으로 함
 	private long bonus; // 상여금
 	private String insurance; // 보험
+	private MultipartFile sinefileowner; //사인 또는 도장 이미지 파일
+	private MultipartFile sinefileparttime; //알바생 사인
+	private String sinefilenameowner; //사업주 사인 경로명
+	private String sinefilenameparttime;
 	private String createdate; // 작성 날짜
 
 	// 기본생성자
-	public employmentcontract() {}
+	public Employmentcontract() {}
 
 	public int getNum() {
 		return num;
@@ -36,12 +48,52 @@ public class employmentcontract
 		this.ownername = ownername;
 	}
 
+	public String getBusinessNumber() {
+		return businessNumber;
+	}
+
+	public void setBusinessNumber(String businessNumber) {
+		this.businessNumber = businessNumber;
+	}
+
+	public String getOwnerPhone() {
+		return ownerPhone;
+	}
+
+	public void setOwnerPhone(String ownerPhone) {
+		this.ownerPhone = ownerPhone;
+	}
+
+	public String getOwneraddr() {
+		return owneraddr;
+	}
+
+	public void setOwneraddr(String owneraddr) {
+		this.owneraddr = owneraddr;
+	}
+
 	public String getParttimename() {
 		return parttimename;
 	}
 
 	public void setParttimename(String parttimename) {
 		this.parttimename = parttimename;
+	}
+
+	public String getParttimePhone() {
+		return parttimePhone;
+	}
+
+	public void setParttimePhone(String parttimePhone) {
+		this.parttimePhone = parttimePhone;
+	}
+
+	public String getParttimeaddr() {
+		return parttimeaddr;
+	}
+
+	public void setParttimeaddr(String parttimeaddr) {
+		this.parttimeaddr = parttimeaddr;
 	}
 
 	public String getPeriod_start() {
@@ -92,11 +144,11 @@ public class employmentcontract
 		this.workinghours_end = workinghours_end;
 	}
 
-	public int getWorkday() {
+	public String getWorkday() {
 		return workday;
 	}
 
-	public void setWorkday(int workday) {
+	public void setWorkday(String workday) {
 		this.workday = workday;
 	}
 
@@ -124,13 +176,43 @@ public class employmentcontract
 		this.insurance = insurance;
 	}
 
+	public MultipartFile getSinefileowner() {
+		return sinefileowner;
+	}
+
+	public void setSinefileowner(MultipartFile sinefileowner) {
+		this.sinefileowner = sinefileowner;
+	}
+
+	public String getSinefilenameowner() {
+		return sinefilenameowner;
+	}
+
+	public void setSinefilenameowner(String sinefilenameowner) {
+		this.sinefilenameowner = sinefilenameowner;
+	}
+
+	public MultipartFile getSinefileparttime() {
+		return sinefileparttime;
+	}
+
+	public void setSinefileparttime(MultipartFile sinefileparttime) {
+		this.sinefileparttime = sinefileparttime;
+	}
+
+	public String getSinefilenameparttime() {
+		return sinefilenameparttime;
+	}
+
+	public void setSinefilenameparttime(String sinefilenameparttime) {
+		this.sinefilenameparttime = sinefilenameparttime;
+	}
+
 	public String getCreatedate() {
 		return createdate;
 	}
 
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
-	}
-
-	
+	}	
 }

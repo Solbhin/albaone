@@ -10,7 +10,7 @@
 	<name>albaone Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<java-version>15</java-version>
+		<java-version>17</java-version>
 		<org.springframework-version>5.3.19</org.springframework-version>
 		<org.aspectj-version>1.9.9.1</org.aspectj-version>
 		<org.slf4j-version>1.7.36</org.slf4j-version>
@@ -52,6 +52,14 @@
 	        <artifactId>thymeleaf-spring5</artifactId>
 	        <version>3.0.12.RELEASE</version>
 	    </dependency>
+	    
+	    <!--PDF 다운로드-->
+		<dependency>
+		    <groupId>com.itextpdf</groupId>
+		    <artifactId>itext7-core</artifactId>
+		    <version>7.2.6</version>
+		    <type>pom</type>
+		</dependency>
 
 		<!-- QR 코드 의존성 -->
 		<dependency>

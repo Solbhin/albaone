@@ -13,16 +13,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ResumeRespositoryImpl implements ResumeRespository {
-	
 	private JdbcTemplate template;
-	
+
 	@Autowired
 	public void setJdbctemplate(DataSource dataSource) {
 		this.template = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Override
-	public void setmyImg(Resume resume,String id) {
+	public void setmyImg(Resume resume, String id) {
 		String SQL = "INSERT INTO Resume(number,name, birthdate, gender, contact, email, address, school, period, major, job_title, experience_period, main_work, reason, work_hours, desired_salary, desired_days, MyimgName,resume_id) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 		template.update(SQL,
 			resume.getNumber(),
@@ -45,7 +44,6 @@ public class ResumeRespositoryImpl implements ResumeRespository {
 		    resume.getMyimgName(),
 		    id
 		);
-
 
 		return;
 	}
@@ -77,7 +75,7 @@ public class ResumeRespositoryImpl implements ResumeRespository {
 	@Override
 	public void setUpdateResume(Resume resume) {
 	    String SQL;
-	    if (resume.getMyimgName() != null) {
+		if (resume.getMyimgName() != null) {
 	        SQL = "UPDATE Resume SET name = ?, birthdate = ?, gender = ?, contact = ?, email = ?, address = ?, school = ?, period = ?, major = ?, job_title = ?, experience_period = ?, main_work = ?, reason = ?, work_hours = ?, desired_salary = ?, desired_days = ?, MyimgName = ? WHERE number = ?";
 	        template.update(SQL,
 	            resume.getName(),
@@ -99,7 +97,8 @@ public class ResumeRespositoryImpl implements ResumeRespository {
 	            resume.getMyimgName(),
 	            resume.getNumber()
 	        );
-	    } else {
+	    }
+		else {
 	        SQL = "UPDATE Resume SET name = ?, birthdate = ?, gender = ?, contact = ?, email = ?, address = ?, school = ?, period = ?, major = ?, job_title = ?, experience_period = ?, main_work = ?, reason = ?, work_hours = ?, desired_salary = ?, desired_days = ? WHERE number = ?";
 	        template.update(SQL,
 	            resume.getName(),
@@ -127,8 +126,7 @@ public class ResumeRespositoryImpl implements ResumeRespository {
 	public void setDeleteResume(String number) {
 		String SQL="DELETE FROM Resume where number = ?";
 		this.template.update(SQL,number);
-		
+
 	}
 
 }
-
