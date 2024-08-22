@@ -8,7 +8,8 @@
 </head>
 <body>
 	<%@include file="menu.jsp" %>
-	<!-- 임시 조회 -->
+	
+	<!-- 다운전 보여주기 -->
     <div id="contract">
     	<p id="title">표준 근로 계약서
         <p>사업주 이름 : ${ contract.ownername }</p>
@@ -42,11 +43,8 @@
 	<!-- 클릭시 PDF 다운로드 미완성 - 다운만 가능 디자인 안됨 -->
     <div id="button"><button onclick="downloadPDF()">PDF로 다운로드하기</button></div>
 
-    <script>
-        function downloadPDF()
-        {
-            window.location.href = `downloadPDF?num=${contract.num}`;
-        }
-    </script>
+    <script type="text/javascript" src="/albaone/resources/js/downloadcontractexam.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
 </body>
 </html>
