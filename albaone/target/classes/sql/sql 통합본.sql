@@ -113,7 +113,7 @@ create table employmentcontract
     period_start date not null, -- 계약기간-근무시작
     period_end date not null, -- 계약기간-근무종료
     place varchar(10), -- 근로장소
-    workdetail varchar(100), -- 업무내용
+    workdetail text, -- 업무내용
     workinghours_start varchar(10) not null,-- 근로 시작 시간
     workinghours_end varchar(10) not null,-- 근로 종료 시간
     workday varchar(15) not null, -- 주당 근무일
