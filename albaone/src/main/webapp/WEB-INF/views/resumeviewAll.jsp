@@ -70,7 +70,7 @@
         </tbody>
     </table>
     <div class="text-center">
-        <a href="resume" class="btn btn-primary">새 이력서 작성</a>
+        <a href="resume" class="btn btn-primary">이력서 작성</a>
         <a href="myApplications" class="btn btn-primary">신청 내역</a>
         <a href="home" class="btn btn-secondary">홈으로</a>
     </div>

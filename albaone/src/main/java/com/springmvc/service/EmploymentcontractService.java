@@ -6,8 +6,8 @@ import com.springmvc.domain.Employmentcontract;
 
 public interface EmploymentcontractService
 {
-	void create(Employmentcontract employmentcontract);
-	List<Employmentcontract> findAllByPartTimeName(String parttimename);
-	List<Employmentcontract> findAllByPartTimeNameownername(String ownername);
+	void create(Employmentcontract Employmentcontract);
 	int deleteContractsByPartTimeName(int num);
+	Employmentcontract findByNum(int num);
+	List<Employmentcontract> findAllByBusinessNumber(String BusinessNumber);
 }

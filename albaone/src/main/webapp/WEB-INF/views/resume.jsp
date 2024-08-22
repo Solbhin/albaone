@@ -11,15 +11,15 @@
 <%@include file="menu.jsp" %>
 <div class="container mt-5">
     <h2 class="text-center">아르바이트 지원서</h2>
-    <form action="resume" method="post" enctype="multipart/form-data" modelAttribute="ResumeAdd">
+    <form action="resume" method="post" enctype="multipart/form-data" modelAttribute="ResumeAdd" onsubmit="return validateFile();">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">성명</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input type="text" class="form-control" id="name" name="name" value="${ name.name }" readonly>
             </div>
             <div class="form-group col-md-6">
                 <label for="photo">사진 (최근 6개월 이내)</label>
-                <input type="file" class="form-control" name="myimg" required>
+                <input type="file" class="form-control" name="myimg">
             </div>
         </div>
         <div class="form-row">
@@ -29,7 +29,17 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="gender">성별</label>
-                <input type="text" class="form-control" id="gender" name="gender" required>
+                <!-- <input type="text" class="form-control" id="gender" name="gender" required> -->
+                <div class="d-flex">
+		            <div class="form-check mr-3">
+		                <input type="radio" class="form-check-input" id="genderMale" name="gender" value="남성" required>
+		                <label class="form-check-label" for="genderMale">남성</label>
+		            </div>
+		            <div class="form-check">
+		                <input type="radio" class="form-check-input" id="genderFemale" name="gender" value="여성" required>
+		                <label class="form-check-label" for="genderFemale">여성</label>
+		            </div>
+        		</div>
             </div>
         </div>
         <div class="form-row">
@@ -44,7 +54,7 @@
         </div>
         <div class="form-group">
             <label for="address">현 주소 (우편번호: - )</label>
-            <input type="text" class="form-control" id="address" name="address" required>
+            <input type="text" class="form-control" id="address" name="address" required maxlength="100">
         </div>
         <div class="form-group">
             <label for="education">학력사항</label>
@@ -65,7 +75,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="work_hours">근무시간</label>
-                <input type="text" class="form-control" id="work_hours" name="work_hours" placeholder="예: 09:00 ~ 18:00" required>
+                <input type="text" class="form-control" id="work_hours" name="work_hours" placeholder="예: 09:00 ~ 18:00" required maxlength="20">
             </div>
             <div class="form-group col-md-6">
                 <label for="desired_salary">희망시급</label>
@@ -74,7 +84,7 @@
         </div>
         <div class="form-group">
             <label for="desired_days">희망휴일</label>
-            <input type="text" class="form-control" id="desired_days" name="desired_days" required>
+            <input type="text" class="form-control" id="desired_days" name="desired_days" required maxlength="20">
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary">저장</button>
@@ -82,5 +92,27 @@
         </div>
     </form>
 </div>
+	
+	<script type="text/javascript">
+		//파일 확장자 유효성 검사
+	    function validateFile()
+	    {
+	        var fileInput = document.querySelector('input[name="myimg"]');
+	        var filePath = fileInput.value;
+	        var allowedExtensions = /(\.png|\.jpg|\.jpeg)$/i;
+	
+	        if (!allowedExtensions.exec(filePath))
+	        {
+	            alert('유효한 이미지 파일만 업로드할 수 있습니다. (png, jpg, jpeg)');
+	            // 선택된 파일 초기화
+	            fileInput.value = '';
+	            
+	            // 제출 방지
+	            return false; 
+	        }
+	        // 제출 허용
+	        return true; 
+	    }
+	</script>
 </body>
 </html>

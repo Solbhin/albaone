@@ -93,7 +93,9 @@
 
             <!-- 상태와 상관없이 버튼을 항상 표시합니다. -->
             <div class="text-center mt-4">
-                <a href="employmentcontract?apply_id=${businesview.apply_id}&status=accepted&postNumber=${postNumber}" class="btn btn-primary">채용 하기</a>
+
+            	<!-- 계약서 폼 가기전 상태파라미터와 알바생 정보 파라미터 가지고 가기 -->
+                <a href="employmentcontract?apply_id=${businesview.apply_id}&status=accepted&postNumber=${postNumber}&parttimename=${businesview.name}&parttimephone=${businesview.contact}&parttimeaddress=${businesview.address}" class="btn btn-primary"  data-status="${businesview.status}" onclick="handleClick(event, this)">채용 하기</a>
                 <a href="updateStatus?apply_id=${businesview.apply_id}&status=rejected&postNumber=${postNumber}" class="btn btn-danger">채용 거절</a>
             </div>
         </c:forEach>
@@ -108,5 +110,47 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+    function handleClick(event, element)
+    {
+        // 현재 상태 가져오기
+        var status = element.getAttribute("data-status");
+
+        // 상태가 '수락'일 경우 클릭 이벤트를 취소
+        if (status === '수락')
+        {
+            event.preventDefault(); // 기본 동작 차단
+            alert("이미 수락된 상태입니다."); // 사용자에게 알림
+            return; // 함수를 종료
+        }
+
+        // AJAX 요청을 통해 상태 업데이트
+        var url = element.getAttribute("href");
+
+        // Fetch API를 사용하여 AJAX 요청
+        fetch(url)
+            .then(response =>
+            {
+                if (response.ok)
+                {
+                    // 요청이 성공하면 페이지 이동
+                    window.location.href = url; // 페이지 이동
+                }
+                else
+                {
+                    alert("상태 업데이트에 실패했습니다.");
+                }
+            })
+            .catch(error =>
+            {
+                console.error('Error:', error);
+                alert("오류가 발생했습니다.");
+            });
+    	// 기본 동작 차단 (링크 이동 방지)
+        event.preventDefault(); 
+    }
+</script>
+    
 </body>
 </html>
