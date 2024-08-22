@@ -1,5 +1,4 @@
 CREATE database albaoneDB;
-drop database albaoneDB;
 use albaoneDB;
 
 -- 사용자 테이블
@@ -13,10 +12,6 @@ create table user
     businessNumber varchar(20) UNIQUE
 );
 
-select * from User;
-select id, pw from user;
-drop table user;
-
 -- 근태 관리 테이블
 CREATE TABLE attendance(
 	id varchar(15),
@@ -29,10 +24,6 @@ CREATE TABLE attendance(
     FOREIGN KEY(id) REFERENCES user(id),
     CONSTRAINT chk_time CHECK (check_in_time <> check_out_time)
 );
-select * from attendance;
-drop table attendance;
-select sum(workHours) from attendance where id='q' and check_in_time >= '2024-08-01' and check_out_time <= '2024-08-31';
-select a.id, u.name, a.businessNumber, sum(a.workHours) from attendance a inner join user u on a.id = u.id group by a.id having businessNumber ="1";
 
 -- 이력서 테이블
 CREATE TABLE if not exists Resume
@@ -57,9 +48,6 @@ CREATE TABLE if not exists Resume
     desired_days varchar(20),
     MyimgName VARCHAR(20)		 -- 이미지 이름
 );
-drop table Resume;
-delete from Resume;
-select * from Resume;
 
 CREATE TABLE if not exists Apply(
 	id varchar(10),
@@ -79,10 +67,6 @@ CREATE TABLE if not exists Apply(
     postNumber int,
     status ENUM('지원 중', '수락', '거절') DEFAULT '지원 중'
 );
-select * from Apply;
-drop table Apply;
-
-SHOW COLUMNS FROM Apply LIKE 'status';
 
 -- 공고 테이블
 CREATE TABLE if not exists jobpost(
@@ -97,8 +81,6 @@ CREATE TABLE if not exists jobpost(
     jobDescription varchar(200),				-- 하는 일
     id VARCHAR(20)								-- 작성자 아이디
 );
-select * from jobpost;
-truncate table jobpost;
 
 -- 계약서 테이블
 create table employmentcontract
@@ -118,12 +100,8 @@ create table employmentcontract
     insurance varchar(25),-- 보험
     createdate date-- 작성 날짜
 );
-select * from employmentcontract;
-truncate table employmentcontract;
-drop table employmentcontract;
 
 -- 퇴직금 조회
-use albaoneDB;
 create table Severance
 (
 	num int primary key auto_increment, -- 단순 숫자(의미 없음 - 기본키용)
@@ -132,21 +110,13 @@ create table Severance
     money bigint, -- 퇴직금
     companyNum char(10) -- 사업자 등록번호
 );
-select * from Severance;
-select * from Severance where companyNum = "사업자 번호"; -- 사장 알바 퇴직금 조회 확인용  
-select * from Severance where parttimename="알바생명"; -- 알바 퇴직금 조회 확인용 
-drop table Severance;
 
 CREATE TABLE empolyee(
 	businessNumber varchar(20),
     id varchar(15)
 );
-select * from empolyee;
-delete from empolyee where id='q' limit 1;
 
 -- 등급 지정
-use albaoneDB;
-
 create table Albarate
 (
 	parttimename varchar(5) primary key, -- 알바생이름
@@ -155,10 +125,3 @@ create table Albarate
     blinking int, -- QR 얼마나 깜빡했는지
     company int -- 사측 평가
 );
-
-select * from Albarate;
--- read 테스트
-select parttimename,commute,absent,blinking,company
-				from Albarate where parttimename = "알바생1";
--- 테스트용
-drop table Albarate; -- 잘못 만들었을 경우 삭제용

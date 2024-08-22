@@ -22,12 +22,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="empolyee" items="${empolyeeList}">
+					<c:forEach var="employee" items="${employeeList}">
 						<tr>
-							<td>${empolyee.id}</td>
-							<td>${empolyee.name}</td>
+							<td>${employee.id}</td>
+							<td>${employee.name}</td>
 							<td><a
-								href="QR?id=${empolyee.id}&businessNumber=${sessionScope.businessNumber}">QR</a></td>
+								href="QR?id=${employee.id}&businessNumber=${sessionScope.businessNumber}">QR</a></td>
 						</tr>
 					</c:forEach>
 					<c:forEach var="company" items="${companyList}">

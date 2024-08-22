@@ -18,7 +18,7 @@
 	<p>
 		<a href="deletecontract">근로계약서 삭제</a>
 	
-	<p><a href="empolyeeList?businessNumber=${sessionScope.businessNumber}">내 사업장 알바생 조회</a></p>
+	<p><a href="employeeList?businessNumber=${sessionScope.businessNumber}">내 사업장 알바생 조회</a></p>
 	<p><a href="companyList?id=${sessionScope.id}">개인 : 내 직장 조회</a></p>
     
     <!-- 퇴직금 테스트 -->

@@ -1,17 +1,17 @@
 package com.springmvc.domain;
 
-public class Empolyee {
+public class Employee {
 	private String id;
 	private String businessNumber;
 	private String name;
 	
-	Empolyee(){}
+	Employee(){}
 
-	public Empolyee(String businessNumber) {
+	public Employee(String businessNumber) {
 		this.businessNumber = businessNumber;
 	}
 	
-	public Empolyee(String id, String name){
+	public Employee(String id, String name){
 		this.id = id;
 		this.name = name;
 	}

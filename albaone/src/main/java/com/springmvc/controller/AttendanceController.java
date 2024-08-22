@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mysql.cj.Session;
 import com.springmvc.domain.Attendance;
-import com.springmvc.domain.Empolyee;
+import com.springmvc.domain.Employee;
 import com.springmvc.service.AttendanceServiceImpl;
 import com.springmvc.service.UserServiceImpl;
-import com.springmvc.service.empolyeeServiceImpl;
+import com.springmvc.service.EmployeeServiceImpl;
 
 @Controller
 public class AttendanceController {
@@ -36,7 +36,7 @@ public class AttendanceController {
 	private AttendanceServiceImpl attendanceService;
 	
 	@Autowired
-	private empolyeeServiceImpl empolyeeService;
+	private EmployeeServiceImpl employeeService;
 	
 	@Autowired
 	private UserServiceImpl userService;
@@ -99,7 +99,7 @@ public class AttendanceController {
 	@GetMapping("addAttendance")
 	public String addAttendanceForm(HttpSession session, Model model) {
 		String businessNumber = (String) session.getAttribute("businessNumber");
-		List<Empolyee> empolyeeList = empolyeeService.getAllEmpolyee(businessNumber);
+		List<Employee> empolyeeList = employeeService.getAllEmployee(businessNumber);
 		model.addAttribute("empolyeeList", empolyeeList);
 		
 		return "attendanceAdd";
