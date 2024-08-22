@@ -15,6 +15,7 @@
 </style>
 </head>
 <body>
+
     <%@include file="menu.jsp" %>
     
     <div class="container mt-4">
@@ -29,7 +30,8 @@
                 </div>
             </div>
             <div class="card-body">
-                <h6 class="card-title">근무지: ${jobPost.workLocation}</h6>
+            	<div id="map" style="width:100%;height:400px;"></div>
+                <p id="addr"><strong>주소:</strong> ${jobPost.workLocation}</p>
                 <p><strong>연락처:</strong> ${jobPost.contactNumber}</p>
                 <p><strong>임금:</strong> ${jobPost.salary} 원</p>
                 <p><strong>근무시간:</strong> ${jobPost.workHours}</p>
@@ -52,5 +54,40 @@
                 <button onclick="window.history.back();" class="btn btn-secondary">목록으로 돌아가기</button>
             </div>
     </div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b93f1c67d88fac7ef8329a28850e92c&libraries=services,clusterer,drawing"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+		
+		var geocoder = new kakao.maps.services.Geocoder();
+		
+		var callback = function(result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				
+				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+				
+				var marker = new kakao.maps.Marker({
+					position: coords
+				});
+				marker.setMap(map);
+				
+				var infowindow = new kakao.maps.InfoWindow({
+					content: '<div style="padding:10px; text-align:center; font-size:14px; line-height:1.5; display: flex; justify-content: center; align-items: center;">' + '${jobPost.companyName}' + '</div>'
+				});
+				
+				infowindow.open(map, marker);
+				
+				map.setCenter(coords);
+			}
+		};
+		
+		geocoder.addressSearch('${jobPost.workLocation}', callback);
+		
+	</script>
 </body>
 </html>

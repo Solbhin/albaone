@@ -10,7 +10,7 @@
     <c:if test="${not empty qrCodeUrl}">
         <img src="${qrCodeUrl}" alt="QR Code" />
         
-        <p><a href="QRcheck?id=${id}&datetime=${datetime}">QR 찍기 테스트 - QR 코드 URL로 요청</a></p>
+        <p><a href="${qrUrl}">QR 찍기 테스트 - QR 코드 URL로 요청</a></p>
     </c:if>
     <c:if test="${empty qrCodeUrl}">
         <p>QR을 받아오지 못했습니다.

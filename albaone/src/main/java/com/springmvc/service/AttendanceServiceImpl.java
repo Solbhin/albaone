@@ -1,5 +1,6 @@
 package com.springmvc.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class AttendanceServiceImpl implements AttendanceService {
 	@Override
 	public void addAttendance(Attendance attendance) {
 		attendanceRepository.addAttendance(attendance);
+	}
+	
+	@Override
+	public void editAttendance(Attendance attendance, LocalDateTime checkInTime) {
+		attendanceRepository.editAttendance(attendance, checkInTime);
 	}
 	
 }

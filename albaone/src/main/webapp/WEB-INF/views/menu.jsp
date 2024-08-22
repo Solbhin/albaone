@@ -29,23 +29,23 @@
               	        <li class="nav-item">
 	                        <a class="nav-link" href="/albaone/attendanceCalendar">직원 근태 관리</a>
 	                    </li>
+	                    <li>
+	                    	<a class="nav-link" href="/albaone/salaryBusiness">직원 급여 조회</a>
+	                    </li>
 	                </c:if>
                    	<c:if test="${empty sessionScope.businessNumber && not empty sessionScope.id}">
+                	    <li class="nav-item">
+	                    	<a class="nav-link" href="resumereadAll">이력서</a>
+	                    </li>
 	                    <li class="nav-item">
 	                        <a class="nav-link" href="/albaone/attendanceCalendar">근태 관리</a>
 	                    </li>
 	                    <li class="nav-item">
-	                        <a class="nav-link" href="#">급여 조회</a>
+	                        <a class="nav-link" href="/albaone/salaryPersonal">급여 조회</a>
 	                    </li>
 	                    <li class="nav-item">
 	                    	<a class="nav-link" href="/albaone/jobposts?page=1">구직 정보</a>
 	                    </li>
-	                    <li class="nav-item">
-	                    	<a class="nav-link" href="resumereadAll">이력서</a>
-	                    </li>
-	                    <!-- <li>
-	               			<a class="nav-link" href="/albaone/Applyread">지원 목록</a>
-	               		</li> -->
 					</c:if>
                 	<c:if test="${not empty sessionScope.id}">
 	                    <li class="nav-item">

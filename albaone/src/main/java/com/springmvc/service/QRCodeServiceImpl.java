@@ -12,17 +12,18 @@ public class QRCodeServiceImpl implements QRCodeService {
 	private QRcodeRepositoryImpl QRCodeRepository;
 
 	@Override
-	public void checkIn(String id, String datetime) {
-		QRCodeRepository.checkIn(id, datetime);
+	public void checkIn(String id, String datetime, String businessNumber) {
+		QRCodeRepository.checkIn(id, datetime, businessNumber);
 	}
 
 	@Override
 	public Attendance getLastAttendance(String id) {
 		return QRCodeRepository.getLastAttendance(id);
 	}
-
-	public void checkOut(String id, String time) {
-		QRCodeRepository.checkOut(id, time);
+	
+	@Override
+	public void checkOut(String id, String time, long flooredMinutes) {
+		QRCodeRepository.checkOut(id, time, flooredMinutes);
 	}
 
 }

@@ -25,4 +25,6 @@ public interface ApplyRespository {
 	List<Apply> getbusinesview(int postNumber, int apply_id);
 
 	void updateApplyStatus(int apply_id,String status,int postNumber);
+
+	String getEmpolyeeId(int apply_id);
 }

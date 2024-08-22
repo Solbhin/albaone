@@ -16,11 +16,9 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 	private JdbcTemplate template;
 	
 	@Autowired
-	public void setJdbctemplate(DataSource dataSource)
-	{
+	public void setJdbctemplate(DataSource dataSource) {
 		this.template = new JdbcTemplate(dataSource);
 	}
-	
 	@Override
 	public void insertApplication(String id,String resume_number, String resumeTitle, int postNumber, 
 	                              String companyName, String workLocation, int salary, 
@@ -34,8 +32,7 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 
 
 	@Override
-	public List<Apply> getApplicaionts(String userId)
-	{
+	public List<Apply> getApplicaionts(String userId) {
 		String sql = "SELECT a.apply_id, a.resumetitle, j.companyName, j.workLocation, j.salary, j.workHours, j.workDays, j.jobDescription, a.resume_id, r.name, r.contact, r.email, r.address " +
                 "FROM apply a " +
                 "JOIN Resume r ON a.resume_id = r.resume_id " +
@@ -43,19 +40,17 @@ public class ApplyRespositoryImpl implements ApplyRespository{
                 "WHERE r.resume_id = ?";
 		return template.query(sql, new Object[]{userId}, new ApplyRowMapper());
 	}
-	
 	@Override
-	public List<Apply> getAllapplys(String id)
-	{
+	public List<Apply> getAllapplys(String id) {
 		String SQL="SELECT * FROM Apply where id= ? ";
 		List<Apply> listOfApply = template.query(SQL,new Object[] {id},new ApplyRowMapper());
 		System.out.println(listOfApply);
 		return listOfApply;
 	}
-	
 	@Override
 	public List<Apply> getAllbusinesapplys(int postNumber) {
 		String SQL="SELECT * FROM apply where postNumber = ? ";
+		System.out.println(postNumber);
 		List<Apply> listOfbusinesApply=template.query(SQL,new Object[] {postNumber},new ApplyRowMapper());
 		return listOfbusinesApply;
 	}
@@ -88,6 +83,12 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 	        default:
 	            return "지원 중";
 	    }
+	}
+	
+	@Override
+	public String getEmpolyeeId(int apply_id) {
+		String SQL = "SELECT id FROM apply WHERE apply_id = ?";
+		return template.queryForObject(SQL, new Object[] {apply_id}, String.class);
 	}
 
 	

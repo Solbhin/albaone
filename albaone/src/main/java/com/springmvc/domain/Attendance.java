@@ -7,10 +7,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Attendance {
 	private String id; 					// 개인회원 식별
+	private String businessNumber;
 	private String companyName; 		// 근무지 식별
 	private String name; 				// 알바생 식별
 	private LocalDateTime checkInTime; 	// 출근시간
 	private LocalDateTime checkOutTime; // 퇴근시간
+	private long workHours; 				// 근무 시간
 	
 	public String getFormattedCheckInTime() {
 		DateTimeFormatter formmater = DateTimeFormatter.ofPattern("HH:mm");
@@ -22,7 +24,7 @@ public class Attendance {
 		return checkOutTime.format(formmater);
 	}
 	
-	public String getWorkHours() {
+	public String getTime() {
 		long minutesWorked = Duration.between(checkInTime, checkOutTime).toMinutes();
 		
 		long flooredMinutes = (minutesWorked/10)*10;
@@ -43,6 +45,14 @@ public class Attendance {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getBusinessNumber() {
+		return businessNumber;
+	}
+	
+	public void setBusinessNumber(String businessNumber) {
+		this.businessNumber = businessNumber;
 	}
 
 	public String getCompanyName() {
@@ -77,4 +87,12 @@ public class Attendance {
 		this.checkOutTime = checkOutTime;
 	}
 
+	public long getWorkHours() {
+		return workHours;
+	}
+
+	public void setWorkHours(long workHours) {
+		this.workHours = workHours;
+	}
+	
 }

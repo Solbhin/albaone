@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.Attendance;
-import com.springmvc.domain.QRCode;
 
 @Repository
 public class QRcodeRepositoryImpl implements QRcodeRepository {
@@ -24,9 +23,9 @@ public class QRcodeRepositoryImpl implements QRcodeRepository {
 	}
 
 	@Override
-	public void checkIn(String id, String datetime) {
-		String SQL = "INSERT INTO attendance (id, check_in_time) VALUES(?, ?)";
-		template.update(SQL, id, datetime);
+	public void checkIn(String id, String datetime, String businessNumber) {
+		String SQL = "INSERT INTO attendance (id, check_in_time, businessNumber) VALUES(?, ?, ?)";
+		template.update(SQL, id, datetime, businessNumber);
 	}
 
 	@Override
@@ -59,9 +58,9 @@ public class QRcodeRepositoryImpl implements QRcodeRepository {
 	}
 
 	@Override
-	public void checkOut(String id, String time) {
-		String SQL = "UPDATE attendance SET check_out_time = ? WHERE id = ? AND check_out_time IS NULL";
-		template.update(SQL, time, id);
+	public void checkOut(String id, String time, long flooredMinutes) {
+		String SQL = "UPDATE attendance SET check_out_time = ?, workHours = ? WHERE id = ? AND check_out_time IS NULL";
+		template.update(SQL, time, flooredMinutes ,id);
 	}
 
 }

@@ -49,5 +49,10 @@ public class ApplyServiceImpl implements ApplyService{
 	public void updateApplyStatus(int apply_id, String status, int postNumber) {
 		applyRepository.updateApplyStatus(apply_id, status, postNumber);
 	}
+
+	@Override
+	public String getEmpolyeeId(int apply_id) {
+		return applyRepository.getEmpolyeeId(apply_id);
+	}
 	
 }
