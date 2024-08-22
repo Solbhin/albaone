@@ -24,3 +24,4 @@ CREATE TABLE if not exists Resume
 drop table Resume;
 delete from Resume;
 select * from Resume;
+SELECT * FROM Resume WHERE resume_id = "알바생1";

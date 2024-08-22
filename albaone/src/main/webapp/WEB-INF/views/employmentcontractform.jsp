@@ -4,8 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>근로계약서</title>
-
-
+<link rel="stylesheet" href="/albaone/resources/css/employmentcontractform.css"> 
 </head>
 <body>
 	<%@include file="menu.jsp" %>
