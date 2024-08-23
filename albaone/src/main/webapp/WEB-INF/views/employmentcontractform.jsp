@@ -4,12 +4,14 @@
 <head>
 <meta charset="UTF-8">
 <title>근로계약서</title>
-<link rel="stylesheet" href="/albaone/resources/css/employmentcontractform.css"> 
+<link rel="stylesheet" href="/albaone/resources/css/employmentcontractform.css">
 </head>
 <body>
 	<%@include file="menu.jsp" %>
     <div id="form">
         <p id="title">표준 계약서 작성</p>
+        <br><br><br>
+        
         <form action="employmentcontract" method="post" modelAttribute="employment" enctype="multipart/form-data">
             <p>사업주명 : <input type="text" name="ownername" value="${user.name}" readonly></p>
             <p>사업자 번호 : <input type="text" name="businessNumber" value="${BusinessNumber}" readonly></p>
@@ -25,8 +27,14 @@
                 ~ <input type="date" name="period_end">
             </p>
             <p>근무장소 : <input type="text" name="place" required></p>
+            
+            <br>
+            
             <p>업무내용</p>
             <textarea rows="2" cols="50" name="workdetail" placeholder="업무 내용을 입력하세요"></textarea>
+            
+            <br><br>
+            
             <div id="worktime">
                 <p>근무 시작 시간</p>
                 <input type="checkbox" id="startCheckbox" onchange="toggleWorkingHoursStart()"> 직접 입력
@@ -134,6 +142,8 @@
                     <input type="text" id="workinghours_end_input" name="workinghours_end" placeholder="근무 종료 시간" style="display:none">
             </div>
             
+            <br>
+            
             <p>주당 근무일<br>
                 월 <input type="checkbox" name="workday" value="월">
                 화 <input type="checkbox" name="workday" value="화">
@@ -143,20 +153,40 @@
                 토 <input type="checkbox" name="workday" value="토">
                 일 <input type="checkbox" name="workday" value="일">
             </p>
+            
+            <br>
+            
             <p>임금 : <input type="number" name="money" min="9860" required placeholder="최저시급 9860"></p>
             <p>상여금 : <input type="number" name="bonus" required placeholder="없으면 0을 입력" min="0"></p>
+            
+            <br>
+            
             <p>보험<br>
                 고용보험<input type="checkbox" id="insurance" name="insurance" value="고용보험">
                 산재보험<input type="checkbox" id="insurance" name="insurance" value="산재보험">
                 국민연금<input type="checkbox" id="insurance" name="insurance" value="국민연금">
                 건강보험<input type="checkbox" id="insurance" name="insurance" value="건강보험">
             </p>
+            
+            <br>
+            
             <p>작성 날짜 : <input type="date" name="createdate" required></p>
+            
+            <br>
+            
             <p>사업주 사인 : <input type="file" name="sinefileowner" required></p>
             
             <!-- 사업주가 알바생 사인을 바로 받기는 힘들기 때문에 required 속성은 뺌 -->
             <p>알바생 사인 : <input type="file" name="sinefileparttime"></p>
+            
+            <br>
+            
+            <p>사업주는 근로계약을 체결함과 동시에 본 계약서를 사본하여 근로자의 교부요구와 관계없이 근로자에게 교부함(근로기준법 제17조 이행)
+            <br>
+            
             <p><input type="submit" value="등록" id="button"></p>
+            
+            <br>
     
             <input type="hidden" value="${apply_id}" name="apply_id">
             <input type="hidden" value="${status}" name="status">

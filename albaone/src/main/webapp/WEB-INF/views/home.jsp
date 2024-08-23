@@ -10,18 +10,11 @@
 	<%@include file="menu.jsp"%>
 
 	<h1>소개 페이지</h1>
-	<!-- 근로 계약서 a태그, 임시 -->
-	<p><a href="contracts">알바생 근로계약서 조회 테스트</a>
+    <!-- 근로 계약서 a태그, 임시 -->
+    <p><a href="contracts">알바생 근로계약서 조회 테스트</a>
 
-	<p><a href="QR">QR 생성</a></p>
-	<p>${id}${name}${businessNumber}</p>
-	
-	<p><a href="empolyeeList?businessNumber=${sessionScope.businessNumber}">내 사업장 알바생 조회</a></p>
+	<p><a href="employeeList?businessNumber=${sessionScope.businessNumber}">내 사업장 알바생 조회</a></p>
 	<p><a href="companyList?id=${sessionScope.id}">개인 : 내 직장 조회</a></p>
-	
-	<!-- 이력서 테스트 -->
-	<p><a href="resume">이력서 작성</a>
-	<p><a href="resumereadAll">이력서 목록</a>
     
     <!-- 퇴직금 테스트 -->
     <p><a href="Severance">퇴직금 계산</a>

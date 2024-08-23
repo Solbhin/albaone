@@ -13,13 +13,24 @@
     <div id="contract">
     	<p id="title">표준 근로 계약서
         
+        <br><br><br>
+        
         <!-- 계약 종료 기간이 없는 경우를 if 문으로 따로 적어야 함 -->
         <p>계약 기간 : ${ contract.period_start } ~ ${ contract.period_start }</p>
+        
+        <br>
+        
         <p>근로 장소 : ${ contract.place }</p>
         <p>근무 시간 : ${ contract.workinghours_start } ~ ${ contract.workinghours_end }</p>
         <p>주당 근무일 : ${ contract.workday }</p>
+        
+        <br>
+        
         <p>임금 : ${ contract.money }</p>
         <p>상여금 : ${ contract.bonus }</p>
+        
+        <br>
+        
         <p>보험 : ${ contract.insurance }</p>
         
         <br>
@@ -31,8 +42,10 @@
         <p>알바생 이름 : ${ contract.parttimename }</p>
         <p>알바생 전화번호 ${ contract.parttimePhone }</p>
         <p>알바생 주소 : ${ contract.parttimeaddr }</p>
+        
         <br>
-
+        <br>
+        
         <div class="sine">
             <p>사업주 서명 :</p>
             <div>
@@ -46,7 +59,9 @@
                 <img src="resources/images/${contract.sinefilenameparttime}" alt="알바생 사인" width="50"></p>
             </div>
         </div>
-
+        
+        <br>
+        <p>사업주는 근로계약을 체결함과 동시에 본 계약서를 사본하여 근로자의 교부요구와 관계없이 근로자에게 교부함(근로기준법 제17조 이행)
     </div>
 	
 	<!-- 클릭시 PDF 다운로드 미완성 - 다운만 가능 디자인 안됨 -->

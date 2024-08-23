@@ -87,7 +87,6 @@
 		};
 		
 		geocoder.addressSearch('${jobPost.workLocation}', callback);
-		
 	</script>
 </body>
 </html>
