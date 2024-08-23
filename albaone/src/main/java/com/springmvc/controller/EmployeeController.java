@@ -15,7 +15,7 @@ import com.springmvc.service.EmployeeServiceImpl;
 public class EmployeeController {
 	@Autowired
 	private EmployeeServiceImpl employeeService;
-	
+
 //	내 사업장 알바생 조회
 	@GetMapping("employeeList")
 	public String empolyeeList(@RequestParam String businessNumber, Model model) {
@@ -23,7 +23,7 @@ public class EmployeeController {
 		model.addAttribute("employeeList", employeeList);
 		return "employeeList";
 	}
-	
+
 //	내 직장 조회
 	@GetMapping("companyList")
 	public String myCompany(@RequestParam String id, Model model) {

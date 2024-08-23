@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>직업 공고 등록</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
     </div>
     <div class="container mt-5">
         <h2 class="text-center">직업 공고 등록</h2>
-        <form action="./jobposting" method="post" modelAttribute="jobPost">
+        <form action="./jobposting" method="post" modelAttribute="jobPost" id="jobPostingForm">
             <div class="form-group">
                 <label for="companyName">상호명</label>
                 <input type="text" class="form-control" name="companyName" placeholder="상호명" required>
@@ -26,6 +27,7 @@
             <div class="form-group">
                 <label for="workLocation">근무지 주소</label>
                 <input type="text" class="form-control" name="workLocation" placeholder="근무지 주소" required>
+                <div id="addressError" class="text-danger" style="display:none;">유효한 주소를 입력하세요.</div>
             </div>
             <div class="form-group">
                 <label for="contactNumber">연락처</label>
@@ -54,5 +56,8 @@
             <button type="submit" class="btn btn-primary btn-block">등록하기</button>
         </form>
     </div>
+
+<!-- 주소 유효성 검사 - 치는게 빡세서 일단 주석처리함 - 읍이나 리 또는 도로명까지 쳐야 검색됨-->
+<!-- <script type="text/javascript" src="/albaone/resources/js/jobPostForm.js"></script> -->
 </body>
 </html>

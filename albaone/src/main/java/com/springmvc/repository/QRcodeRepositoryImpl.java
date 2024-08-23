@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.Attendance;
-import com.springmvc.domain.QRCode;
 
 @Repository
 public class QRcodeRepositoryImpl implements QRcodeRepository {

@@ -13,3 +13,5 @@ CREATE TABLE attendance(
 select * from attendance;
 drop table attendance;
 select sum(workHours) from attendance where id='q' and check_in_time >= '2024-08-01' and check_out_time < '2024-09-01';
+delete from attendance where check_in_time = "2024-08-22 15:42:03";
+SELECT * FROM attendance WHERE id = "q" ORDER BY check_in_time DESC LIMIT 1

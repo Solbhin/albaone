@@ -1,7 +1,6 @@
 package com.springmvc.repository;
 
 import com.springmvc.domain.Attendance;
-import com.springmvc.domain.QRCode;
 
 public interface QRcodeRepository {
 	Attendance getLastAttendance(String id);
