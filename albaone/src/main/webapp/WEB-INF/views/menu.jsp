@@ -26,12 +26,9 @@
 						<li class="nav-item">
 							<a class="nav-link" href="/albaone/jobposts?page=1">구인 정보</a>	                
 	               		</li>
-              	        <li class="nav-item">
-	                        <a class="nav-link" href="/albaone/attendanceCalendar">직원 근태 관리</a>
-	                    </li>
-	                    <li>
-	                    	<a class="nav-link" href="/albaone/salaryBusiness">직원 급여 조회</a>
-	                    </li>
+	               		<li class="nav-item">
+	               			<a class="nav-link" href="employeeList?businessNumber=${sessionScope.businessNumber}">직원 관리</a>
+	               		</li>
 	                </c:if>
                    	<c:if test="${empty sessionScope.businessNumber && not empty sessionScope.id}">
                 	    <li class="nav-item">

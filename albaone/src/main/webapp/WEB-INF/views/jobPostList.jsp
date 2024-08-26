@@ -13,10 +13,6 @@
         padding: 15px;
         margin-bottom: 20px;
     }
-    .card-header {
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
     .card-body {
         margin-bottom: 10px;
     }
@@ -50,14 +46,15 @@
        		<c:forEach items="${jobPosts}" var="jobpost">
 	            <div class="col-md-4 mb-3">
 	                <div class="card">
-	                    <div class="card-header">${jobpost.postNumber}</div>
 	                    <div class="card-body">
-	                        <h5 class="card-title">${jobpost.companyName} | 지역 | 등록일자</h5>
-	                        <p class="card-text">근무요일 + 근무시간</p>
+	                        <h4 class="card-title">${jobpost.companyName}</h4><hr>
+	                        <p class="card-text">주소: ${jobpost.workLocation} </p>
+	                        <p class="card-text">근무요일: ${jobpost.workDays}</p>
+	                        <p class="card-text">근무시간: ${jobpost.workHours}
+	                        <p class="card-text">시급: ${jobpost.salary}</p>
 	                    </div>
-	                    <div class="card-footer">
-	                        <span>${jobpost.salary}</span>
-	                        <a href="./jobpost?postNumber=${jobpost.postNumber}" class="btn btn-primary">읽기</a>
+	                    <div class="d-flex justify-content-end">
+	                        <a href="./jobpost?postNumber=${jobpost.postNumber}" class="btn btn-primary">상세보기</a>
 	                    </div>
 	                </div>
 	            </div>

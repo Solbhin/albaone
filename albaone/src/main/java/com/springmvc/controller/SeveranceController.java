@@ -36,7 +36,7 @@ public class SeveranceController {
 	}
 
 	// 퇴직금 폼
-	@PostMapping("/Severance")
+	@PostMapping("/severance")
 	public String Severanceform(@RequestParam(value = "partname") String parttimename, Model model) {
 		System.out.println("퇴직금 계산 메서드");
 

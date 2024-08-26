@@ -1,6 +1,10 @@
 package com.springmvc.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,5 +34,23 @@ public class EmployeeController {
 		List<Employee> companyList = employeeService.getMyCompany(id);
 		model.addAttribute("companyList", companyList);
 		return "employeeList";
+	}
+	
+//	퇴사
+	@GetMapping("resignation")
+	public String resignation(@RequestParam String id, 
+			@RequestParam String resignationDate,
+			HttpSession session) {
+		
+		String businessNumber = (String) session.getAttribute("businessNumber");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate formattedDate = LocalDate.parse(resignationDate, formatter);
+		
+		System.out.println("퇴사 ID: "+id);
+		System.out.println("사업장: "+businessNumber);
+		System.out.println("퇴사일자: "+formattedDate);
+		
+		employeeService.resignationEmployee(id, businessNumber, formattedDate);
+		return null;
 	}
 }

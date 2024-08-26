@@ -1,5 +1,6 @@
 package com.springmvc.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -21,12 +22,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 	
 	@Override
 	public List<Employee> getAllEmployee(String businessNumber) {
-		String SQL = "SELECT e.id, u.name "
+		String SQL = "SELECT e.id, u.name, e.hireDate "
 				+ "FROM employee e "
 				+ "INNER JOIN user u "
 				+ "ON e.id = u.id "
 				+ "WHERE e.businessNumber = ?";
-		return template.query(SQL, new Object[] {businessNumber},(rs, rowNum) -> new Employee(rs.getString("id"), rs.getString("name")));
+		return template.query(SQL, new Object[] {businessNumber},(rs, rowNum) -> new Employee(rs.getString("id"), rs.getString("name"), rs.getString("hireDate")));
 	}
 	
 	@Override
@@ -37,9 +38,15 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 	}
 
 	@Override
-	public void addEmployee(String id, String businessNumber) {
-		String SQL = "INSERT INTO employee VALUES(?, ?)";
-		template.update(SQL, businessNumber, id);
+	public void addEmployee(String employeeId, String businessNumber, LocalDate date) {
+		String SQL = "INSERT INTO employee VALUES(?, ?, ?)";
+		template.update(SQL, businessNumber, employeeId, date);
+	}
+
+	@Override
+	public void resignationEmployee(String id, String businessNumber, LocalDate formattedDate) {
+		String SQL = "UPDATE employee SET resignationDate = ? WHERE id = ? AND businessNumber = ?";
+		template.update(SQL, formattedDate, id, businessNumber);
 	}
 
 }

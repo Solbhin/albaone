@@ -1,11 +1,14 @@
 package com.springmvc.repository;
 
 import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.Apply;
@@ -50,7 +53,6 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 	@Override
 	public List<Apply> getAllbusinesapplys(int postNumber) {
 		String SQL="SELECT * FROM apply where postNumber = ? ";
-		System.out.println(postNumber);
 		List<Apply> listOfbusinesApply=template.query(SQL,new Object[] {postNumber},new ApplyRowMapper());
 		return listOfbusinesApply;
 	}
@@ -66,12 +68,20 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 		return template.query(SQL,new Object[] {postNumber,apply_id},new ApplyRowMapper());
 	}
 	@Override
-	public void updateApplyStatus(int apply_id, String status, int postNumber) {
-	    // status 값을 ENUM 값으로 변환
-	    String statusEnum = convertToEnumStatus(status);
-
-	    String SQL = "UPDATE Apply SET status = ? WHERE apply_id = ? AND postNumber = ?";
-	    template.update(SQL, statusEnum, apply_id, postNumber);
+	public void updateApplyStatus(int apply_id, String status, Integer postNumber) {
+	    
+		if(postNumber == null) {
+			String statusEnum = convertToEnumStatus(status);
+			String SQL = "UPDATE Apply SET status = ? WHERE apply_id = ? ";
+			template.update(SQL,statusEnum,apply_id);
+			System.out.println("널임");
+		}
+	    if(postNumber != null) {
+		    String statusEnum = convertToEnumStatus(status);
+		    String SQL = "UPDATE Apply SET status = ? WHERE apply_id = ? AND postNumber = ?";
+		    template.update(SQL, statusEnum, apply_id, postNumber);
+		    System.out.println("널 아님");
+	    }
 	}
 
 	private String convertToEnumStatus(String status) {
@@ -80,10 +90,22 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 	            return "수락";
 	        case "rejected":
 	            return "거절";
+	        case "공고 없음":
+	        	return "공고 없음";
 	        default:
 	            return "지원 중";
 	    }
 	}
+	public List<Integer> getApplyIdsByPostNumber(int postNumber) {
+	    String SQL = "SELECT apply_id FROM Apply WHERE postNumber = ?";
+	    return template.query(SQL, new Object[]{postNumber}, new RowMapper<Integer>() {
+	        @Override
+	        public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+	            return rs.getInt("apply_id");
+	        }
+	    });
+	}
+
 	
 	@Override
 	public String getEmpolyeeId(int apply_id) {

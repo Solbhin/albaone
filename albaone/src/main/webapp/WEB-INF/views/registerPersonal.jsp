@@ -86,6 +86,7 @@
         });
     }
     
+    
     function validateForm() {
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirmPassword").value;
@@ -95,6 +96,14 @@
             return false; // 제출 요청을 거절
         }
         return true; // 제출 요청 허용
+    }
+    
+    // 중복 체크 후 다시 아이디를 변경할 때 회원가입 비활성화
+    var id = document.querySelector("#id");
+    id.addEventListener("keyup", disable);
+    function disable() {
+    	console.log("함수")
+        submitButton.disabled = true;
     }
 </script>
 </body>

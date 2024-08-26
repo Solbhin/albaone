@@ -157,6 +157,7 @@
             <!-- 사업주가 알바생 사인을 바로 받기는 힘들기 때문에 required 속성은 뺌 -->
             <p>알바생 사인 : <input type="file" name="sinefileparttime"></p>
             <p><input type="submit" value="등록" id="button"></p>
+            <input type="hidden" value="${employeeId}" name="employeeId">
     
             <input type="hidden" value="${apply_id}" name="apply_id">
             <input type="hidden" value="${status}" name="status">

@@ -1,9 +1,13 @@
 package com.springmvc.domain;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Employee {
 	private String id;
 	private String businessNumber;
 	private String name;
+	private LocalDate hireDate;
 	
 	Employee(){}
 
@@ -11,9 +15,12 @@ public class Employee {
 		this.businessNumber = businessNumber;
 	}
 	
-	public Employee(String id, String name){
+	public Employee(String id, String name, String hireDate){
 		this.id = id;
 		this.name = name;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate date = LocalDate.parse(hireDate, formatter);
+		this.hireDate = date;
 	}
 	
 	public String getId() {
@@ -34,7 +41,12 @@ public class Employee {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+	public LocalDate getHireDate() {
+		return hireDate;
+	}
+
+	public void setHireDate(LocalDate hireDate) {
+		this.hireDate = hireDate;
+	}
 	
 }

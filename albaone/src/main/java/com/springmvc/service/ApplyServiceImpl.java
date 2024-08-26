@@ -46,7 +46,7 @@ public class ApplyServiceImpl implements ApplyService{
 	}
 
 	@Override
-	public void updateApplyStatus(int apply_id, String status, int postNumber) {
+	public void updateApplyStatus(int apply_id, String status, Integer postNumber) {
 		applyRepository.updateApplyStatus(apply_id, status, postNumber);
 	}
 

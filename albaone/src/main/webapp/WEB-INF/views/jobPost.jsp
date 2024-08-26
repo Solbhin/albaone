@@ -24,7 +24,7 @@
                 <h5>${jobPost.companyName}의 상세정보</h5>
                 <div>
                 	<c:if test="${jobPost.id == sessionScope.id}">
-	                    <button class="btn btn-danger btn-sm" onclick="if(confirm('정말 삭제하시겠습니까?')) { location.href='deleteJobPost?postNumber=${jobPost.postNumber}'; }">삭제</button>
+	                    <button class="btn btn-danger btn-sm" onclick="if(confirm('정말 삭제하시겠습니까?')) { location.href='deleteJobPost?postNumber=${jobPost.postNumber}&status=공고 없음'; }">삭제</button>
 	                    <button class="btn btn-primary btn-sm" onclick="location.href='editJobPost?postNumber=${jobPost.postNumber}'">수정</button>
 					</c:if>
                 </div>

@@ -13,7 +13,6 @@
 	<!-- 근로 계약서 a태그, 임시 -->
 	<p><a href="contracts">알바생 근로계약서 조회 테스트</a>
 	
-	<p><a href="employeeList?businessNumber=${sessionScope.businessNumber}">내 사업장 알바생 조회</a></p>
 	<p><a href="companyList?id=${sessionScope.id}">개인 : 내 직장 조회</a></p>
     
     <!-- 퇴직금 테스트 -->

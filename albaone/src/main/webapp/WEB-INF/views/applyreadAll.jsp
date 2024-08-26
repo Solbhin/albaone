@@ -56,6 +56,9 @@
 						        <c:when test="${application.status == '거절'}">
 						            <span class="badge badge-danger">거절</span>
 						        </c:when>
+						        <c:when test="${application.status == '공고 없음'}">
+						            <span class="badge badge-dark">공고 마감</span>
+						        </c:when>
 						    </c:choose>
 						</td>
                         <td>

@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label for="username">아이디</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" name="id" value="${user.id}" placeholder="아이디" required>
+                            <input type="text" id="id" class="form-control" name="id" value="${user.id}" placeholder="아이디" required>
                             <button type="button" class="btn btn-secondary" onclick="checkId()">중복 체크</button>
                         </div>
                     </div>
@@ -103,6 +103,13 @@
             return true; // 제출 요청 허용
         }
         
+        // 중복 체크 후 다시 아이디를 변경할 때 회원가입 비활성화
+        var id = document.querySelector("#id");
+        id.addEventListener("keyup", disable);
+        function disable() {
+        	console.log("함수")
+            submitButton.disabled = true;
+        }
         
 	</script>
 	<!-- 실제 사업자 번호 찾기 귀찮아서 임시로 주석처리 -->
