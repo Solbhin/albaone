@@ -26,7 +26,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 				+ "FROM employee e "
 				+ "INNER JOIN user u "
 				+ "ON e.id = u.id "
-				+ "WHERE e.businessNumber = ?";
+				+ "WHERE e.businessNumber = ? AND e.resignationDate IS NULL";
 		return template.query(SQL, new Object[] {businessNumber},(rs, rowNum) -> new Employee(rs.getString("id"), rs.getString("name"), rs.getString("hireDate")));
 	}
 	
@@ -39,7 +39,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 	@Override
 	public void addEmployee(String employeeId, String businessNumber, LocalDate date) {
-		String SQL = "INSERT INTO employee VALUES(?, ?, ?)";
+		String SQL = "INSERT INTO employee(businessNumber, id, hireDate) VALUES(?, ?, ?)";
 		template.update(SQL, businessNumber, employeeId, date);
 	}
 
@@ -47,6 +47,31 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 	public void resignationEmployee(String id, String businessNumber, LocalDate formattedDate) {
 		String SQL = "UPDATE employee SET resignationDate = ? WHERE id = ? AND businessNumber = ?";
 		template.update(SQL, formattedDate, id, businessNumber);
+	}
+
+	@Override
+	public List<Employee> getAllResignee(String businessNumber) {
+		String SQL = "SELECT e.id, u.name, e.hireDate, e.resignationDate "
+				+ "FROM employee e "
+				+ "INNER JOIN user u "
+				+ "ON e.id = u.id "
+				+ "WHERE e.businessNumber = ? AND e.resignationDate IS NOT NULL";
+		return template.query(SQL, new Object[] {businessNumber},(rs, rowNum) -> new Employee(rs.getString("id"), rs.getString("name"), rs.getString("hireDate"), rs.getString("resignationDate")));
+	}
+	
+	@Override
+	public Employee getOneResignee(String id, String businessNumber) {
+		String SQL = "SELECT e.id, u.name, e.hireDate, e.resignationDate "
+				+ "FROM employee e "
+				+ "INNER JOIN user u "
+				+ "ON e.id = u.id "
+				+ "WHERE e.id = ? AND e.businessNumber = ?";
+		return template.queryForObject(SQL, new Object[] {id, businessNumber},
+				(rs, rowNum) -> new Employee(
+						rs.getString("id"),
+						rs.getString("name"),
+						rs.getString("hireDate"),
+						rs.getString("resignationDate")));
 	}
 
 }

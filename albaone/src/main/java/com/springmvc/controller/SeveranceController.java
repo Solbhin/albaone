@@ -1,6 +1,8 @@
 package com.springmvc.controller;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -14,10 +16,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.springmvc.domain.Employee;
 import com.springmvc.domain.Employmentcontract;
 import com.springmvc.domain.Severance;
 import com.springmvc.repository.EmploymentcontractRepositoryImpl;
+import com.springmvc.service.EmployeeServiceImpl;
 import com.springmvc.service.SeveranceServiceImpl;
+import com.springmvc.service.AttendanceServiceImpl;
 
 @Controller
 public class SeveranceController {
@@ -28,15 +33,50 @@ public class SeveranceController {
 	@Autowired
 	private SeveranceServiceImpl SeveranceService;
 
-	// 퇴직금 지급 - 알바생명 입력
-	@GetMapping("/Severance")
-	public String Severancecreate() {
-		System.out.println("퇴직금 지급 메서드");
-		return "Severance";
+	@Autowired
+	private EmployeeServiceImpl employeeService;
+
+	@Autowired
+	private AttendanceServiceImpl attendanceService;
+
+	// 퇴직금 조회
+	@GetMapping("severance")
+	public String Severancecreate(@RequestParam String id, HttpSession session, Model model) {
+		String businessNumber = (String) session.getAttribute("businessNumber");
+		Employee employee = employeeService.getOneResignee(id, businessNumber);
+		LocalDate resignationDate = employee.getResignationDate();
+		int resignYear = resignationDate.getYear(); // 퇴직일자의 년도
+		int resignMonthValue = resignationDate.getMonthValue(); // 퇴직일자의 월 값
+		int resignDay = resignationDate.getDayOfMonth();
+
+//		퇴직전 3개월 기간
+		LocalDate dateAll1 = LocalDate.of(resignYear, resignMonthValue - 3, resignDay);
+		LocalDate dateAll2 = LocalDate.of(resignYear, resignMonthValue, resignDay - 1);
+		long periodAll = ChronoUnit.DAYS.between(dateAll1, dateAll2) + 1;
+
+		int wage = 9860; // 시급
+		int workMinutes = attendanceService.get3MonthWorkMinutes(id, businessNumber, dateAll1, dateAll2); // 3개월간 근무시간
+		long total3MonthSalary = (long) ((float) workMinutes / 60 * wage); // 3개월간 급여 합계 
+		long averageWage = total3MonthSalary / periodAll; // 1일 평균 임금
+		long severance = averageWage * 30 * employee.getEmploymentPeriod() / 365; // 퇴직금
+		
+//		디버깅
+//		System.out.println("시작날짜: " + dateAll1);
+//		System.out.println("끝날짜: " + dateAll2);
+//		System.out.println("기간: " + periodAll);
+//		System.out.println("근무시간 "+workMinutes);
+//		System.out.println("총 급여: "+total3MonthSalary);
+//		System.out.println("1일 평균임금: " + averageWage);
+//		System.out.println("재직일자: "+employee.getEmploymentPeriod()); 
+//		System.out.println("퇴직금: "+severance);
+		
+		model.addAttribute("severance", severance);
+
+		return "severance";
 	}
 
 	// 퇴직금 폼
-	@PostMapping("/severance")
+	@PostMapping("/Severance")
 	public String Severanceform(@RequestParam(value = "partname") String parttimename, Model model) {
 		System.out.println("퇴직금 계산 메서드");
 
@@ -84,7 +124,7 @@ public class SeveranceController {
 
 		// 입사와 퇴사 차이 구하기
 		long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-		// 근속 일수/365일
+		// 근속 일수/365일의 
 		double yearsBetween = daysBetween / 365.0;
 
 		// 퇴직금 계산하기 (임금*3 + 보너스) * 30일 * (근속일수 /365일)

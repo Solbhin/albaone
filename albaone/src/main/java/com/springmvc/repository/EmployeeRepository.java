@@ -15,4 +15,8 @@ public interface EmployeeRepository {
 
 	void resignationEmployee(String id, String businessNumber, LocalDate formattedDate);
 
+	List<Employee> getAllResignee(String businessNumber);
+
+	Employee getOneResignee(String id, String businessNumber);
+
 }

@@ -53,4 +53,15 @@ public class EmployeeController {
 		employeeService.resignationEmployee(id, businessNumber, formattedDate);
 		return null;
 	}
+	
+//	퇴사자 조회
+	@GetMapping("resignee")
+	public String resignee(HttpSession session, Model model) {
+		String businessNumber = (String) session.getAttribute("businessNumber");
+		List<Employee> resigneeList = employeeService.getAllResignee(businessNumber);
+		
+		model.addAttribute("resigneeList", resigneeList);
+		
+		return "resignee";
+	}
 }

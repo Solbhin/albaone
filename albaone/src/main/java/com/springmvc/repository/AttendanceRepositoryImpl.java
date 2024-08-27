@@ -1,5 +1,6 @@
 package com.springmvc.repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -59,5 +60,14 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
 		String SQL = "UPDATE attendance SET check_in_time=?, check_out_time=?, workHours = ? WHERE id = ? AND businessNumber = ? AND check_in_time = ?";
 		template.update(SQL, attendance.getCheckInTime(), attendance.getCheckOutTime(), attendance.getWorkHours(), attendance.getId(), attendance.getBusinessNumber(), checkInTime);
 	}
+
+	@Override
+	public int get3MonthWorkMinutes(String id, String businessNumber, LocalDate dateAll1, LocalDate dateAll2) {
+		String SQL = "SELECT sum(workHours) AS workMinutes "
+				+ "FROM attendance "
+				+ "WHERE id = ? AND businessNumber = ? AND check_in_time >= ? AND check_out_time <= ?";
+		return template.queryForObject(SQL, Integer.class, id, businessNumber, dateAll1, dateAll2);
+	}
+
 	
 }

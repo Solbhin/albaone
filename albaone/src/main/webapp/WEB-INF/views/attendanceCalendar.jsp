@@ -25,6 +25,7 @@
            <a href="employeeList?businessNumber=${sessionScope.businessNumber}" class="btn btn-success">내 직원 조회</a>
            <a href="/albaone/attendanceCalendar" class="btn btn-info">직원 근태 관리</a>
            <a href="/albaone/salaryBusiness" class="btn btn-primary">직원 급여 조회</a>
+           <a href="/albaone/resignee" class="btn btn-warning">퇴직금 조회</a>
        </div>
     </c:if>
 

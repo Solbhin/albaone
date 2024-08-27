@@ -34,4 +34,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeRepository.resignationEmployee(id, businessNumber, formattedDate);
 	}
 
+	@Override
+	public List<Employee> getAllResignee(String businessNumber) {
+		return employeeRepository.getAllResignee(businessNumber);
+	}
+
+	@Override
+	public Employee getOneResignee(String id, String businessNumber) {
+		return employeeRepository.getOneResignee(id, businessNumber);
+	}
+
 }
