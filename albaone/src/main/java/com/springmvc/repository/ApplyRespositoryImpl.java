@@ -26,11 +26,11 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 	public void insertApplication(String id,String resume_number, String resumeTitle, int postNumber, 
 	                              String companyName, String workLocation, int salary, 
 	                              String workHours, String workDays, String jobDescription, 
-	                              String name, String contact, String email, String address) 
+	                              String name, String contact, String email, String address, String MyimgName) 
 	{
-	    String SQL = "INSERT INTO apply(id,resume_number, resumetitle, postNumber, companyName, workLocation, salary, workHours, workDays, jobDescription, name, contact, email, address) " +
-	                 "VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	    template.update(SQL, id,resume_number, resumeTitle, postNumber, companyName, workLocation, salary, workHours, workDays, jobDescription, name, contact, email, address);
+	    String SQL = "INSERT INTO apply(id,resume_number, resumetitle, postNumber, companyName, workLocation, salary, workHours, workDays, jobDescription, name, contact, email, address, MyimgName) " +
+	                 "VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	    template.update(SQL, id,resume_number, resumeTitle, postNumber, companyName, workLocation, salary, workHours, workDays, jobDescription, name, contact, email, address, MyimgName);
 	}
 
 
@@ -74,13 +74,11 @@ public class ApplyRespositoryImpl implements ApplyRespository{
 			String statusEnum = convertToEnumStatus(status);
 			String SQL = "UPDATE Apply SET status = ? WHERE apply_id = ? ";
 			template.update(SQL,statusEnum,apply_id);
-			System.out.println("널임");
 		}
 	    if(postNumber != null) {
 		    String statusEnum = convertToEnumStatus(status);
 		    String SQL = "UPDATE Apply SET status = ? WHERE apply_id = ? AND postNumber = ?";
 		    template.update(SQL, statusEnum, apply_id, postNumber);
-		    System.out.println("널 아님");
 	    }
 	}
 

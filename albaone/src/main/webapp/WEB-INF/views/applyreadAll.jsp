@@ -22,10 +22,11 @@
                     <th>근무 시간</th>
                     <th>근무 일수</th>
                     <th>직무 설명</th>
-                    <th>이력서 이름</th>
+                    <th>이름</th>
                     <th>연락처</th>
                     <th>이메일</th>
                     <th>주소</th>
+                    <th>사진</th>
                     <th>지원 상태</th>
                     <th>지원 취소</th>
                 </tr>
@@ -44,6 +45,7 @@
                         <td>${application.contact}</td>
                         <td>${application.email}</td>
                         <td>${application.address}</td>
+                       	<td><img src="${pageContext.request.contextPath}/resources/images/${application.myimgName}" alt="사진" width="100"></td>
 						<td>
 						    <!-- 지원 상태를 표시 -->
 						    <c:choose>

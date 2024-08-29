@@ -6,7 +6,7 @@ import com.springmvc.domain.Apply;
 
 public interface ApplyService {
 
-	void applyForJob(String id,String resumenumber, String resumeTitle, int postNumber, String companyName, String workLocation, int salary, String workHours,String workDays, String jobDescription,String name, String contact, String email, String address);
+	void applyForJob(String id,String resumenumber, String resumeTitle, int postNumber, String companyName, String workLocation, int salary, String workHours,String workDays, String jobDescription,String name, String contact, String email, String address, String MyimgName);
 
 	List<Apply> getApplicaionts(String userId);
 

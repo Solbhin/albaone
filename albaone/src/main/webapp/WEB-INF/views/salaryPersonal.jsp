@@ -20,12 +20,15 @@
 	        	<input type="month" name="yearMonth" value="${yearMonth}">
 	        	<input type="submit" class="btn btn-secondary" value="선택">
 	        </form>
+	        <div class="text-right mt-3">
+	        	<a href="severancePersonal" class="btn btn-primary">퇴직금 조회</a>
+	        </div>
         </div>
         
 		<div class="card mt-4" id="salaryCard">
 			<h3>${yearMonth.year}년 ${yearMonth.monthValue}월</h3>
 			<p>총 근무시간: ${workHours}시간 ${workMinutes}분</p>
-			<p>시급: ${minimumWage} 원</p>
+			<p>시급: ${wage} 원</p>
 			<p>월급: ${salary}원</p>
 			<p>주휴수당: ${benefit} 원</p>
 			<p class="font-weight-bold">합계: ${totalSalary}원</p>

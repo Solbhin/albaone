@@ -16,6 +16,7 @@ CREATE TABLE if not exists Apply(
 	address VARCHAR(100),
     postNumber int,
     status ENUM('지원 중', '수락', '거절', '공고 없음') DEFAULT '지원 중'
+    MyimgName VARCHAR(20)
 );
 select * from Apply;
 drop table Apply;

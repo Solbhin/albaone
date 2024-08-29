@@ -19,4 +19,6 @@ public interface EmployeeService {
 
 	Employee getOneResignee(String id, String businessNumber);
 
+	List<Employee> getResignationHistory(String id);
+
 }

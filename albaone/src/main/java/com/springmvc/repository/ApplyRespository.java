@@ -12,7 +12,7 @@ public interface ApplyRespository {
 	void insertApplication(String id,String resume_number, String resumeTitle, int postNumber, 
             String companyName, String workLocation, int salary, 
             String workHours, String workDays, String jobDescription, 
-            String name, String contact, String email, String address);
+            String name, String contact, String email, String address, String MyimgName);
 
 	List<Apply> getApplicaionts(String userId);
 

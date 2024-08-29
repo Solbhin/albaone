@@ -37,6 +37,18 @@ public class Employee {
 		this.employmentPeriod = ChronoUnit.DAYS.between(formattedHire, formattedResign);
 	}
 	
+	public Employee(String id, String name, String hireDate, String resignationDate, String businessNumber){
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate formattedHire = LocalDate.parse(hireDate, formatter);
+		LocalDate formattedResign = LocalDate.parse(resignationDate, formatter);
+		this.id = id;
+		this.name = name;
+		this.hireDate = formattedHire;
+		this.resignationDate = formattedResign;
+		this.employmentPeriod = ChronoUnit.DAYS.between(formattedHire, formattedResign);
+		this.businessNumber = businessNumber;
+	}
+	
 	public String getId() {
 		return id;
 	}

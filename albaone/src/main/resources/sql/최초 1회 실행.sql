@@ -108,19 +108,11 @@ create table employmentcontract
     createdate date-- 작성 날짜
 );
 
--- 퇴직금 조회
-create table Severance
-(
-	num int primary key auto_increment, -- 단순 숫자(의미 없음 - 기본키용)
-	parttimename varchar(5), -- 알바생
-    company varchar(20), -- 상호명
-    money bigint, -- 퇴직금
-    companyNum char(10) -- 사업자 등록번호
-);
-
-CREATE TABLE empolyee(
+CREATE TABLE employee(
 	businessNumber varchar(20),
-    id varchar(15)
+    id varchar(15),
+    hireDate date,
+    resignationDate date
 );
 
 -- 등급 지정

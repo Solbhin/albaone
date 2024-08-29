@@ -23,4 +23,17 @@ SELECT e.id, u.name, e.hireDate, e.resignationDate
     WHERE e.businessNumber = "1" AND e.resignationDate is NOT NULL;
     
 update employee set hireDate = "2024-05-08" where hireDate = "2023-05-08";
-SELECT * FROM employee WHERE id = "q" AND businessNumber = "1"; 
+SELECT e.id, u.name, e.hireDate, e.resignationDate
+	FROM employee e
+    INNER JOIN user u
+    ON e.id = u.id
+    WHERE e.id = "q" AND e.businessNumber = "1" AND e.resignationDate is NOT NULL;
+SELECT e.businessNumber, e.id, u.name, e.hireDate, e.resignationDate
+	FROM employee e
+    INNER JOIN user u
+    ON e.id = u.id
+    WHERE e.id = "w" AND e.resignationDate IS NOT NULL;
+    
+insert into employee values("2", "q", "2023-01-01", "2024-08-28");
+
+delete from employee where id = "1";

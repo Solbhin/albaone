@@ -19,6 +19,8 @@ import com.springmvc.service.EmployeeServiceImpl;
 public class EmployeeController {
 	@Autowired
 	private EmployeeServiceImpl employeeService;
+	
+	@Autowired
 
 //	내 사업장 알바생 조회
 	@GetMapping("employeeList")
@@ -51,6 +53,7 @@ public class EmployeeController {
 		System.out.println("퇴사일자: "+formattedDate);
 		
 		employeeService.resignationEmployee(id, businessNumber, formattedDate);
+		
 		return null;
 	}
 	
