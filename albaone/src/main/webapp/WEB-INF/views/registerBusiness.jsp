@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">이름</label>
-                        <input type="text" class="form-control" name="name" value="${user.name}" placeholder="이름" required>
+                        <input type="text" class="form-control" name="name" value="${user.name}" placeholder="이름" required max="5">
                     </div>
                     <div class="form-group">
                         <label for="email">이메일</label>
@@ -50,10 +50,19 @@
 					<div class="form-group">
                         <label for="phone">휴대폰</label>
                         <input type="text" class="form-control" name="phone" value="${user.phone}" placeholder="휴대폰" required>
+                        <button type="button" class="btn btn-secondary mt-2 sendVerificationCode" onclick="sendVerificationCode()">인증 요청</button>
                     </div>
+						<div class="form-group" id="verificationSection" style="display:none;">
+					    <label for="verificationCode">인증 코드</label><span class="certificationTime">05:00</span>
+					    <input type="text" class="form-control" id="verificationCode" placeholder="인증 코드를 입력하세요" required>
+					    <button type="button" class="btn btn-primary mt-2" onclick="verifyCode()">인증 확인</button>
+					    <!-- 인증 메시지를 표시할 div -->
+					    <div id="verificationMessage" style="margin-top: 10px;"></div> 
+					</div>
 					<div class="form-group">
                         <label for="businessNumber">사업자 등록번호</label>
-                        <input type="text" class="form-control" name="businessNumber" value="${user.businessNumber}" placeholder="사업자 등록번호" required>
+                        <input type="text" class="form-control" name="businessNumber" id="businessNumber" value="${user.businessNumber}" placeholder="사업자 등록번호(-빼고 입력)" required maxlength="10">
+                        <small id="businessNumberMessage" class="text-danger"></small>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mt-3" id="submitButton" disabled>회원가입</button>
                 </form>
@@ -105,69 +114,8 @@
         
         
 	</script>
-	<!-- 실제 사업자 번호 찾기 귀찮아서 임시로 주석처리 -->
-	<!-- <script type="text/javascript">
-	var isBusinessNumberValid = false;
-
-    function checkBusinessNumber() {
-        var businessNumber = $('#businessNumber').val();
-        var businessNumberMessage = $('#businessNumberMessage');
-
-        // 사업자 등록번호 형식 검사 (10자리 숫자)
-        var businessNumberRegex = /^\d{10}$/;
-        if (!businessNumberRegex.test(businessNumber)) {
-            businessNumberMessage.text("올바른 사업자 등록번호를 입력하세요.");
-            businessNumberMessage.removeClass("text-success").addClass("text-danger");
-            isBusinessNumberValid = false;
-            return;
-        }
-
-        var data = { "b_no": [businessNumber] };
-
-        $.ajax({
-            url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=hJ4D%2F0pmhHozXC0XRoM5iOeccDvtvD0XdcRCaolcp5OGcxdpqyxqJj3wJuKkEQnBke%2F0NqLfl9W8CDCVvb7vOA%3D%3D",
-            type: "POST",
-            data: JSON.stringify(data),
-            dataType: "json",
-            contentType: "application/json",
-            accept: "application/json",
-            success: function(result) {
-                if (result.status_code === "OK") {
-                    if (result.data[0].tax_type !== "") {
-                        businessNumberMessage.text("유효한 사업자 등록번호입니다.");
-                        businessNumberMessage.removeClass("text-danger").addClass("text-success");
-                        isBusinessNumberValid = true;
-                    } else {
-                        businessNumberMessage.text("유효하지 않은 사업자 등록번호입니다.");
-                        businessNumberMessage.removeClass("text-success").addClass("text-danger");
-                        isBusinessNumberValid = false;
-                    }
-                } else {
-                    businessNumberMessage.text("사업자 등록번호 확인 중 오류가 발생했습니다.");
-                    businessNumberMessage.removeClass("text-success").addClass("text-danger");
-                    isBusinessNumberValid = false;
-                }
-            },
-            error: function(result) {
-                businessNumberMessage.text("서버와 통신 중 오류가 발생했습니다.");
-                businessNumberMessage.removeClass("text-success").addClass("text-danger");
-                isBusinessNumberValid = false;
-            }
-        });
-    }
-
-    $(document).ready(function() {
-        $('form').on('submit', function(e) {
-            if (!isBusinessNumberValid) {
-                e.preventDefault();
-                alert("유효한 사업자 등록번호를 입력하세요.");
-            }
-        });
-
-        $('#businessNumber').on('blur', function() {
-            checkBusinessNumber();
-        });
-    });
-	</script> -->
+	<!-- 본인 인증 테스트시 위에 자바스크립트를 주석처리하고 아래 링크를 주석 해제하고 사용 -->
+	<!-- 유료 api, 테스트시 유의 - key를 깃에 올리지 말것 -->
+	<!-- <script type="text/javascript" src="/albaone/resources/js/registerBusiness.js"></script> -->
 </body>
 </html>

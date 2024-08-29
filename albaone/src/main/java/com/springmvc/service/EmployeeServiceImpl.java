@@ -1,5 +1,6 @@
 package com.springmvc.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public void addEmployee(String id, String businessNumber) {
-		employeeRepository.addEmployee(id, businessNumber);
+	public void addEmployee(String businessNumber, String employeeId, LocalDate date) {
+		employeeRepository.addEmployee(employeeId, businessNumber, date);
+	}
+
+	@Override
+	public void resignationEmployee(String id, String businessNumber, LocalDate formattedDate) {
+		employeeRepository.resignationEmployee(id, businessNumber, formattedDate);
+	}
+
+	@Override
+	public List<Employee> getAllResignee(String businessNumber) {
+		return employeeRepository.getAllResignee(businessNumber);
+	}
+
+	@Override
+	public Employee getOneResignee(String id, String businessNumber) {
+		return employeeRepository.getOneResignee(id, businessNumber);
+	}
+
+	@Override
+	public List<Employee> getResignationHistory(String id) {
+		return employeeRepository.getResignationHistory(id);
 	}
 
 }

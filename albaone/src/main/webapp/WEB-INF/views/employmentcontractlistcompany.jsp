@@ -34,7 +34,7 @@
             </thead>
             <tbody>
                 <c:forEach var="contract" items="${contract}">
-                    <tr>
+                    <tr id="${contract.num}">
                         <td>${contract.parttimename}</td>
                         <td>${contract.parttimePhone}</td>
                         <td>${contract.period_start}</td>
@@ -51,10 +51,12 @@
                         <td><img src="resources/images/${contract.sinefilenameowner}" alt="사장 사인" width="50"></td>
                         <td><img src="resources/images/${contract.sinefilenameparttime}" alt="알바생 사인" width="50"></td>
                     </tr>
-                    <tr>
-                        <td colspan="14" style="text-align: left;"> <!-- 모든 열을 합쳐서 버튼을 추가할 공간을 만듭니다 -->
+                    <!-- 버튼 행 -->
+                    <tr id="${contract.num}-details">
+                    	<!-- 모든 열을 합쳐서 버튼을 추가할 공간을 생성 -->
+                        <td colspan="14" style="text-align: left;"> 
                             <button onclick="window.location.href='downloadcontractexam?num=${contract.num}'">다운로드</button>
-                            <button class="delete-button" data-num="${contract.num}">삭제</button>
+                            <button class="delete-button" id="${contract.num}">삭제</button>
                         </td>
                     </tr>
                 </c:forEach>
@@ -65,6 +67,8 @@
         <p>등록된 근로 계약서가 없습니다.</p>
     </c:if>
 
-    <script type="text/javascript" src="/albaone/resources/js/employmentcontractlistcompany.js"></script>
+    <script type="text/javascript" src="/albaone/resources/js/employmentcontractlistcompany.js">
+    </script>
+
 </body>
 </html>

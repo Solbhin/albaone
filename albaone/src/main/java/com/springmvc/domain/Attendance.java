@@ -12,7 +12,7 @@ public class Attendance {
 	private String name; 				// 알바생 식별
 	private LocalDateTime checkInTime; 	// 출근시간
 	private LocalDateTime checkOutTime; // 퇴근시간
-	private long workHours; 				// 근무 시간
+	private long workHours; 			// 근무 시간
 	
 	public String getFormattedCheckInTime() {
 		DateTimeFormatter formmater = DateTimeFormatter.ofPattern("HH:mm");

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,9 +45,17 @@
                         <input type="email" class="form-control" name="email" placeholder="이메일" required>
                     </div>
 					<div class="form-group">
-                        <label for="phone">휴대폰</label>
-                        <input type="text" class="form-control" name="phone" placeholder="휴대폰" required>
-                    </div>
+					    <label for="phone">휴대폰</label>
+					    <input type="text" class="form-control" name="phone" placeholder="휴대폰" required>
+					    <button type="button" class="btn btn-secondary mt-2 sendVerificationCode" onclick="sendVerificationCode()">인증 요청</button>
+					</div>
+					<div class="form-group" id="verificationSection" style="display:none;">
+					    <label for="verificationCode">인증 코드</label><span class="certificationTime">05:00</span>
+					    <input type="text" class="form-control" id="verificationCode" placeholder="인증 코드를 입력하세요" required>
+					    <button type="button" class="btn btn-primary mt-2" onclick="verifyCode()">인증 확인</button>
+					    <!-- 인증 메시지를 표시할 div -->
+					    <div id="verificationMessage" style="margin-top: 10px;"></div> 
+					</div>
                     <button type="submit" class="btn btn-primary btn-block mt-3" id="submitButton" disabled>회원가입</button>
                 </form>
                 <div class="text-center mt-3">
@@ -58,7 +65,7 @@
         </div>
     </div>
     
-    <script>
+<!-- <script>
    	var idck = 0;
    	const submitButton = document.getElementById('submitButton');
     function checkId() {
@@ -96,6 +103,10 @@
         }
         return true; // 제출 요청 허용
     }
-</script>
+</script> -->
+
+본인 인증 테스트시 위에 자바스크립트를 주석처리하고 아래 링크를 주석 해제하고 사용
+<!-- 유료 api, 테스트시 유의 - key를 깃에 올리지 말것 -->
+<script type="text/javascript" src="/albaone/resources/js/registerPersonal.js"></script>
 </body>
 </html>

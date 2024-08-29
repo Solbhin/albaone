@@ -24,7 +24,7 @@
                 <h5>${jobPost.companyName}의 상세정보</h5>
                 <div>
                 	<c:if test="${jobPost.id == sessionScope.id}">
-	                    <button class="btn btn-danger btn-sm" onclick="if(confirm('정말 삭제하시겠습니까?')) { location.href='deleteJobPost?postNumber=${jobPost.postNumber}'; }">삭제</button>
+	                    <button class="btn btn-danger btn-sm" onclick="if(confirm('정말 삭제하시겠습니까?')) { location.href='deleteJobPost?postNumber=${jobPost.postNumber}&status=공고 없음'; }">삭제</button>
 	                    <button class="btn btn-primary btn-sm" onclick="location.href='editJobPost?postNumber=${jobPost.postNumber}'">수정</button>
 					</c:if>
                 </div>
@@ -42,11 +42,13 @@
              <c:if test="${empty sessionScope.businessNumber}">
             <div class="card-footer text-center">
             	<a href="applyresumeList?postNumber=${jobPost.postNumber}">지원하기</a>
+            	<a href="reviewList?companyName=${jobPost.companyName}">리뷰보기</a>
             </div>
             </c:if>
             <c:if test="${not empty sessionScope.businessNumber}">
             <div class="card-footer text-center">
             	<a href="businesApplylist?postNumber=${jobPost.postNumber}">지원 내역 조회</a>
+            	<a href="reviewList?companyName=${jobPost.companyName}">리뷰보기</a>
             </div>
             </c:if>
         </div>
@@ -87,6 +89,7 @@
 		};
 		
 		geocoder.addressSearch('${jobPost.workLocation}', callback);
+		
 	</script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>근로 계약서 목록</h1>
-    <c:if test="${not empty contracts}">
+    <c:if test="${not empty contract}">
         <table border="1">
             <thead>
                 <tr>
@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="contract" items="${contracts}">
+                <c:forEach var="contract" items="${contract}">
                     <tr>
                         <td>${contract.ownername}</td>
                         <td>${contract.parttimename}</td>
@@ -48,7 +48,7 @@
             </tbody>
         </table>
     </c:if>
-    <c:if test="${empty contracts}">
+    <c:if test="${empty contract}">
         <p>등록된 근로 계약서가 없습니다.</p>
     </c:if>
 </body>

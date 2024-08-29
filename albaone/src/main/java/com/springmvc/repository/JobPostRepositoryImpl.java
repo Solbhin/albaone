@@ -18,6 +18,8 @@ public class JobPostRepositoryImpl implements JobPostRepository {
 	public void setJdbcTemplate(DataSource dataSource) {
 		this.template = new JdbcTemplate(dataSource);
 	}
+	@Autowired
+	private ApplyRespositoryImpl applyRespository;
 
 	@Override
 	public void jobPosting(JobPost jobPost, String id) {
@@ -79,6 +81,11 @@ public class JobPostRepositoryImpl implements JobPostRepository {
 	public void deletePost(int postNumber) {
 		String SQL = "DELETE FROM jobpost WHERE postNumber = ?";
 		template.update(SQL, postNumber);
+		
+		List<Integer> applyIds = applyRespository.getApplyIdsByPostNumber(postNumber);
+		for ( int applyId : applyIds) {
+			applyRespository.updateApplyStatus(applyId, "공고 없음", null);
+		}
 	}
 
 	@Override

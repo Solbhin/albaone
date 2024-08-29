@@ -1,5 +1,7 @@
 package com.springmvc.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Apply {
 	private String id;
 	private String resume_number;
@@ -17,7 +19,8 @@ public class Apply {
 	private String address;
 	private int postNumber;
 	private String status;
-	
+	private String MyimgName;
+	private MultipartFile myimg;		// 증명사진
 	
 	public String getId() {
 		return id;
@@ -115,5 +118,18 @@ public class Apply {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getMyimgName() {
+		return MyimgName;
+	}
+	public void setMyimgName(String myimgName) {
+		MyimgName = myimgName;
+	}
+	public MultipartFile getMyimg() {
+		return myimg;
+	}
+	public void setMyimg(MultipartFile myimg) {
+		this.myimg = myimg;
+	}
+	
 	
 }

@@ -1,12 +1,14 @@
 package com.springmvc.service;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import com.springmvc.domain.Severance;
 
-public interface SeveranceService
-{
-	void create(Severance Severance);
-	List<Severance> findAllBySeverance_alba(String parttimename);
-	List<Severance> findAllBySeverance_comp(String company);
+public interface SeveranceService {
+
+	void createSeverance(String id, String businessNumber, LocalDate hireDate, LocalDate formattedDate, long periodAll,
+			String total, String average, String severance);
+
+	Severance getSeverance(String id, String businessNumber);
+
 }

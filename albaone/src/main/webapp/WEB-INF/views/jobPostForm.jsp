@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page import="java.time.LocalDateTime"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,15 +11,16 @@
     <title>직업 공고 등록</title>
 </head>
 <body>
-	<%@include file="menu.jsp" %>
-	
-   	<div class="mt-3 text-center">
+    <%@include file="menu.jsp" %>
+    
+    <div class="mt-4 text-center">
         <a href="./jobposting" class="btn btn-success">공고 등록</a>
         <a href="./myJobPost?page=1" class="btn btn-info">내가 쓴 글 조회</a>
         <a href="./jobposts?page=1" class="btn btn-primary">전체 게시글 조회</a>
     </div>
     <div class="container mt-5">
         <h2 class="text-center">직업 공고 등록</h2>
+        <div id="map" style="width:100%;height:400px;"></div>
         <form action="./jobposting" method="post" modelAttribute="jobPost" id="jobPostingForm">
             <div class="form-group">
                 <label for="companyName">상호명</label>
@@ -26,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label for="workLocation">근무지 주소</label>
-                <input type="text" class="form-control" name="workLocation" placeholder="근무지 주소" required>
+                <input type="text" class="form-control" name="workLocation" id="workLocation" placeholder="근무지 주소" required>
                 <div id="addressError" class="text-danger" style="display:none;">유효한 주소를 입력하세요.</div>
             </div>
             <div class="form-group">
@@ -57,7 +59,57 @@
         </form>
     </div>
 
-<!-- 주소 유효성 검사 - 치는게 빡세서 일단 주석처리함 - 읍이나 리 또는 도로명까지 쳐야 검색됨-->
-<!-- <script type="text/javascript" src="/albaone/resources/js/jobPostForm.js"></script> -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b93f1c67d88fac7ef8329a28850e92c&libraries=services,clusterer,drawing"></script>
+    <script type="text/javascript">
+        var container = document.getElementById('map');
+        var options =
+        {
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 초기 좌표 설정
+            level: 3
+        };
+        var map = new kakao.maps.Map(container, options);
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        // 주소 유효성 검사 및 지도에 표시, input 이벤트로 진행
+        $('#workLocation').on('input', function() { 
+            var address = $(this).val();
+            // 주소가 비어있지 않은 경우에만 진행
+            if (address)
+            {
+                geocoder.addressSearch(address, function(result, status)
+                {
+                    if (status === kakao.maps.services.Status.OK)
+                    {
+                        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                        
+                        // 지도에 마커를 표시
+                        var marker = new kakao.maps.Marker({
+                            position: coords
+                        });
+                        marker.setMap(map);
+                        
+                        var infowindow = new kakao.maps.InfoWindow({
+                            content: '<div style="padding:10px; text-align:center; font-size:14px; line-height:1.5; display: flex; justify-content: center; align-items: center;">' + address + '</div>'
+                        });
+                        infowindow.open(map, marker);
+                        map.setCenter(coords);
+                        
+                        // 오류 메시지 숨기기
+                        $('#addressError').hide();
+                    }
+                    else
+                    {
+                        // 주소가 유효하지 않은 경우
+                        $('#addressError').show();
+                        map.setCenter(new kakao.maps.LatLng(33.450701, 126.570667)); // 기본 위치로 이동
+                    }
+                });
+            }
+            else
+            {
+                $('#addressError').hide(); // 주소가 비어있으면 오류 메시지 숨기기
+            }
+        });
+    </script>
 </body>
 </html>

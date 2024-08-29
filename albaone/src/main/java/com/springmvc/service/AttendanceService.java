@@ -1,5 +1,6 @@
 package com.springmvc.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface AttendanceService {
 	void addAttendance(Attendance attendance);
 
 	void editAttendance(Attendance attendance, LocalDateTime checkInTime);
+
+	int get3MonthWorkMinutes(String id, String businessNumber, LocalDate dateAll1, LocalDate dateAll2);
 }

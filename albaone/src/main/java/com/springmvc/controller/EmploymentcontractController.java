@@ -1,12 +1,18 @@
 package com.springmvc.controller;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,19 +36,35 @@ public class EmploymentcontractController {
 
 	@Autowired
 	private UserServiceImpl UserServiceImpl;
+	
+	@Autowired
+	private EmployeeServiceImpl employeeService;
 
 	// get 요청 발생시 계약서 create 폼 제공
 	@GetMapping("/employmentcontract")
-	public String employmentcontractform(@RequestParam("apply_id") int apply_id, @RequestParam("status") String status,
+	public String employmentcontractform
+	(
+			@RequestParam("apply_id") int apply_id, @RequestParam("status") String status,
 			@RequestParam("postNumber") int postNumber, @RequestParam("parttimename") String parttimename,
 			@RequestParam("parttimephone") String parttimephone,
-			@RequestParam("parttimeaddress") String parttimeaddress, Model model, HttpSession session) {
+			@RequestParam("parttimeaddress") String parttimeaddress,
+			@RequestParam("id") String employeeId,
+			@RequestParam("parttimeid") String parttimeid,
+			Model model,
+			HttpSession session
+	)
+	{
+
 		String id = (String) session.getAttribute("id");
+		System.out.println("직원 ID: "+employeeId);
+		
 		model.addAttribute("apply_id", apply_id);
 		model.addAttribute("status", status);
 		model.addAttribute("postNumber", postNumber);
 		model.addAttribute("user", UserServiceImpl.findUserById(id));
 		model.addAttribute("BusinessNumber", UserServiceImpl.findBusinessNumber(id));
+		model.addAttribute("employeeId", employeeId);
+		model.addAttribute("parttimeid",parttimeid); //알바생 id
 		if (parttimename != null) {
 			model.addAttribute("parttimename", parttimename);
 		}
@@ -64,14 +86,21 @@ public class EmploymentcontractController {
 			@RequestParam(value = "insurance", required = false) List<String> insurance,
 			@RequestParam("workinghours_start") String workingHoursStart,
 			@RequestParam("workinghours_end") String workingHoursEnd,
-			@RequestParam(value = "workday", required = false) String workday, BindingResult result,
-			HttpServletRequest req) {
+			@RequestParam(value = "workday", required = false) String workday,
+			@RequestParam("employeeId") String employeeId, BindingResult result,
+			HttpServletRequest req, HttpSession session) {
 		if (result.hasErrors()) {
 			return "resume";
 		}
-
+		
+		String businessNumber = employmentcontract.getBusinessNumber();
 		String root = req.getServletContext().getRealPath("/resources/images");// 저장 경로
-
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String day = employmentcontract.getPeriod_start();
+		LocalDate date = LocalDate.parse(day, formatter);
+		
+		System.out.println("Post 직원 ID: "+employeeId);
+		
 		// sineName - 파일명, 파라미터
 		MultipartFile sineNameowner = employmentcontract.getSinefileowner();// 멀티 파츠로 파일 생성
 		MultipartFile sineNameparttime = employmentcontract.getSinefileparttime();
@@ -120,10 +149,11 @@ public class EmploymentcontractController {
 			String workdayString = String.join(", ", workday);
 			employmentcontract.setWorkday(workdayString);
 		}
-
+		
 		employmentcontractService.create(employmentcontract);
 		applyService.updateApplyStatus(apply_id, status, postNumber);
-
+		employeeService.addEmployee(businessNumber, employeeId, date);
+		
 		return "redirect:/businesApplylist?postNumber=" + postNumber;
 	}
 
@@ -146,9 +176,15 @@ public class EmploymentcontractController {
 	// 계약서 삭제
 	@GetMapping("/empcomdel")
 	@ResponseBody
-	public ResponseEntity<String> delete(@RequestParam int num, HttpSession session) {
-		employmentcontractService.deleteContractsByPartTimeName(num);
-		return ResponseEntity.ok("삭제되었습니다."); // 성공 메시지 반환
+	public ResponseEntity<String> delete(@RequestParam int num, HttpSession session)
+	{
+	    employmentcontractService.deleteContractsByPartTimeName(num);
+
+	    // 헤더 설정
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(new MediaType("text", "plain", StandardCharsets.UTF_8));
+
+	    return new ResponseEntity<>("삭제되었습니다.", headers, HttpStatus.OK); // 성공 메시지 반환
 	}
 
 	// 다운로드 샘플 보여주기
@@ -156,5 +192,27 @@ public class EmploymentcontractController {
 	public String downloadcontractexam(Model model, @RequestParam("num") int num) {
 		model.addAttribute("contract", employmentcontractService.findByNum(num));
 		return "downloadcontractexam";
+	}
+	
+	//알바생 계약서 조회 - 사장 조회와 동일, 사업자번호로 조회하냐, 아이디로 조회하냐
+	@GetMapping("contractsParttime")
+	public String contractsParttime(HttpSession session, Model model)
+	{
+		String id = (String) session.getAttribute("id");
+		System.out.println(id);
+		List<Employmentcontract> contracts = employmentcontractService.findAllByParttimeid(id);
+		model.addAttribute("id",id);
+		if (!contracts.isEmpty())
+		{
+			System.out.println("실행됨");
+			model.addAttribute("contract", contracts);
+		}
+		else
+		{
+			System.out.println("실행안됨");
+			model.addAttribute("error", "해당 알바생명의 계약서가 존재하지 않습니다.");
+		}
+		
+		return "employmentcontractlist";
 	}
 }

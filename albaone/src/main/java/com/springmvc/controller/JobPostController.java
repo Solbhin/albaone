@@ -16,18 +16,17 @@ import com.springmvc.domain.JobPost;
 import com.springmvc.service.JobPostServiceImpl;
 
 @Controller
-public class JobPostController
-{
+public class JobPostController {
 	@Autowired
 	private JobPostServiceImpl jobPostService;
 
-	//채용 공고글 양식 제공
+//	채용 공고글 양식 제공
 	@GetMapping("/jobposting")
 	public String jobPostForm() {
 		return "jobPostForm";
 	}
 
-	//채용 공고 등록
+//	채용 공고 등록
 	@PostMapping("/jobposting")
 	public String jobPosting(@ModelAttribute("jobPost") JobPost jobPost, HttpSession session) {
 		String id = (String) session.getAttribute("id");
@@ -35,7 +34,7 @@ public class JobPostController
 		return "redirect:/jobposts?page=1"; // 전체 조회 페이지
 	}
 
-	//채용 공고 조회
+//	채용 공고 조회
 	@GetMapping("/jobposts")
 	public String jobPostList(@RequestParam int page, Model model) {
 		List<JobPost> jobPosts = jobPostService.getAllPosts(page);
@@ -46,7 +45,7 @@ public class JobPostController
 		return "jobPostList";
 	}
 
-	//상세보기
+//	상세보기
 	@GetMapping("/jobpost")
 	public String jobPost(@RequestParam int postNumber, Model model) {
 		JobPost jobPost = jobPostService.getPostDetail(postNumber);
@@ -54,7 +53,7 @@ public class JobPostController
 		return "jobPost";
 	}
 
-	//내가 쓴 글 보기
+//	내가 쓴 글 보기
 	@GetMapping("/myJobPost")
 	public String myJobPost(@RequestParam int page, HttpSession session, Model model) {
 		String id = (String) session.getAttribute("id");
@@ -66,13 +65,13 @@ public class JobPostController
 		return "jobPostList";
 	}
 
-	//게시글 수정
+//	게시글 수정
 	@GetMapping("/editjobpost")
 	public String editJobPostForm(@RequestParam int postNumber) {
 		return "redirect:/jobposts?page=1";
 	}
 
-	//게시글 수정 폼
+//	게시글 수정 폼
 	@GetMapping("/editJobPost")
 	public String jobPostEditForm(@RequestParam int postNumber, Model model) {
 		JobPost jobPost = jobPostService.getPostDetail(postNumber);
@@ -87,7 +86,7 @@ public class JobPostController
 		return "redirect:/jobposts?page=1";
 	}
 
-	//게시글 삭제
+//	게시글 삭제
 	@GetMapping("/deleteJobPost")
 	public String deleteJobPost(@RequestParam int postNumber) {
 		jobPostService.deletePost(postNumber);

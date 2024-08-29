@@ -27,6 +27,7 @@ public class ApplyRowMapper implements RowMapper<Apply> {
         apply.setEmail(rs.getString("email"));
         apply.setAddress(rs.getString("address"));
         apply.setStatus(rs.getString("status"));
+        apply.setMyimgName(rs.getString("myimgName"));
         return apply;
     }
 }

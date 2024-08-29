@@ -1,45 +1,48 @@
 package com.springmvc.domain;
 
-public class Severance
-{
-	private String parttimename; //알바
-	private String company; //업체
-	private long money; //퇴직금
-	private String companyNum; //사업자 등록번호
-	
-	public Severance(){}
+public class Severance {
+	private String name;
+	private String total3MonthSalary;
+	private String averageWage;
+	private String severance;
 
-	public String getParttimename() {
-		return parttimename;
+	public Severance(String string, String string2, String string3, String string4) {
+		this.name = string;
+		this.total3MonthSalary = string2;
+		this.averageWage = string3;
+		this.severance = string4;
 	}
 
-	public void setParttimename(String parttimename) {
-		this.parttimename = parttimename;
+	public String getName() {
+		return name;
 	}
 
-	public String getCompany() {
-		return company;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
+	public String getTotal3MonthSalary() {
+		return total3MonthSalary;
 	}
 
-	public long getMoney() {
-		return money;
+	public void setTotal3MonthSalary(String total3MonthSalary) {
+		this.total3MonthSalary = total3MonthSalary;
 	}
 
-	public void setMoney(long money) {
-		this.money = money;
+	public String getAverageWage() {
+		return averageWage;
 	}
 
-	public String getCompanyNum() {
-		return companyNum;
+	public void setAverageWage(String averageWage) {
+		this.averageWage = averageWage;
 	}
 
-	public void setCompanyNum(String companyNum) {
-		this.companyNum = companyNum;
+	public String getSeverance() {
+		return severance;
 	}
-	
-	
+
+	public void setSeverance(String severance) {
+		this.severance = severance;
+	}
+
 }

@@ -15,8 +15,8 @@ public class ApplyServiceImpl implements ApplyService{
 	private ApplyRespositoryImpl applyRepository;
 
 	@Override
-	public void applyForJob(String id,String resume_number, String resumeTitle, int postNumber, String companyName, String workLocation, int salary, String workHours,String workDays, String jobDescription,String name, String contact, String email, String address) {
-		applyRepository.insertApplication(id,resume_number, resumeTitle,  postNumber,  companyName,  workLocation,  salary,  workHours, workDays,  jobDescription, name,  contact,  email,  address);
+	public void applyForJob(String id,String resume_number, String resumeTitle, int postNumber, String companyName, String workLocation, int salary, String workHours,String workDays, String jobDescription,String name, String contact, String email, String address, String MyimgName) {
+		applyRepository.insertApplication(id,resume_number, resumeTitle,  postNumber,  companyName,  workLocation,  salary,  workHours, workDays,  jobDescription, name,  contact,  email,  address , MyimgName);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class ApplyServiceImpl implements ApplyService{
 	}
 
 	@Override
-	public void updateApplyStatus(int apply_id, String status, int postNumber) {
+	public void updateApplyStatus(int apply_id, String status, Integer postNumber) {
 		applyRepository.updateApplyStatus(apply_id, status, postNumber);
 	}
 

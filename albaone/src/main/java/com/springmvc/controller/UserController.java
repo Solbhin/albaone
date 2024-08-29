@@ -20,6 +20,9 @@ import com.springmvc.domain.User;
 import com.springmvc.service.UserServiceImpl;
 import com.springmvc.service.AttendanceServiceImpl;
 import com.springmvc.service.AlbarateServiceImpl;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Random;
 
 @Controller
 public class UserController {
@@ -31,7 +34,7 @@ public class UserController {
 
 	@Autowired
 	private AlbarateServiceImpl AlbarateServiceImpl;
-
+	
 	// 로그인 양식
 	@GetMapping("/login")
 	public String loginForm() {
@@ -104,7 +107,7 @@ public class UserController {
 	// 회원 가입 처리
 	@PostMapping("/register")
 	public String registerUser(@ModelAttribute("user") User user, BindingResult result) {
-		AlbarateServiceImpl.insert(user.getId());
+		AlbarateServiceImpl.insert(user.getName());
 		userService.setNewUser(user);
 		return "redirect:/login";
 	}

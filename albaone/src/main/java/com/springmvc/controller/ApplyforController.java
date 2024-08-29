@@ -60,7 +60,9 @@ public class ApplyforController
                               HttpSession session) {
         JobPost jobPost = jobPostService.getPostDetail(postNumber);
      
+        System.out.println("리썸넘버: "+number);
         Resume resumes=resumeService.getResumeNumber(number);
+        System.out.println("확인용: "+resumes);
         String id=(String) session.getAttribute("id");
         
         applyService.applyForJob(id,resume_number, resumeTitle, postNumber, 
@@ -68,7 +70,7 @@ public class ApplyforController
                                  jobPost.getSalary(), jobPost.getWorkHours(), 
                                  jobPost.getWorkDays(), jobPost.getJobDescription(),
                                  resumes.getName() , resumes.getContact(), 
-                                 resumes.getEmail() ,resumes.getAddress());
+                                 resumes.getEmail() ,resumes.getAddress(),resumes.getMyimgName());
         return "redirect:/myApplications";
         
     }
@@ -119,15 +121,11 @@ public class ApplyforController
 		model.addAttribute("status",status);
 		model.addAttribute("postNumber",postNumber);
 
-	    System.out.println(status);
-	    System.out.println("포스트넘버"+postNumber);
 		applyService.updateApplyStatus(apply_id,status,postNumber);
 		
 		return "redirect:/businesApplylist";
 	}
-	
-	
-	
+
 	//알바생 지원 메뉴 클릭시 지원 목록 조회
 //	@GetMapping("/Applyread")
 //	public String Applyread(Model model, HttpSession session)

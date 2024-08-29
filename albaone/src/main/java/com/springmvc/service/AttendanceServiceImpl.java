@@ -1,5 +1,6 @@
 package com.springmvc.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -37,6 +38,11 @@ public class AttendanceServiceImpl implements AttendanceService {
 	@Override
 	public void editAttendance(Attendance attendance, LocalDateTime checkInTime) {
 		attendanceRepository.editAttendance(attendance, checkInTime);
+	}
+
+	@Override
+	public int get3MonthWorkMinutes(String id, String businessNumber, LocalDate dateAll1, LocalDate dateAll2) {
+		return attendanceRepository.get3MonthWorkMinutes(id, businessNumber, dateAll1, dateAll2);
 	}
 	
 }
