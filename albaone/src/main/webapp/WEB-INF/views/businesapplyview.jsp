@@ -68,6 +68,10 @@
                                 <td>${businesview.jobDescription}</td>
                             </tr>
                             <tr>
+                            	<th>사진 </th>
+                            	<td><img src="${pageContext.request.contextPath}/resources/images/${businesview.myimgName}" alt="사진" width="100"></td>
+                            </tr>
+                            <tr>
                                 <th>지원 상태</th>
                                 <td>
                                     <c:choose>

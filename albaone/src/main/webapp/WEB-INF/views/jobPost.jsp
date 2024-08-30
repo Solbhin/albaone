@@ -42,11 +42,13 @@
              <c:if test="${empty sessionScope.businessNumber}">
             <div class="card-footer text-center">
             	<a href="applyresumeList?postNumber=${jobPost.postNumber}">지원하기</a>
+            	<a href="reviewList?companyName=${jobPost.companyName}">리뷰보기</a>
             </div>
             </c:if>
             <c:if test="${not empty sessionScope.businessNumber}">
             <div class="card-footer text-center">
             	<a href="businesApplylist?postNumber=${jobPost.postNumber}">지원 내역 조회</a>
+            	<a href="reviewList?companyName=${jobPost.companyName}">리뷰보기</a>
             </div>
             </c:if>
         </div>

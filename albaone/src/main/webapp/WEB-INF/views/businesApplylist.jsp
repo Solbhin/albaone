@@ -27,6 +27,7 @@
                         <th scope="col">근무일</th>
                         <th scope="col">급여</th>
                         <th scope="col">직무 설명</th>
+                        <th scope="col">사진<th>
                         <th scope="col">지원 상태</th>
                         <th scope="col">상세보기</th>
                     </tr>
@@ -44,6 +45,7 @@
                             <td>${apply.workDays}</td>
                             <td>${apply.salary}원</td>
                             <td>${apply.jobDescription}</td>
+                            <td><img src="${pageContext.request.contextPath}/resources/images/${apply.myimgName}" alt="사진" width="100"></td>
                             <td>
                             <c:choose>
                                 <c:when test="${apply.status == '지원 중'}">

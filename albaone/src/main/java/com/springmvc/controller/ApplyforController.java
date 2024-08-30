@@ -60,7 +60,9 @@ public class ApplyforController
                               HttpSession session) {
         JobPost jobPost = jobPostService.getPostDetail(postNumber);
      
+        System.out.println("리썸넘버: "+number);
         Resume resumes=resumeService.getResumeNumber(number);
+        System.out.println("확인용: "+resumes);
         String id=(String) session.getAttribute("id");
         
         applyService.applyForJob(id,resume_number, resumeTitle, postNumber, 

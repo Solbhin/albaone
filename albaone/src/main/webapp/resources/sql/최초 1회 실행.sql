@@ -124,3 +124,14 @@ create table Albarate
     blinking int, -- QR 얼마나 깜빡했는지
     company int -- 사측 평가
 );
+
+create table severance(
+	id varchar(20),
+    businessNumber varchar(20),
+    hireDate date,
+    resignationDate date,
+    period int,
+    total3MonthSalary varchar(20),
+    averageWage varchar(20),
+    severance varchar(20)    
+);

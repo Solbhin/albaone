@@ -22,7 +22,11 @@ public class JobPostController {
 
 //	채용 공고글 양식 제공
 	@GetMapping("/jobposting")
-	public String jobPostForm() {
+	public String jobPostForm(HttpSession session, Model model) {
+		String businessNumber = (String) session.getAttribute("businessNumber");
+		
+		model.addAttribute("businessNumber", businessNumber);
+		
 		return "jobPostForm";
 	}
 
