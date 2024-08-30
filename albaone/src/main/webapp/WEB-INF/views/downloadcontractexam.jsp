@@ -50,6 +50,10 @@
                     </div>
                 </div>
             </div>
+            
+            <br>
+            
+            <p class="text-center"><strong></strong>근로기준법 제17조에 따라 근로계약 체결시 근로자에게 교부하여야 함</p>
         </div>
 
         <!-- PDF 다운로드 버튼 -->
@@ -58,6 +62,8 @@
         </div>
     </div>
 
+	<!-- footer있어도 PDF에 포함 안됨 -->
+	
     <script type="text/javascript" src="/albaone/resources/js/downloadcontractexam.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
