@@ -27,11 +27,15 @@
                 <input type="text" class="form-control" name="companyName" placeholder="상호명" required>
             </div>
             <div class="form-group">
+            <div class="form-group">
                 <label for="workLocation">근무지 주소</label>
                 <input type="text" class="form-control" name="workLocation" id="workLocation" placeholder="근무지 주소" required>
                 <div id="addressError" class="text-danger" style="display:none;">유효한 주소를 입력하세요.</div>
             </div>
             <div class="form-group">
+                <label for="businessNumber">사업자 등록번호</label>
+                <input type="text" class="form-control" name="businessNumber" id="businessNumber" value="${businessNumber}" readonly>
+            </div>
                 <label for="contactNumber">연락처</label>
                 <input type="text" class="form-control" name="contactNumber" placeholder="연락처" required>
             </div>
