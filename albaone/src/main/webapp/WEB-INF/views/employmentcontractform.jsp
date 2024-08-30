@@ -61,10 +61,10 @@
                 </div>
             </div>
             
-            <div id="worktime">
+            <div id="worktime" class="form-group col-md-6">
                 <p>근무 시작 시간</p>
                 <input type="checkbox" id="startCheckbox" onchange="toggleWorkingHoursStart()"> 직접 입력
-                <select id="workinghours_start" name="workinghours_start">
+                <select id="workinghours_start" name="workinghours_start" class="form-select">
                     <option value="00:00">00:00</option>
                     <option value="00:30">00:30</option>
                     <option value="01:00">01:00</option>
@@ -113,10 +113,10 @@
                     <option value="23:00">23:00</option>
                     <option value="23:30">23:30</option>
                 </select>
-                <input type="text" id="workinghours_start_input" name="workinghours_start" placeholder="근무 시작 시간" style="display:none">
+                <input type="text" id="workinghours_start_input" name="workinghours_start" placeholder="근무 시작 시간" class="form-control mt-2" style="display:none">
                 <p>근무 종료 시간</p>
                     <input type="checkbox" id="endCheckbox" onchange="toggleWorkingHoursEnd()"> 직접 입력
-                    <select id="workinghours_end" name="workinghours_end">
+                    <select id="workinghours_end" name="workinghours_end" class="form-select">
                         <option value="00:00">00:00</option>
                         <option value="00:30">00:30</option>
                         <option value="01:00">01:00</option>
@@ -165,7 +165,7 @@
                         <option value="23:00">23:00</option>
                         <option value="23:30">23:30</option>
                     </select>
-                    <input type="text" id="workinghours_end_input" name="workinghours_end" placeholder="근무 종료 시간" style="display:none">
+                    <input type="text" id="workinghours_end_input" name="workinghours_end" placeholder="근무 종료 시간" class="form-control mt-2" style="display:none">
             </div>
 
             <div class="form-group">
