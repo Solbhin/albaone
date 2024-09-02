@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/albaone/resources/css/font.css">
+<link rel="stylesheet" href="/albaone/resources/css/resume.css">
 <title>이력서 등록</title>
 </head>
 <body>
@@ -86,7 +88,7 @@
             <label for="desired_days">희망휴일</label>
             <input type="text" class="form-control" id="desired_days" name="desired_days" required maxlength="20">
         </div>
-        <div class="text-center">
+        <div class="text-center button">
             <button type="submit" class="btn btn-primary">저장</button>
             <a href="resumecancel" class="btn btn-danger">취소</a>
         </div>
@@ -94,25 +96,7 @@
 </div>
 	
 	<script type="text/javascript">
-		//파일 확장자 유효성 검사
-	    function validateFile()
-	    {
-	        var fileInput = document.querySelector('input[name="myimg"]');
-	        var filePath = fileInput.value;
-	        var allowedExtensions = /(\.png|\.jpg|\.jpeg)$/i;
-	
-	        if (!allowedExtensions.exec(filePath))
-	        {
-	            alert('유효한 이미지 파일만 업로드할 수 있습니다. (png, jpg, jpeg)');
-	            // 선택된 파일 초기화
-	            fileInput.value = '';
-	            
-	            // 제출 방지
-	            return false; 
-	        }
-	        // 제출 허용
-	        return true; 
-	    }
+
 	</script>
 </body>
 </html>

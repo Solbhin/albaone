@@ -1,0 +1,12 @@
+* {    list-style: none;    text-decoration: none;    box-sizing: border-box;    padding: 0;    margin: 0;	}
+
+span
+{
+    font-size: 10px;
+}
+
+/* 내용간 간격 */
+.p
+{
+    margin-top: 3%;
+}

@@ -5,17 +5,12 @@
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
-    .input-group {
-        width: 100%;
-    }
-    .input-group-append {
-        margin-left: -1px; /* 버튼과 경계가 겹치지 않도록 조정 */
-    }
-</style>
+<link rel="stylesheet" href="/albaone/resources/css/register.css"> 
 <title>개인회원</title>
 </head>
 <body>
+		<%@include file="menu.jsp" %>
+
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card" style="width: 30rem;">
             <div class="card-body">
@@ -105,8 +100,8 @@
     }
 </script> -->
 
-본인 인증 테스트시 위에 자바스크립트를 주석처리하고 아래 링크를 주석 해제하고 사용
-<!-- 유료 api, 테스트시 유의 - key를 깃에 올리지 말것 -->
+<!-- 본인 인증 테스트시 위에 자바스크립트를 주석처리하고 아래 링크를 주석 해제하고 사용 -->
+<!-- 유료 api, 테스트시 유의 - key를 깃에 올리지 말것 키는 서비스에 있음 -->
 <script type="text/javascript" src="/albaone/resources/js/registerPersonal.js"></script>
 </body>
 </html>

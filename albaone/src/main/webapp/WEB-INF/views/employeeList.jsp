@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<title>Insert title here</title>
+<title>알바원 - 내 직원 보기</title>
 </head>
 <body>
 	<%@include file="menu.jsp" %>

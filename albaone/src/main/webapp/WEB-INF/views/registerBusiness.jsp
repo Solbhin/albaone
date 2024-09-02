@@ -6,14 +6,7 @@
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
-    .input-group {
-        width: 100%;
-    }
-    .input-group-append {
-        margin-left: -1px; /* 버튼과 경계가 겹치지 않도록 조정 */
-    }
-</style>
+<link rel="stylesheet" href="/albaone/resources/css/register.css"> 
 <title>기업회원</title>
 </head>
 <body>
@@ -68,6 +61,7 @@
                 </form>
                 <div class="text-center mt-3">
                     <a href="/albaone/login" class="btn btn-link">로그인 페이지로</a>
+                    <!-- <a href="/albaone/login" class="btn btn-primary">로그인 페이지로</a> -->
                 </div>
             </div>
         </div>
