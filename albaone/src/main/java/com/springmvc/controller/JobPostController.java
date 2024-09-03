@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springmvc.domain.JobPost;
 import com.springmvc.service.JobPostServiceImpl;
@@ -69,12 +70,6 @@ public class JobPostController {
 		return "jobPostList";
 	}
 
-//	게시글 수정
-	@GetMapping("/editjobpost")
-	public String editJobPostForm(@RequestParam int postNumber) {
-		return "redirect:/jobposts?page=1";
-	}
-
 //	게시글 수정 폼
 	@GetMapping("/editJobPost")
 	public String jobPostEditForm(@RequestParam int postNumber, Model model) {
@@ -97,4 +92,24 @@ public class JobPostController {
 		return "redirect:/jobposts?page=1";
 	}
 
+//	게시글 검색
+	@GetMapping("/searchJobPosts")
+	public String searchJobPosts(@RequestParam(required = false) Integer page, @RequestParam("searchInput") String query, Model model) {
+		if(page==null) {
+			page = 1;
+		}
+		
+		List<JobPost> jobPosts = jobPostService.searchJobPosts(page, query);
+		int totalPosts = jobPostService.getTotalPosts();
+		
+		model.addAttribute("search", "search");
+		model.addAttribute("query", query);
+		model.addAttribute("jobPosts", jobPosts);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPosts", totalPosts);
+		
+		
+		
+		return "jobPostList";
+	}
 }

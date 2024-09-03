@@ -18,4 +18,6 @@ public interface JobPostService {
 	void deletePost(int postNumber);
 
 	void updatePost(JobPost jobPost);
+
+	List<JobPost> searchJobPosts(Integer page, String query);
 }

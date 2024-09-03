@@ -27,7 +27,8 @@
             </div>
             <div class="form-group">
                 <label for="checkOutTime">퇴근 시간</label>
-                <input type="time" class="form-control" name="outTime">
+                <input type="time" class="form-control" name="outTime" value="${localOutTime}">
+                <input type="hidden" name="checkOutTime" value=${checkOutTime}">
             </div>
             <button type="submit" class="btn btn-primary btn-block mt-3">등록하기</button>
         </form>

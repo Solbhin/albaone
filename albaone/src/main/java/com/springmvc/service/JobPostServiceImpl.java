@@ -48,4 +48,9 @@ public class JobPostServiceImpl implements JobPostService {
 		return jobPostRepository.getMyPosts(page, id);
 	}
 
+	@Override
+	public List<JobPost> searchJobPosts(Integer page, String query) {
+		return jobPostRepository.searchJobPosts(page, query);
+	}
+
 }

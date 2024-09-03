@@ -25,6 +25,10 @@
                 <div id="addressError" class="text-danger" style="display:none;">유효한 주소를 입력하세요.</div>
             </div>
             <div class="form-group">
+                <label for="businessNumber">사업자 등록번호</label>
+                <input type="text" class="form-control" name="businessNumber" id="businessNumber" value="${businessNumber}" readonly>
+            </div>
+            <div class="form-group">
                 <label for="contactNumber">연락처</label>
                 <input type="text" class="form-control" name="contactNumber" value="${jobPost.contactNumber}" placeholder="연락처" required>
             </div>

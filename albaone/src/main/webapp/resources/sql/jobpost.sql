@@ -12,5 +12,6 @@ CREATE TABLE if not exists jobpost(
     jobDescription varchar(200),				-- 하는 일
     id VARCHAR(20)								-- 작성자 아이디
 );
+alter table jobpost add column businessNumber varchar(10);
 select * from jobpost;
 truncate table jobpost;
