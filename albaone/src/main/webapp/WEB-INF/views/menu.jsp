@@ -13,7 +13,12 @@
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="./">알바원</a>
+        	<div class="logo">
+	            <a class="navbar-brand" href="./">
+					<img class="navbar-logo" src="${pageContext.request.contextPath}/resources/images/logo.png">
+				</a>
+			</div>
+			
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

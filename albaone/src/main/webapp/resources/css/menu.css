@@ -12,6 +12,12 @@
     z-index: 1000;
 }
 
+.navbar-logo {
+    height: 50px; /* 내비게이션 바 높이에 맞게 조정 */
+    width: auto;  /* 비율을 유지하기 위해 자동 설정 */
+}
+
+
 /* 내비게이션 바 높이와 같은 높이의 div 추가 */
 .navbar-offset {
     height: 56px; /* 내비게이션 바의 높이와 동일하게 설정 */

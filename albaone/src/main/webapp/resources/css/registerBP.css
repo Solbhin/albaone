@@ -22,3 +22,7 @@
     .input-group-append {
         margin-left: -1px; /* 버튼과 경계가 겹치지 않도록 조정 */
     }
+    .update-btn{
+    	background-color: #b5a09a !important;
+   		border : 0px !important;
+    }
