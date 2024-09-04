@@ -10,4 +10,5 @@ public interface EmploymentcontractRepository
 	int deleteContractsByPartTimeName(int num);
 	Employmentcontract findByNum(int num);
 	List<Employmentcontract> findAllByBusinessNumber(String BusinessNumber);
+	List<Employmentcontract> findAllByParttimeid(String parttimeid);
 }

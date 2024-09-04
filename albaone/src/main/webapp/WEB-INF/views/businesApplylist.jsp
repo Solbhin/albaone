@@ -62,7 +62,7 @@
                                 </c:otherwise>
                             </c:choose>
                             </td>
-                            <td><a href="businesapplyview?apply_id=${apply.apply_id}&postNumber=${postNumber}" class="btn btn-primary">상세보기</a></td>
+                            <td><a href="businesapplyview?apply_id=${apply.apply_id}&postNumber=${postNumber}&id=${apply.id}" class="btn btn-primary">상세보기</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>
