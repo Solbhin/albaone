@@ -18,6 +18,8 @@ public interface JobPostRepository {
 	void deletePost(int postNumber);
 
 	void updatePost(JobPost jobPost);
-
+	
+	List<JobPost> findRecentJopPosts(int limit);
+	
 	List<JobPost> searchJobPosts(Integer page, String query);
 }

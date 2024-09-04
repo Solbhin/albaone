@@ -70,7 +70,8 @@ public class QRCodeController {
 		Attendance attendance = QRCodeService.getLastAttendance(id);
 		if (attendance == null) { // 첫 출근
 			QRCodeService.checkIn(id, datetime, businessNumber);
-		} else { // 첫 출근 아닐 경우
+			System.out.println("첫 출근");
+			} else { // 첫 출근 아닐 경우
 			LocalDateTime CheckOutTime = attendance.getCheckOutTime();
 			System.out.println("퇴근시간: " + CheckOutTime);
 			if (CheckOutTime == null) { // 퇴근

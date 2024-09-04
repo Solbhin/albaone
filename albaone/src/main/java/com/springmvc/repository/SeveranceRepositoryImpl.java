@@ -1,4 +1,4 @@
-package com.springmvc.service;
+package com.springmvc.repository;
 
 import java.time.LocalDate;
 
@@ -26,6 +26,7 @@ public class SeveranceRepositoryImpl implements SeveranceRepository {
 		template.update(SQL, id, businessNumber, hireDate, formattedDate, periodAll, total, average, severance);
 	}
 
+	@Override
 	public Severance getSeverance(String id, String businessNumber) {
 		String SQL = "SELECT s.id, u.name, s.businessNumber, s.hireDate, s.resignationDate, s.period, s.total3MonthSalary, s.averageWage, s.severance "
 				+ "FROM severance s "

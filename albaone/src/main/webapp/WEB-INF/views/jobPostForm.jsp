@@ -13,12 +13,7 @@
 <body>
     <%@include file="menu.jsp" %>
     
-    <div class="mt-4 text-center">
-        <a href="./jobposting" class="btn btn-success">공고 등록</a>
-        <a href="./myJobPost?page=1" class="btn btn-info">내가 쓴 글 조회</a>
-        <a href="./jobposts?page=1" class="btn btn-primary">전체 게시글 조회</a>
-    </div>
-    <div class="container mt-5">
+    <div class="container mt-4">
         <h2 class="text-center">직업 공고 등록</h2>
         <div id="map" style="width:100%;height:400px;"></div>
         <form action="./jobposting" method="post" modelAttribute="jobPost" id="jobPostingForm">

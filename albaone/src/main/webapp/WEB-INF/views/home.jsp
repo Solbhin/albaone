@@ -1,31 +1,56 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>알바원</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/albaone/resources/css/home.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <%@include file="menu.jsp"%>
-    
-    <div class="container">
-
-        <h1 class="mt-4">소개 페이지</h1>
-        <p>알바원은 구인구직, 근태관리, 급여 자동 생성, 퇴직금 자동 생성이 가능한 사이트입니다.</p>
-
-        <div class="list-group mt-4">
-            <a href="contracts" class="list-group-item list-group-item-action">알바생 근로계약서 조회 테스트</a>
-            <a href="companyList?id=${sessionScope.id}" class="list-group-item list-group-item-action">개인 : 내 직장 조회</a>
-            <a href="writeAlbarate" class="list-group-item list-group-item-action">사장 평가</a>
-            <a href="ReadAlbarate" class="list-group-item list-group-item-action">내 평점 조회</a>
+    <%@include file="menu.jsp" %>
+    <div class="image-container">
+        <img class="img" src="${pageContext.request.contextPath}/resources/images/homemain.jpg" alt="사진">
+        <div class="text-overlay">
+            <h2>알바원 서비스</h2>
+            <p>알바원은 구직자를 위한 다양한 서비스를 제공합니다.</p>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="container">
+        <div class="my-5">
+            <h3>최신 공고</h3>
+            <c:choose>
+                <c:when test="${empty recentJopPosts}">
+                    <p class="text-center">죄송합니다 현재 공고가 없습니다.</p>
+                </c:when>
+                <c:otherwise>
+                    <div class="row">
+                        <c:forEach items="${recentJopPosts}" var="jobpost">
+                            <div class="col-md-4 mb-3">
+                                <div class="card card-custom">
+                                    <div class="card-body">
+                                        <h4 class="card-title">${jobpost.companyName}</h4><hr>
+                                        <p class="card-text">주소: ${jobpost.workLocation}</p>
+                                        <p class="card-text">근무요일: ${jobpost.workDays}</p>
+                                        <p class="card-text">근무시간: ${jobpost.workHours}</p>
+                                        <p class="card-text">시급: ${jobpost.salary}</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="./jobpost?postNumber=${jobpost.postNumber}">상세보기</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
+    <footer>
+        <%@include file="footer.jsp" %>
+    </footer>
 </body>
 </html>

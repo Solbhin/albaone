@@ -47,7 +47,12 @@ public class JobPostServiceImpl implements JobPostService {
 	public List<JobPost> getMyPosts(int page, String id) {
 		return jobPostRepository.getMyPosts(page, id);
 	}
-
+	
+	@Override
+	public List<JobPost> findRecentJopPosts(int limit){
+		return jobPostRepository.findRecentJopPosts(limit);
+	}
+	
 	@Override
 	public List<JobPost> searchJobPosts(Integer page, String query) {
 		return jobPostRepository.searchJobPosts(page, query);

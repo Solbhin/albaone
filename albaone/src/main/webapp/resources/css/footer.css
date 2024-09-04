@@ -1,0 +1,78 @@
+.footer {
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    color: #333;
+    border-top: 1px solid #ddd;
+}
+
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.company-info {
+    flex: 1;
+    padding-right: 20px;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.company-info p {
+    margin: 10px 0;
+    text-align: center;
+    flex: 0 0 calc(33.333% - 10px);
+    box-sizing: border-box;
+}
+
+.company-info i {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.contact-info {
+    flex: 1;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.company-details {
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.awards {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.award-image {
+    width: 40px;
+    height: auto;
+    margin: 0 5px;
+}
+
+.footer a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: grey;
+}

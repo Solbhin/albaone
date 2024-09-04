@@ -8,6 +8,8 @@
 <title>근무 기록 수정</title>
 </head>
 <body>
+	<%@include file = "menu.jsp" %>
+
     <div class="container mt-5">
         <h2 class="text-center">근무 기록 수정</h2>
         <form action="attendanceEdit" method="post">
@@ -28,9 +30,9 @@
             <div class="form-group">
                 <label for="checkOutTime">퇴근 시간</label>
                 <input type="time" class="form-control" name="outTime" value="${localOutTime}">
-                <input type="hidden" name="checkOutTime" value=${checkOutTime}">
+                <input type="hidden" name="checkOutTime" value="${checkOutTime}">
             </div>
-            <button type="submit" class="btn btn-primary btn-block mt-3">등록하기</button>
+            <button type="submit" class="btn btn-primary btn-block mt-3">수정</button>
         </form>
     </div>
 </body>
