@@ -24,14 +24,22 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
 
 	@Override
 	public List<Attendance> getAllAttendances(String id) {
-		String SQL = "SELECT * FROM attendance WHERE id = ?";
+		String SQL = "SELECT a.id, j.companyName, a.businessNumber, u.name, a.check_in_time, a.check_out_time, a.workHours "
+				+ "FROM attendance a "
+				+ "INNER JOIN user u ON a.id = u.id "
+				+ "INNER JOIN jobPost j ON a.businessNumber = j.businessNumber "
+				+ "WHERE a.id = ?";
 		List<Attendance> listOfAttendance = template.query(SQL, new Object[] { id }, new AttendanceRowMapper());
 		return listOfAttendance;
 	}
 	
 	@Override
 	public List<Attendance> getAttendancesByBusinessNumber(String businessNumber) {
-		String SQL = "SELECT a.id, a.businessNumber, a.companyName, u.name, a.check_in_time, a.check_out_time FROM attendance a inner join user u on a.id = u.id WHERE a.businessNumber = ?";
+		String SQL = "SELECT a.id, j.companyName, a.businessNumber, u.name, a.check_in_time, a.check_out_time "
+				+ "FROM attendance a "
+				+ "inner join user u on a.id = u.id "
+				+ "INNER JOIN jobPost j ON a.businessNumber = j.businessNumber "
+				+ "WHERE a.businessNumber = ?";
 		List<Attendance> listOfAttendance = template.query(SQL, new Object[] {businessNumber}, new AttendanceRowMapper());
 		return listOfAttendance;
 	}

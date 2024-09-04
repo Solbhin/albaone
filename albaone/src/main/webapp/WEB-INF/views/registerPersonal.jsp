@@ -4,16 +4,16 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/albaone/resources/css/registerBP.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="/albaone/resources/css/register.css"> 
 <title>개인회원</title>
 </head>
 <body>
-		<%@include file="menu.jsp" %>
-
+	<%@include file="menu.jsp" %>
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card" style="width: 30rem;">
             <div class="card-body">
+             	<i class="bi bi-person-fill"></i>
                 <h5 class="card-title text-center">개인회원 가입</h5>
                 <form action="./" method="post" modelAttribute="user" onsubmit="return validateForm()">
                     <div class="form-group">
@@ -53,9 +53,6 @@
 					</div>
                     <button type="submit" class="btn btn-primary btn-block mt-3" id="submitButton" disabled>회원가입</button>
                 </form>
-                <div class="text-center mt-3">
-                    <a href="/albaone/login" class="btn btn-link">로그인 페이지로</a>
-                </div>
             </div>
         </div>
     </div>
@@ -100,8 +97,9 @@
     }
 </script> -->
 
-<!-- 본인 인증 테스트시 위에 자바스크립트를 주석처리하고 아래 링크를 주석 해제하고 사용 -->
-<!-- 유료 api, 테스트시 유의 - key를 깃에 올리지 말것 키는 서비스에 있음 -->
+ <!--본인 인증 테스트시 위에 자바스크립트를 주석처리하고 아래 링크를 주석 해제하고 사용  -->
+<!-- 유료 api, 테스트시 유의 - key를 깃에 올리지 말것 -->
 <script type="text/javascript" src="/albaone/resources/js/registerPersonal.js"></script>
+<%@include file="footer.jsp"%>
 </body>
 </html>

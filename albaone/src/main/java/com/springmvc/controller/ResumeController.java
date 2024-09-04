@@ -40,22 +40,11 @@ public class ResumeController {
 
 	// 이력서 작성
 	@PostMapping("/resume")
-	public String resumeadd
-	(
-			@ModelAttribute("ResumeAdd") Resume resume,
-			BindingResult result,
-			HttpServletRequest req,
-			HttpSession session,
-			@RequestParam("workinghours_start") String workinghours_start,
-			@RequestParam("workinghours_end") String workinghours_end
-	)
-	{
-		System.out.println(workinghours_start);
-		System.out.println(workinghours_end);
+	public String resumeadd(@ModelAttribute("ResumeAdd") Resume resume, BindingResult result, HttpServletRequest req,
+			HttpSession session) {
 		String id = (String) session.getAttribute("id");
 
-		if (result.hasErrors())
-		{
+		if (result.hasErrors()) {
 			return "resume";
 		}
 		String root = req.getServletContext().getRealPath("/resources/images");
@@ -64,28 +53,12 @@ public class ResumeController {
 		File saveFile = new File(root, saveName);
 
 		if (myimg != null && !myimg.isEmpty())
-		{
-			try
-			{
+			try {
 				myimg.transferTo(saveFile);
 				resume.setMyimgName(saveName);
+			} catch (Exception e) {
 			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-		
-	    String work_hours = "";
-	    if (workinghours_start != null && workinghours_end != null)
-	    {
-	        workinghours_start = workinghours_start.replace(",", "").trim();
-	        workinghours_end = workinghours_end.replace(",", "").trim();
-	        work_hours = workinghours_start + "~" + workinghours_end;
-	    }
-	    System.out.println();
-	    resume.setWork_hours(work_hours);
-		
+
 		resumeService.setmyImg(resume, id);
 		return "redirect:/resumereadAll";
 	}
@@ -119,24 +92,15 @@ public class ResumeController {
 
 	// 이력서 수정
 	@GetMapping("/resumeupdate")
-	public String resumeupdate
-	(@ModelAttribute("updateResume") Resume resume,@RequestParam("number") String number,
+	public String resumeupdate(@ModelAttribute("updateResume") Resume resume, @RequestParam("number") String number,
 			Model model) {
 		Resume resumeNumber = resumeService.getResumeNumber(number);
 		model.addAttribute("resume", resumeNumber);
 		return "updateResume";
 	}
 
-	// 이력서 업데이트
 	@PostMapping("/resumeupdate")
-	public String resumeupdate
-	(
-			@ModelAttribute("updateResume") Resume resume,
-			@RequestParam int number,
-			@RequestParam("workinghours_start") String workinghours_start,
-			@RequestParam("workinghours_end") String workinghours_end
-	)
-	{
+	public String resumeupdate(@ModelAttribute("updateResume") Resume resume, @RequestParam int number) {
 		MultipartFile Image = resume.getMyimg();
 		if (Image != null && !Image.isEmpty()) {
 			try {
@@ -147,17 +111,6 @@ public class ResumeController {
 				throw new RuntimeException(" Image saving failed", e);
 			}
 		}
-		
-	    String work_hours = "";
-	    if (workinghours_start != null && workinghours_end != null)
-	    {
-	        workinghours_start = workinghours_start.replace(",", "").trim();
-	        workinghours_end = workinghours_end.replace(",", "").trim();
-	        work_hours = workinghours_start + "~" + workinghours_end;
-	    }
-	    System.out.println();
-	    resume.setWork_hours(work_hours);
-		
 		resumeService.setUpdateResume(resume);
 		return "redirect:/resumereadAll";
 	}

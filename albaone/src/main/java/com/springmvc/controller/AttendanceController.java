@@ -131,11 +131,19 @@ public class AttendanceController {
 
 //	근태 기록 수정 양식 제공
 	@GetMapping("attendanceEdit")
-	public String editAttendanceForm(@RequestParam String id, String checkInTime, Model model) {
+	public String editAttendanceForm(@RequestParam String id, String checkInTime, @RequestParam(required = false) String checkOutTime, Model model) {
 		LocalDateTime localDateTime = LocalDateTime.parse(checkInTime);
 		LocalDate localDate = localDateTime.toLocalDate();
 		LocalTime localTime = localDateTime.toLocalTime();
 		String name = userService.getUserName(id);
+		
+		if(checkOutTime!=null) {
+			LocalDateTime localDateTime2 = LocalDateTime.parse(checkOutTime);
+			LocalTime localOutTime = localDateTime2.toLocalTime();
+			
+			model.addAttribute("localOutTime", localOutTime);
+		}
+		
 		System.out.println(name);
 		System.out.println(localDate);
 		System.out.println(localTime);
@@ -146,6 +154,7 @@ public class AttendanceController {
 		model.addAttribute("name", name);
 		model.addAttribute("localTime", localTime);
 		model.addAttribute("checkInTime", checkInTime);
+		model.addAttribute("checkOutTime", checkOutTime);
 
 		return "attendanceEditForm";
 	}

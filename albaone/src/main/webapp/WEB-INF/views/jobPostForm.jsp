@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="/albaone/resources/css/jobPost.css"> 
     <title>직업 공고 등록</title>
 </head>
 <body>
@@ -60,7 +59,7 @@
                 <label for="jobDescription">하는 일</label>
                 <textarea class="form-control" name="jobDescription" rows="4" placeholder="하는 일" required></textarea>
             </div>
-            <div class="button"><button type="submit" class="btn btn-primary btn-block">등록하기</button></div>
+            <button type="submit" class="btn btn-primary btn-block">등록하기</button>
         </form>
     </div>
 

@@ -85,6 +85,10 @@
             </div>
         </div>
     </nav>
+    
+    <!-- 내비게이션 바 높이와 동일한 높이의 div -->
+    <div class="navbar-offset"></div>
+
 <script src="/albaone/resources/js/menu.js"></script>
 </body>
 </html>

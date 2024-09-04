@@ -3,7 +3,16 @@
 
 
 /* NAV바 색상*/
-nav {
+.navbar {
     background-color: #EDE6D2;
-    
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+/* 내비게이션 바 높이와 같은 높이의 div 추가 */
+.navbar-offset {
+    height: 56px; /* 내비게이션 바의 높이와 동일하게 설정 */
 }

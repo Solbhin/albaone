@@ -13,8 +13,8 @@ public class SmsServiceImpl implements SmsService {
 	// 모든 IP 허용 key - git에 업로드할때 키는 빼고 업로드할것
 	// 전역 변수
 	private final DefaultMessageService messageService;
-	private final String key = ""; // api 키
-	private final String secretkey = "";
+	private final String key = "NCS7AK94WDILNDFB"; // api 키
+	private final String secretkey = "3JMFVRDDWKLEHD8UYBXVNWOGUMO3VJBP";
 
 	// 생성자 초기화
 	public SmsServiceImpl() {

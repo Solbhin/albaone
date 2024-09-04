@@ -95,5 +95,37 @@ public class JobPostRepositoryImpl implements JobPostRepository {
 				jobPost.getSalary(), jobPost.getWorkHours(), jobPost.getWorkDays(), jobPost.getWorkDuration(),
 				jobPost.getJobDescription(), jobPost.getPostNumber());
 	}
+	
+	@Override
+	public List<JobPost> findRecentJopPosts(int limit) {
+	    String SQL = "SELECT * FROM jobpost ORDER BY postNumber DESC LIMIT ?";
+	    return template.query(SQL, new Object[] { limit }, 
+	        (rs, rowNum) -> new JobPost(
+	            rs.getInt("postNumber"),
+	            rs.getString("companyName"),
+	            rs.getString("workLocation"),
+	            rs.getInt("salary"),
+	            rs.getString("workHours"),
+	            rs.getString("workDays")
+	        )
+	    );
+	}
+	
+	@Override
+	public List<JobPost> searchJobPosts(Integer page, String query) {
+		int pageSize = 9;
+		int offset = (page-1) * pageSize;
+		
+		String SQL = "SELECT * "
+				+ "FROM jobpost "
+				+ "WHERE companyName LIKE ? "
+				+ "OR workLocation LIKE ? "
+				+ "ORDER BY postNumber DESC LIMIT ? OFFSET ?";
+		String searchQuery = "%" + query + "%";
+		return template.query(SQL, new Object[] { searchQuery, searchQuery ,pageSize, offset},
+				(rs, rowNum) -> new JobPost(rs.getInt("postNumber"), rs.getString("companyName"),
+						rs.getString("workLocation"), rs.getInt("salary"), rs.getString("workHours"),
+						rs.getString("workDays")));
+	}
 
 }

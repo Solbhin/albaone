@@ -30,7 +30,10 @@ public class QRcodeRepositoryImpl implements QRcodeRepository {
 
 	@Override
 	public Attendance getLastAttendance(String id) {
-		String SQL = "SELECT * FROM attendance WHERE id = ? ORDER BY check_in_time DESC LIMIT 1";
+		String SQL = "SELECT * "
+				+ "FROM attendance "
+				+ "WHERE id = ? "
+				+ "ORDER BY check_in_time DESC LIMIT 1";
 		try {
 			return template.queryForObject(SQL, new Object[] { id }, this::mapRowToAttendance);
 		} catch (Exception e) {
@@ -41,9 +44,6 @@ public class QRcodeRepositoryImpl implements QRcodeRepository {
 	private Attendance mapRowToAttendance(ResultSet rs, int rowNum) throws SQLException {
 		Attendance attendance = new Attendance();
 		attendance.setId(rs.getString("id"));
-		attendance.setCompanyName(rs.getString("companyName"));
-		attendance.setName(rs.getString("name"));
-		
 		String checkInTimeString = rs.getString("check_in_time");
 	    if (checkInTimeString != null) {
 	        attendance.setCheckInTime(LocalDateTime.parse(checkInTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
