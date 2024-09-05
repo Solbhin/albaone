@@ -24,7 +24,7 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
 
 	@Override
 	public List<Attendance> getAllAttendances(String id) {
-		String SQL = "SELECT a.id, j.companyName, a.businessNumber, u.name, a.check_in_time, a.check_out_time, a.workHours "
+		String SQL = "SELECT a.id, j.companyName, a.businessNumber, u.name, a.check_in_time, a.check_out_time, a.workHours , a.reason , a.edit "
 				+ "FROM attendance a "
 				+ "INNER JOIN user u ON a.id = u.id "
 				+ "INNER JOIN jobPost j ON a.businessNumber = j.businessNumber "
@@ -35,7 +35,7 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
 	
 	@Override
 	public List<Attendance> getAttendancesByBusinessNumber(String businessNumber) {
-		String SQL = "SELECT a.id, j.companyName, a.businessNumber, u.name, a.check_in_time, a.check_out_time "
+		String SQL = "SELECT a.id, j.companyName, a.businessNumber, u.name, a.check_in_time, a.check_out_time , a.reason , a.edit "
 				+ "FROM attendance a "
 				+ "inner join user u on a.id = u.id "
 				+ "INNER JOIN jobPost j ON a.businessNumber = j.businessNumber "
@@ -52,8 +52,8 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
 
 	@Override
 	public void addAttendance(Attendance attendance) {
-		String SQL = "INSERT INTO attendance(id, businessNumber, check_in_time, check_out_time, workHours) VALUES(?, ?, ?, ?, ?)";
-		template.update(SQL, attendance.getId(), attendance.getBusinessNumber(), attendance.getCheckInTime(), attendance.getCheckOutTime(), attendance.getWorkHours());
+		String SQL = "INSERT INTO attendance(id, businessNumber, check_in_time, check_out_time, workHours, reason) VALUES(?, ?, ?, ?, ?, ?)";
+		template.update(SQL, attendance.getId(), attendance.getBusinessNumber(), attendance.getCheckInTime(), attendance.getCheckOutTime(), attendance.getWorkHours(), attendance.getReason());
 	}
 	
 	@Override
@@ -65,8 +65,8 @@ public class AttendanceRepositoryImpl implements AttendanceRepository {
 		System.out.println(attendance.getBusinessNumber());
 		System.out.println(checkInTime);
 		
-		String SQL = "UPDATE attendance SET check_in_time=?, check_out_time=?, workHours = ? WHERE id = ? AND businessNumber = ? AND check_in_time = ?";
-		template.update(SQL, attendance.getCheckInTime(), attendance.getCheckOutTime(), attendance.getWorkHours(), attendance.getId(), attendance.getBusinessNumber(), checkInTime);
+		String SQL = "UPDATE attendance SET check_in_time=?, check_out_time=?, workHours = ?, edit = ? WHERE id = ? AND businessNumber = ? AND check_in_time = ?";
+		template.update(SQL, attendance.getCheckInTime(), attendance.getCheckOutTime(), attendance.getWorkHours(), attendance.getEdit() ,attendance.getId(), attendance.getBusinessNumber(), checkInTime);
 	}
 
 	@Override

@@ -37,3 +37,12 @@ SELECT e.businessNumber, e.id, u.name, e.hireDate, e.resignationDate
 insert into employee values("2", "q", "2023-01-01", "2024-08-28");
 
 delete from employee where id = "1";
+
+
+SELECT e.id, u.name, e.hireDate, e.resignationDate
+	FROM employee e
+    INNER JOIN user u
+    ON e.id = u.id
+    WHERE e.businessNumber = "8459201902" AND e.resignationDate is NOT NULL;
+    
+truncate table employee;

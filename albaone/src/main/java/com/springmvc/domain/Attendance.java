@@ -13,6 +13,8 @@ public class Attendance {
 	private LocalDateTime checkInTime; 	// 출근시간
 	private LocalDateTime checkOutTime; // 퇴근시간
 	private long workHours; 			// 근무 시간
+	private String reason; // 사유
+	private String edit; //수정
 	
 	public String getFormattedCheckInTime() {
 		DateTimeFormatter formmater = DateTimeFormatter.ofPattern("HH:mm");
@@ -94,5 +96,22 @@ public class Attendance {
 	public void setWorkHours(long workHours) {
 		this.workHours = workHours;
 	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	public String getEdit() {
+		return edit;
+	}
+
+	public void setEdit(String edit) {
+		this.edit = edit;
+	}
+	
 	
 }

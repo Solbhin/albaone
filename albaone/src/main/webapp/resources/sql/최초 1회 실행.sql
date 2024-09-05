@@ -21,6 +21,8 @@ CREATE TABLE attendance(
     check_in_time datetime,
     check_out_time datetime,
     workHours time,
+    reason text, -- 사유, 사유가 있으면 출근은 아니지만 등급에선 출근으로 인정, 월급계산에선 출근X null값 허용
+    edit char(4), -- 수정시 null 체크, null 아닌 행의 개수를 셀 예정
     FOREIGN KEY(id) REFERENCES user(id),
     CONSTRAINT chk_time CHECK (check_in_time <> check_out_time)
 );
@@ -65,7 +67,8 @@ CREATE TABLE if not exists Apply(
 	email VARCHAR(50), 
 	address VARCHAR(100),
     postNumber int,
-    status ENUM('지원 중', '수락', '거절', '공고 없음') DEFAULT '지원 중'
+    status ENUM('지원 중', '수락', '거절', '공고 없음') DEFAULT '지원 중',
+	MyimgName VARCHAR(20)
 );
 
 -- 공고 테이블
@@ -105,7 +108,8 @@ create table employmentcontract
     insurance varchar(25),-- 보험
     sinefilenameowner varchar(20), -- 파일경로(사업주)
     sinefilenameparttime varchar(20), -- 파일경로(알바생)
-    createdate date-- 작성 날짜
+    createdate date,-- 작성 날짜
+    parttimeid varchar(20) -- 알바생 아이디
 );
 
 CREATE TABLE employee(
@@ -125,6 +129,17 @@ create table Albarate
     company int -- 사측 평가
 );
 
+-- 리뷰
+create table Review
+(
+	ReviewNumber int primary key auto_increment, -- 리뷰 글 넘버
+	companyName VARCHAR(20) NOT NULL, -- 회사명
+    ratingAvg decimal(2,1), -- 별점
+    id varchar(10), -- 개인 회원 아이디
+    comment text -- 리뷰
+);
+
+-- 퇴직금
 create table severance(
 	id varchar(20),
     businessNumber varchar(20),

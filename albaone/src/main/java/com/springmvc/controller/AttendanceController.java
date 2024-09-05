@@ -41,18 +41,18 @@ public class AttendanceController {
 	@Autowired
 	private UserServiceImpl userService;
 
-//	근태 기록 조회
+	//근태 기록 조회
 	@GetMapping("/attendanceCalendar")
 	public String getCalendar(@RequestParam(value = "month", required = false) Integer month,
 			@RequestParam(value = "year", required = false) Integer year, HttpSession session, Model model) {
-//		현재 날짜 불러오기
+		//현재 날짜 불러오기
 		LocalDate currentDate = LocalDate.now();
 		if (month == null || year == null) {
 			month = currentDate.getMonthValue();
 			year = currentDate.getYear();
 		}
 
-//	    월이 넘어가면 연도가 바뀌게 설정
+		//월이 넘어가면 연도가 바뀌게 설정
 		if (month < 1) {
 			month = 12;
 			year -= 1;
@@ -63,7 +63,7 @@ public class AttendanceController {
 		YearMonth yearMonth = YearMonth.of(year, month);
 		List<Map<String, Object>> daysInMonth = new ArrayList<>();
 
-//	    날짜 정보 수집
+		//날짜 정보 수집
 		for (int day = 1; day <= yearMonth.lengthOfMonth(); day++) {
 			LocalDate date = LocalDate.of(year, month, day);
 			Map<String, Object> dayInfo = new HashMap<>();
@@ -76,7 +76,7 @@ public class AttendanceController {
 		model.addAttribute("currentYear", year);
 		model.addAttribute("days", daysInMonth);
 
-//	    출석 정보 가져오기
+		//출석 정보 가져오기
 		String businessNumber = (String) session.getAttribute("businessNumber");
 		List<Attendance> listOfAttendance = null;
 
@@ -94,7 +94,7 @@ public class AttendanceController {
 		}
 	}
 
-//	근태 기록 추가 양식 제공
+	//근태 기록 추가 양식 제공
 	@GetMapping("addAttendance")
 	public String addAttendanceForm(HttpSession session, Model model) {
 		String businessNumber = (String) session.getAttribute("businessNumber");
@@ -104,12 +104,23 @@ public class AttendanceController {
 		return "attendanceAdd";
 	}
 
-//	근태 기록 추가
+	//근태 기록 추가
 	@PostMapping("attendanceAdd")
-	public String addAttendance(@RequestParam String id, String selectDate, String inTime, String outTime,
-			HttpSession session) {
-//		String -> LocalDateTime 변환
+	public String addAttendance
+	(
+			@RequestParam String id,
+			String selectDate,
+			@RequestParam(value = "inTime", required = false) String inTime,
+			@RequestParam(value = "outTime", required = false) String outTime,
+			@RequestParam(value = "reason", required = false) String reason,
+			HttpSession session)
+	{
+
+		//근무
+		//String -> LocalDateTime 변환
+
 		Attendance attendance = new Attendance();
+
 		LocalDate localDate = LocalDate.parse(selectDate);
 		LocalTime checkinTime = LocalTime.parse(inTime);
 		LocalTime checkoutTime = LocalTime.parse(outTime);
@@ -123,7 +134,8 @@ public class AttendanceController {
 		attendance.setCheckInTime(checkInDateTime);
 		attendance.setCheckOutTime(checkOutDateTime);
 		attendance.setWorkHours(flooredMinutes);
-
+		attendance.setReason(reason);
+		
 		attendanceService.addAttendance(attendance);
 
 		return "redirect:/attendanceCalendar";
@@ -159,19 +171,21 @@ public class AttendanceController {
 		return "attendanceEditForm";
 	}
 
-//	근태 기록 수정
+	//근태 기록 수정
 	@PostMapping("attendanceEdit")
 	public String editAttendance(String id, String selectDate, String inTime, String outTime, String checkInTime,
+			String reason, String edit,
 			HttpSession session) {
 		Attendance attendance = new Attendance();
 		LocalDate localDate = LocalDate.parse(selectDate);
 		LocalTime checkinTime = LocalTime.parse(inTime);
 		LocalDateTime checkInDateTime = LocalDateTime.of(localDate, checkinTime);
-
+		System.out.println(edit);
 		attendance.setId(id);
 		attendance.setBusinessNumber(String.valueOf(session.getAttribute("businessNumber")));
 		attendance.setCheckInTime(checkInDateTime);
-
+		attendance.setReason(reason);
+		attendance.setEdit(edit);
 		if (outTime != null && !outTime.isEmpty()) {
 			LocalTime checkoutTime = LocalTime.parse(outTime);
 			LocalDateTime checkOutDateTime = LocalDateTime.of(localDate, checkoutTime);

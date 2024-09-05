@@ -62,14 +62,14 @@ public class EmployeeController {
 		
 		employeeService.resignationEmployee(id, businessNumber, formattedDate); // 퇴직일자 업데이트
 		
-//		퇴직금 지급여부 확인 후 생성
+		//퇴직금 지급여부 확인 후 생성
 		Employee employee = employeeService.getOneResignee(id, businessNumber);
 		if(employee.getEmploymentPeriod()>365) {
 			int resignYear = formattedDate.getYear(); // 퇴직일자의 년도
 			int resignMonthValue = formattedDate.getMonthValue(); // 퇴직일자의 월 값
 			int resignDay = formattedDate.getDayOfMonth(); // 퇴직일자의 일 값
 	
-	//		퇴직전 3개월 기간
+			//퇴직전 3개월 기간
 			LocalDate dateAll1 = LocalDate.of(resignYear, resignMonthValue - 3, resignDay);
 			LocalDate dateAll2 = LocalDate.of(resignYear, resignMonthValue, resignDay - 1);
 			long periodAll = ChronoUnit.DAYS.between(dateAll1, dateAll2) + 1;
@@ -85,7 +85,7 @@ public class EmployeeController {
 			String average = numberFormat.format(averageWage);
 			String severance = numberFormat.format(result);
 			
-	//		디버깅
+			//디버깅
 			System.out.println("시작날짜: " + dateAll1);
 			System.out.println("끝날짜: " + dateAll2);
 			System.out.println("기간: " + periodAll);

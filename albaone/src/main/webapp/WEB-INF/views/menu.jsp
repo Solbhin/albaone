@@ -63,14 +63,13 @@
 						    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown(event)" data-bs-auto-close="true" >근무</a>
 						    <div class="dropdown-menu" style="">
 						     	<a class="dropdown-item" href="/albaone/attendanceCalendar">근무 기록</a>
-						        <a class="dropdown-item" href="/albaone/salaryPersonal">급여 조회</a>		     
+						        <a class="dropdown-item" href="/albaone/salaryPersonal">급여 조회</a>	
+						        <a class="dropdown-item" href="contractsParttime">계약서 조회</a>
+						        <a class="dropdown-item" href="ReadAlbarate">등급 조회</a>		     
 						    </div>
 						</li>
 	                    <li class="nav-item">
 	                    	<a class="nav-link" href="/albaone/jobposts?page=1">채용 정보</a>
-	                    </li>
-	                    <li class="nav-item">
-	                        <a class="nav-link" href="contractsParttime">계약서 조회</a>
 	                    </li>
 					</c:if>
                 	<c:if test="${not empty sessionScope.id}">
