@@ -60,7 +60,9 @@ public class ApplyforController
                               HttpSession session) {
         JobPost jobPost = jobPostService.getPostDetail(postNumber);
      
+        System.out.println("리썸넘버: "+number);
         Resume resumes=resumeService.getResumeNumber(number);
+        System.out.println("확인용: "+resumes);
         String id=(String) session.getAttribute("id");
         
         applyService.applyForJob(id,resume_number, resumeTitle, postNumber, 
@@ -100,18 +102,11 @@ public class ApplyforController
 	}
     
 	@GetMapping("/businesapplyview")
-	public String businesapplyview
-	(
-			@RequestParam("postNumber") int postNumber,
-			@RequestParam("apply_id") int apply_id,
-			@RequestParam("id") String id,
-			Model model
-	)
-	{
+	public String businesapplyview(@RequestParam("postNumber")int postNumber,
+									@RequestParam("apply_id")int apply_id,Model model) {
 		List<Apply> businesview=applyService.getbusinesview(postNumber,apply_id);
 		model.addAttribute("businesview",businesview);
 		model.addAttribute("postNumber",postNumber);
-		model.addAttribute("id",id); //Apply데이터베이스의 아이디를 가져감
 		return "businesapplyview";
 	}
 	

@@ -40,10 +40,4 @@ public class EmploymentcontractServiceImpl implements EmploymentcontractService
 		return employmentcontractRepository.findByNum(num);
 	}
 
-	@Override
-	public List<Employmentcontract> findAllByParttimeid(String parttimeid)
-	{
-		return employmentcontractRepository.findAllByParttimeid(parttimeid);
-	}
-
 }

@@ -3,6 +3,7 @@ package com.springmvc.domain;
 public class JobPost {
 	private int postNumber; // 게시글 번호
 	private String companyName; // 상호명
+	private String businessNumber;
 	private String workLocation; // 근무지 주소
 	private String contactNumber; // 연락처
 	private int salary; // 임금
@@ -53,6 +54,14 @@ public class JobPost {
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+
+	public String getBusinessNumber() {
+		return businessNumber;
+	}
+
+	public void setBusinessNumber(String businessNumber) {
+		this.businessNumber = businessNumber;
 	}
 
 	public String getWorkLocation() {

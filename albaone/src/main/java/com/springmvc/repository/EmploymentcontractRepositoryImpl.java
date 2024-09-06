@@ -30,7 +30,7 @@ public class EmploymentcontractRepositoryImpl implements EmploymentcontractRepos
 	{
 		System.out.println("근로계약서 리파지토리 create");
 		String sql =
-				"insert into employmentcontract values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				"insert into employmentcontract values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		template.update
 		(
@@ -55,8 +55,8 @@ public class EmploymentcontractRepositoryImpl implements EmploymentcontractRepos
 				Employmentcontract.getInsurance(),
 				Employmentcontract.getSinefilenameowner(),
 				Employmentcontract.getSinefilenameparttime(),
-				Employmentcontract.getCreatedate(),
-				Employmentcontract.getParttimeid()
+				Employmentcontract.getCreatedate()
+				
 		);
 		return;
 	}
@@ -99,45 +99,6 @@ public class EmploymentcontractRepositoryImpl implements EmploymentcontractRepos
         });
     }
 
-	//알바생 아이디로 조회하기
-	@SuppressWarnings("deprecation")
-	@Override
-    public List<Employmentcontract> findAllByParttimeid(String parttimeid)
-	{
-        String sql = "select * from employmentcontract where parttimeid = ?";
-        return template.query(sql, new Object[]{parttimeid}, new RowMapper<Employmentcontract>()
-        {
-            @Override
-            public Employmentcontract mapRow(ResultSet rs, int rowNum) throws SQLException
-            {
-            	Employmentcontract Employmentcontract = new Employmentcontract();
-            	Employmentcontract.setNum(rs.getInt("num"));
-            	Employmentcontract.setOwnername(rs.getString("ownername"));
-            	Employmentcontract.setBusinessNumber(rs.getString("businessNumber"));
-            	Employmentcontract.setOwnerPhone(rs.getString("ownerPhone"));
-            	Employmentcontract.setOwneraddr(rs.getString("owneraddr"));
-            	Employmentcontract.setParttimename(rs.getString("parttimename"));
-            	Employmentcontract.setParttimeaddr(rs.getString("parttimePhone"));
-            	Employmentcontract.setParttimePhone(rs.getString("parttimeaddr"));
-            	Employmentcontract.setPeriod_start(rs.getString("period_start"));
-            	Employmentcontract.setPeriod_end(rs.getString("period_end"));
-            	Employmentcontract.setPlace(rs.getString("place"));
-            	Employmentcontract.setWorkdetail(rs.getString("workdetail"));
-            	Employmentcontract.setWorkinghours_start(rs.getString("workinghours_start"));
-            	Employmentcontract.setWorkinghours_end(rs.getString("workinghours_end"));
-            	Employmentcontract.setWorkday(rs.getString("workday"));
-            	Employmentcontract.setMoney(rs.getInt("money"));
-            	Employmentcontract.setBonus(rs.getInt("bonus"));
-            	Employmentcontract.setInsurance(rs.getString("insurance"));
-            	Employmentcontract.setSinefilenameowner(rs.getString("sinefilenameowner"));
-            	Employmentcontract.setSinefilenameparttime(rs.getString("sinefilenameparttime"));
-            	Employmentcontract.setCreatedate(rs.getString("createdate"));
-                return Employmentcontract;
-            }
-        });
-    }
-	
-	
     //넘버로 계약서 삭제
     @Override
     public int deleteContractsByPartTimeName(int num)

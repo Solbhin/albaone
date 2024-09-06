@@ -5,14 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/albaone/resources/css/jobPost.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>게시글 상세보기</title>
-<style>
-    .card {
-        margin: 20px auto;
-        max-width: 600px;
-    }
-</style>
 </head>
 <body>
 
@@ -41,22 +36,33 @@
             </div>
              <c:if test="${empty sessionScope.businessNumber}">
             <div class="card-footer text-center">
-            	<a href="applyresumeList?postNumber=${jobPost.postNumber}">지원하기</a>
-            	<a href="reviewList?companyName=${jobPost.companyName}">리뷰보기</a>
+            	<a href="applyresumeList?postNumber=${jobPost.postNumber}" class="btn btn-outline-dark btn-lg m-2 btn-style">
+				        지원하기
+			    </a>
+			    <a href="reviewList?companyName=${jobPost.companyName}" class="btn btn-outline-dark btn-lg m-2 btn-style">
+				        리뷰보기
+				</a>
             </div>
             </c:if>
             <c:if test="${not empty sessionScope.businessNumber}">
-            <div class="card-footer text-center">
-            	<a href="businesApplylist?postNumber=${jobPost.postNumber}">지원 내역 조회</a>
-            	<a href="reviewList?companyName=${jobPost.companyName}">리뷰보기</a>
-            </div>
-            </c:if>
+				<div class="card-footer text-center">
+				    <a href="applyresumeList?postNumber=${jobPost.postNumber}" class="btn btn-outline-dark btn-lg m-2 btn-style">
+				        지원하기
+				    </a>
+				    <a href="reviewList?companyName=${jobPost.companyName}" class="btn btn-outline-dark btn-lg m-2 btn-style">
+				        리뷰보기
+				    </a>
+				</div>
+
+
+			</c:if>
         </div>
             <div class="text-center">
                 <button onclick="window.history.back();" class="btn btn-secondary">목록으로 돌아가기</button>
             </div>
     </div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9b93f1c67d88fac7ef8329a28850e92c&libraries=services,clusterer,drawing"></script>
+    
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7dae7fbe3ec02d481fe913a5d0874e98&libraries=services,clusterer,drawing"></script>
 	<script>
 		var container = document.getElementById('map');
 		var options = {

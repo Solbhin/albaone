@@ -1,42 +1,56 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>근로계약서 조회 - 알바생 페이지</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/albaone/resources/css/employmentcontractlistcompany.css"> 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>근로 계약서 목록</title>
 </head>
 <body>
-    <%@include file="menu.jsp" %>
-    
-    <div class="container mt-5">
-        <c:forEach var="contract" items="${contract}">
-            <c:if test="${not empty contract}">
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <h5 class="mb-1">근무장소: ${contract.place}</h5>
-                        <p class="mb-1">고용주 전화번호 : ${contract.ownerPhone}</p>
-                        <p class="mb-1">임금: ${contract.money}</p>
-                        <p class="mb-1">작성 날짜: ${contract.createdate}</p>
-                        <button class="btn btn-primary" onclick="window.location.href='downloadcontractexam?num=${contract.num}'">
-                            다운로드
-                        </button>
-                    </div>
-                </div>
-            </c:if>
-        </c:forEach>
-        <c:if test="${empty contract}">
-            <div class="alert alert-warning" role="alert">
-                등록된 근로 계약서가 없습니다.
-            </div>
-        </c:if>
-    </div>
-    
-    <footer>
-        <%@include file="footer.jsp" %>
-    </footer>
+    <h1>근로 계약서 목록</h1>
+    <c:if test="${not empty contracts}">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>사업주명</th>
+                    <th>알바생명</th>
+                    <th>근무 시작</th>
+                    <th>근무 종료</th>
+                    <th>근로 장소</th>
+                    <th>업무 내용</th>
+                    <th>근로 시작 시간</th>
+                    <th>근로 종료 시간</th>
+                    <th>주당 근무일</th>
+                    <th>임금</th>
+                    <th>상여금</th>
+                    <th>보험</th>
+                    <th>작성 날짜</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="contract" items="${contracts}">
+                    <tr>
+                        <td>${contract.ownername}</td>
+                        <td>${contract.parttimename}</td>
+                        <td>${contract.period_start}</td>
+                        <td>${contract.period_end}</td>
+                        <td>${contract.place}</td>
+                        <td>${contract.workdetail}</td>
+                        <td>${contract.workinghours_start}</td>
+                        <td>${contract.workinghours_end}</td>
+                        <td>${contract.workday}</td>
+                        <td>${contract.money}</td>
+                        <td>${contract.bonus}</td>
+                        <td>${contract.insurance}</td>
+                        <td>${contract.createdate}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </c:if>
+    <c:if test="${empty contracts}">
+        <p>등록된 근로 계약서가 없습니다.</p>
+    </c:if>
 </body>
 </html>
 

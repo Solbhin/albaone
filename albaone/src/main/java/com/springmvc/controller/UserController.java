@@ -49,7 +49,7 @@ public class UserController {
 			String businessNumber = userService.findBusinessNumber(id);
 			User user = userService.findUserById(id);
 			String name = user.getName();
-			session.setAttribute("name", name);
+			session.setAttribute("userName", name);
 			session.setAttribute("businessNumber", businessNumber);
 			return "redirect:/home";
 		} else {

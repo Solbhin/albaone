@@ -12,6 +12,9 @@ import com.springmvc.service.*;
 public class rateController
 {
 	@Autowired
+	private AlbarateServiceImpl AlbarateServiceImpl;
+	
+	@Autowired
 	private AttendanceServiceImpl AttendanceServiceImpl;
 	
 	// 알바생이 자기 등급 조회

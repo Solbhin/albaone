@@ -28,7 +28,6 @@ public class Employmentcontract
 	private String sinefilenameowner; //사업주 사인 경로명
 	private String sinefilenameparttime;
 	private String createdate; // 작성 날짜
-	private String parttimeid; //알바생 아이디
 
 	// 기본생성자
 	public Employmentcontract() {}
@@ -215,13 +214,5 @@ public class Employmentcontract
 
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
-	}
-
-	public String getParttimeid() {
-		return parttimeid;
-	}
-
-	public void setParttimeid(String parttimeid) {
-		this.parttimeid = parttimeid;
-	}
+	}	
 }

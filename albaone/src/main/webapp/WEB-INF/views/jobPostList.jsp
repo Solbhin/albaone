@@ -20,7 +20,7 @@
 		<div class="container mt-4">
 			<form id="searchForm">
 				<div class="input-group mb-3">
-					<input type="text" name="searchInput" id="searchInput" class="form-control" value="${query}" placeholder="주소나 사업장 입력해주세요.">
+					<input type="text" name="searchInput" id="searchInput" class="form-control" value="${query}" placeholder="주소나 상호명을 입력해주세요.">
 					<input type="submit" class="btn btn-secondary" value="검색">
 				</div>
 			</form>

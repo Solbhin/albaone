@@ -1,5 +1,11 @@
 package com.springmvc.controller;
 
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,18 +14,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.domain.Employee;
 import com.springmvc.domain.Severance;
 import com.springmvc.service.EmployeeServiceImpl;
 import com.springmvc.service.SeveranceServiceImpl;
+import com.springmvc.service.AttendanceServiceImpl;
 
 @Controller
 public class SeveranceController {
 	@Autowired
 	private EmployeeServiceImpl employeeService;
 
+	@Autowired
+	private AttendanceServiceImpl attendanceService;
+	
 	@Autowired
 	private SeveranceServiceImpl severanceService;
 
