@@ -10,7 +10,8 @@ CREATE TABLE if not exists jobpost(
     workDays VARCHAR(5) default "요일협의",		-- 근무요일
     workDuration varchar(10) not null,			-- 근무기간
     jobDescription varchar(200),				-- 하는 일
-    id VARCHAR(20)								-- 작성자 아이디
+    id VARCHAR(20),								-- 작성자 아이디
+    businessNumber varchar(10)
 );
 alter table jobpost add column businessNumber varchar(10);
 select * from jobpost;

@@ -1,6 +1,8 @@
 package com.springmvc.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -85,34 +87,80 @@ public class ResumeController {
 	// 이력서 상세보기
 	@GetMapping("/resumeread")
 	public String resumereadview(@RequestParam("number") String number, Model model) {
-		Resume resumeNumber = resumeService.getResumeNumber(number);
-		model.addAttribute("resume", resumeNumber);
+		Resume resume = resumeService.getResumeNumber(number);
+		
+		List<String> schools = Arrays.asList(resume.getSchool().split(","));
+		List<String> periods = Arrays.asList(resume.getPeriod().split(","));
+		List<String> majors = Arrays.asList(resume.getMajor().split(","));
+		List<String> jopTitles = Arrays.asList(resume.getJob_title().split(","));
+		List<String> experiencePeriods = Arrays.asList(resume.getExperience_period().split(","));
+		List<String> mainWorks = Arrays.asList(resume.getMain_work().split(","));
+	
+		
+		model.addAttribute("resume", resume);
+		model.addAttribute("schools",schools);
+		model.addAttribute("periods",periods);
+		model.addAttribute("jopTitles",jopTitles);
+		model.addAttribute("majors",majors);
+		model.addAttribute("experiencePeriods",experiencePeriods);
+		model.addAttribute("mainWorks",mainWorks);
 		return "resumeview";
 	}
-
-	// 이력서 수정
+	
+	// 이력서 수정 폼 표시
 	@GetMapping("/resumeupdate")
-	public String resumeupdate(@ModelAttribute("updateResume") Resume resume, @RequestParam("number") String number,
-			Model model) {
-		Resume resumeNumber = resumeService.getResumeNumber(number);
-		model.addAttribute("resume", resumeNumber);
-		return "updateResume";
-	}
+	public String resumeUpdateForm(@RequestParam("number") String number, Model model) {
+	    Resume resume = resumeService.getResumeNumber(number);
+	    
+	    // 학력사항과 경력사항 리스트 변환
+	    List<String> schools = Arrays.asList(resume.getSchool().split(","));
+	    List<String> periods = Arrays.asList(resume.getPeriod().split(","));
+	    List<String> majors = Arrays.asList(resume.getMajor().split(","));
+	    List<String> jopTitles = Arrays.asList(resume.getJob_title().split(","));
+	    List<String> experiencePeriods = Arrays.asList(resume.getExperience_period().split(","));
+	    List<String> mainWorks = Arrays.asList(resume.getMain_work().split(","));
 
+	    // 모델에 데이터 추가
+	    model.addAttribute("resume", resume);
+	    model.addAttribute("schools", schools);
+	    model.addAttribute("periods", periods);
+	    model.addAttribute("majors", majors);
+	    model.addAttribute("jobTitles", jopTitles);
+	    model.addAttribute("experiencePeriods", experiencePeriods);
+	    model.addAttribute("mainWorks", mainWorks);
+
+	    return "updateResume";
+	}
+	
+	// 이력서 수정
 	@PostMapping("/resumeupdate")
-	public String resumeupdate(@ModelAttribute("updateResume") Resume resume, @RequestParam int number) {
-		MultipartFile Image = resume.getMyimg();
-		if (Image != null && !Image.isEmpty()) {
-			try {
-				String fname = Image.getOriginalFilename();
-				Image.transferTo(new File("/resources/images/" + fname));
-				resume.setMyimgName(fname);
-			} catch (Exception e) {
-				throw new RuntimeException(" Image saving failed", e);
-			}
-		}
-		resumeService.setUpdateResume(resume);
-		return "redirect:/resumereadAll";
+	public String resumeupdate(@ModelAttribute("updateResume") Resume resume,
+	                           @RequestParam("number") String number,
+	                           @RequestParam(value = "schools[]", required = false) List<String> schools,
+	                           @RequestParam(value = "periods[]", required = false) List<String> periods,
+	                           @RequestParam(value = "majors[]", required = false) List<String> majors,
+	                           @RequestParam(value = "jobTitles[]", required = false) List<String> jobTitles,
+	                           @RequestParam(value = "experiencePeriods[]", required = false) List<String> experiencePeriods,
+	                           @RequestParam(value = "mainWorks[]", required = false) List<String> mainWorks) {
+		
+	    System.out.println("schools: " + schools);
+	    System.out.println("periods: " + periods);
+	    System.out.println("majors: " + majors);
+	    System.out.println("jobTitles: " + jobTitles);
+	    System.out.println("experiencePeriods: " + experiencePeriods);
+	    System.out.println("mainWorks: " + mainWorks);
+		
+	    
+	    // 나머지 처리
+	    resume.setSchool(String.join(",", schools));
+	    resume.setPeriod(String.join(",", periods));
+	    resume.setMajor(String.join(",", majors));
+	    resume.setJob_title(String.join(",", jobTitles));
+	    resume.setExperience_period(String.join(",", experiencePeriods));
+	    resume.setMain_work(String.join(",", mainWorks));
+	    
+	    resumeService.setUpdateResume(resume);
+	    return "redirect:/resumereadAll";
 	}
 
 	// 이력서 삭제

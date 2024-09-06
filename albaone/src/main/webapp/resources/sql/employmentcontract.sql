@@ -21,8 +21,12 @@ create table employmentcontract
     insurance varchar(25),-- 보험
     sinefilenameowner varchar(20), -- 파일경로(사업주)
     sinefilenameparttime varchar(20), -- 파일경로(알바생)
-    createdate date-- 작성 날짜
+    createdate date,-- 작성 날짜
+    parttimeid varchar(20) -- 알바생 아이디
 );
+
+alter table employmentcontract add column parttimeid varchar(20);
 select * from employmentcontract;
 truncate table employmentcontract;
 drop table employmentcontract;
+

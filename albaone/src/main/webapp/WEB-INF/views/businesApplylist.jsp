@@ -27,7 +27,7 @@
                         <th scope="col">근무일</th>
                         <th scope="col">급여</th>
                         <th scope="col">직무 설명</th>
-                        <th scope="col">사진<th>
+                        <th scope="col">사진</th>
                         <th scope="col">지원 상태</th>
                         <th scope="col">상세보기</th>
                     </tr>
@@ -62,7 +62,7 @@
                                 </c:otherwise>
                             </c:choose>
                             </td>
-                            <td><a href="businesapplyview?apply_id=${apply.apply_id}&postNumber=${postNumber}" class="btn btn-primary">상세보기</a></td>
+                            <td><a href="businesapplyview?apply_id=${apply.apply_id}&postNumber=${postNumber}&id=${apply.id}" class="btn btn-primary">상세보기</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -14,7 +14,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
         	<div class="logo">
-	            <a class="navbar-brand" href="./">
+	            <a class="navbar-brand" href="/albaone">
 					<img class="navbar-logo" src="${pageContext.request.contextPath}/resources/images/logo.png">
 				</a>
 			</div>
@@ -26,7 +26,7 @@
                 <ul class="navbar-nav">
  	                <c:if test="${not empty sessionScope.id}">
 	                	<li class="nav-item">
-	                		<p class="nav-link">안녕하세요 <strong>${id}님</strong></p>
+	                		<p class="nav-link">안녕하세요 <strong>${userName}님</strong></p>
 	                	</li>
 	                </c:if>
 	                <c:if test="${not empty sessionScope.businessNumber && not empty sessionScope.id}">
@@ -47,6 +47,9 @@
 						        <a class="dropdown-item" href="resignee">직원 퇴직금 조회</a>
 						    </div>
 						</li>
+						<li class="nav-item">
+	                        <a class="nav-link" href="contracts">계약서 조회</a>
+	                    </li>
 	                </c:if>
                    	<c:if test="${empty sessionScope.businessNumber && not empty sessionScope.id}">
 						<li class="nav-item dropdown">
@@ -65,6 +68,9 @@
 						</li>
 	                    <li class="nav-item">
 	                    	<a class="nav-link" href="/albaone/jobposts?page=1">채용 정보</a>
+	                    </li>
+	                    <li class="nav-item">
+	                        <a class="nav-link" href="contractsParttime">계약서 조회</a>
 	                    </li>
 					</c:if>
                 	<c:if test="${not empty sessionScope.id}">

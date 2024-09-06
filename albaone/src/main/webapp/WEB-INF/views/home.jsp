@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/albaone/resources/css/home.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
     <%@include file="menu.jsp" %>
     <div class="image-container">
