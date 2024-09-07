@@ -13,7 +13,7 @@
 
     <%@include file="menu.jsp" %>
     
-    <div class="container mt-4">
+    <div class="container mt-4 main">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5>${jobPost.companyName}의 상세정보</h5>
@@ -46,12 +46,8 @@
             </c:if>
             <c:if test="${not empty sessionScope.businessNumber}">
 				<div class="card-footer text-center">
-				    <a href="applyresumeList?postNumber=${jobPost.postNumber}" class="btn btn-outline-dark btn-lg m-2 btn-style">
-				        지원하기
-				    </a>
-				    <a href="reviewList?companyName=${jobPost.companyName}" class="btn btn-outline-dark btn-lg m-2 btn-style">
-				        리뷰보기
-				    </a>
+				    <a href="businesApplylist?postNumber=${jobPost.postNumber}" class="btn btn-outline-dark btn-lg m-2 btn-style">지원 내역 조회</a>
+            		<a href="reviewList?companyName=${jobPost.companyName}" class="btn btn-outline-dark btn-lg m-2 btn-style">리뷰보기</a>
 				</div>
 
 
@@ -61,6 +57,8 @@
                 <button onclick="window.history.back();" class="btn btn-secondary">목록으로 돌아가기</button>
             </div>
     </div>
+    
+    <%@include file="footer.jsp" %>
     
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7dae7fbe3ec02d481fe913a5d0874e98&libraries=services,clusterer,drawing"></script>
 	<script>

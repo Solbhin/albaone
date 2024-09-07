@@ -10,7 +10,6 @@
     <title>근무 기록 입력</title>
 </head>
 <body>
-	
     <div class="container mt-5">
         <h2 class="text-center">근무 기록 입력</h2>
         <form action="attendanceAdd" method="post">
@@ -29,22 +28,14 @@
             </div>
             <div class="form-group">
                 <label for="checkInTime">출근 시간</label>
-                <input type="time" class="form-control" name="inTime" >
+                <input type="time" class="form-control" name="inTime" required>
             </div>
             <div class="form-group">
                 <label for="checkOutTime">퇴근 시간</label>
-                <input type="time" class="form-control" name="outTime" >
+                <input type="time" class="form-control" name="outTime" required>
             </div>
-            
-            <div class="form-group">
-                <label for="reason">결근사유</label>
-                <input type="checkbox" id="absenceCheckbox">
-                <textarea class="form-control" id="reason" name="reason" rows="4" placeholder="결근 사유를 입력하세요" style="display:none"></textarea>
-            </div>
-            
             <button type="submit" class="btn btn-primary btn-block mt-3">등록하기</button>
         </form>
     </div>
-    <script type="text/javascript" src="/albaone/resources/js/attendanceAdd.js"></script>
 </body>
 </html>

@@ -5,87 +5,58 @@
 <head>
 <meta charset="UTF-8">
 <title>등급 조회</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<style>
-    .custom-background {
-        background-color: #D8CAB8 !important;
-    }
-</style>
 </head>
 <body>
-	<%@include file="menu.jsp" %>
+	<a href="./">홈으로</a>
+	<!-- 변수에 EL 담기 -->
+	<c:set var="commute" value="${read.commute}" />
+	<c:set var="absent" value="${read.absent}" />
+	<c:set var="blinking" value="${read.blinking}" />
+	<c:set var="company" value="${read.company}" />
 
-	<div class="container mt-5">
-		<c:if test="${not empty readList}">
-			<c:set var="currentCompany" value="" />
-			
-			<c:forEach var="read" items="${readList}">
-				<c:if test="${not empty read}">
-					<c:if test="${currentCompany != read.companyName}">
-						<c:if test="${not empty currentCompany}">
-							<!-- 이전 회사의 결과를 출력하는 부분 -->
-							<c:if test="${workingDays > 0}">
-								<c:set var="totalDays" value="${workingDays + absentDays}" />
-								<c:set var="attendanceRate" value="${(workingDays / totalDays) * 100}" />
-								<div class="custom-background">
-									근무 일수: ${workingDays}일, 출석률: ${attendanceRate}%<br>
-									<p class="mb-1">QR 미체크 횟수: ${qrMissedCount}</p>
-								</div>
-							</c:if>
-							<c:if test="${workingDays == 0}">
-								<div class="alert alert-warning" role="alert">
-									근무 기록이 없습니다.
-								</div>
-							</c:if>
-						</c:if>
-						
-						<!-- 새로운 회사에 대한 초기화 -->
-						<c:set var="currentCompany" value="${read.companyName}" />
-						<c:set var="workingDays" value="0" />
-						<c:set var="absentDays" value="0" />
-						<c:set var="qrMissedCount" value="0" />
-						
-						<h4>${currentCompany}</h4>
-					</c:if>
-					
-					<!-- 근무일수 및 QR 미체크 횟수 계산 -->
-					<c:if test="${not empty read.checkOutTime}">
-						<c:set var="workingDays" value="${workingDays + 1}" />
-					</c:if>
-					<c:if test="${empty read.checkOutTime}">
-						<c:if test="${empty read.reason}">
-							<c:set var="absentDays" value="${absentDays + 1}" />
-						</c:if>
-					</c:if>
-					<c:if test="${not empty read.edit}">
-						<c:set var="qrMissedCount" value="${qrMissedCount + 1}" />
-					</c:if>
+	<table border="1">
+	<tbody>
+		<tr>
+			<th colspan="2">알바생 이름</th>
+			<td>${ read.parttimename }</td>
+		</tr>
+		<tr>
+			<td>출퇴근</td>
+			<td>${ read.commute }</td>
+			<c:set var="commuteresult" value="" />
+			<td>생략</td>
+		</tr>
+		<tr>
+			<td>결근</td>
+			<td>${ read.absent }</td>
+			<c:set var="absentresult" value="" />
+			<td>생략</td>
+		</tr>
+		<tr>
+			<td>QR 소홀</td>
+			<td>${ read.blinking }</td>
+			<c:set var="blinkingresult" value="" />
+			<td>생략</td>
+		</tr>
+		<tr>
+			<td>회사 평가</td>
+			<td>${ read.company }</td>
+				<!-- 5이상 -->
+				<c:if test="${company >= 5}">
+			    	<c:set var="companyresult" value="우수알바" />
 				</c:if>
-			</c:forEach>
-			
-			<!-- 마지막 회사의 결과를 출력 -->
-			<c:if test="${workingDays > 0}">
-				<c:set var="totalDays" value="${workingDays + absentDays}" />
-				<c:set var="attendanceRate" value="${(workingDays / totalDays) * 100}" />
-				<div class="alert alert-success" role="alert">
-					근무 일수: ${workingDays}일, 출석률: ${attendanceRate}%<br>
-					<p class="mb-1">QR 미체크 횟수: ${qrMissedCount}</p>
-				</div>
-			</c:if>
-			<c:if test="${workingDays == 0}">
-				<div class="alert alert-warning" role="alert">
-					근무 기록이 없습니다.
-				</div>
-			</c:if>
-		</c:if>
-		
-		<c:if test="${empty readList}">
-			<div class="alert alert-warning" role="alert">
-				근무 기록이 없습니다.
-			</div>
-		</c:if>
-		
-		<a class="btn btn-block mt-3 custom-background" href="./">홈으로</a>
-	</div>
+				<!-- -5~4 -->
+				<c:if test="${company < 5 and company >= -5}">
+				    <c:set var="companyresult" value="일반알바" />
+				</c:if>
+				<!-- -5 미만 -->
+				<c:if test="${company < -5}">
+				    <c:set var="companyresult" value="노력필요" />
+				</c:if>
+
+			<td><c:out value="${companyresult}" /></td>
+		</tr>
+		</tbody>
+	</table>
 </body>
 </html>

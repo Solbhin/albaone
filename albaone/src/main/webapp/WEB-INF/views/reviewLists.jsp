@@ -11,20 +11,23 @@
 </head>
 <body>
 
-<div class="container mt-5">
-    <h2>${companyName}의 리뷰</h2>
-    <c:if test="${not empty averageRating}">
-        <h3>평균 평점: ${averageRating} 점
-            <c:choose>
-                <c:when test="${averageRating >= 0}">
-                    <c:forEach var="i" begin="1" end="5">
-                        <i class="fas fa-star ${i <= averageRating ? 'text-warning' : 'text-muted'}"></i>
-                    </c:forEach>
-                </c:when>
-            </c:choose>
-        </h3>
-    </c:if>
-    <div class="mb-4">
+	<div class="container mt-5">
+		<h2>${companyName}의리뷰</h2>
+		<c:if test="${not empty averageRating}">
+			<h3>
+				평균 평점: ${averageRating} 점
+				<c:choose>
+					<c:when test="${averageRating >= 0}">
+						<c:forEach var="i" begin="1" end="5">
+							<i
+								class="fas fa-star ${i <= averageRating ? 'text-warning' : 'text-muted'}"></i>
+						</c:forEach>
+					</c:when>
+				</c:choose>
+			</h3>
+		</c:if>
+		
+<div class="mb-4">
         <h5>리뷰 목록</h5>
         <ul class="list-group">
             <c:if test="${not empty reviews}">
@@ -36,13 +39,15 @@
                                 <i class="fas fa-star ${i <= review.ratingAvg ? 'text-warning' : 'text-muted'}"></i>
                             </c:forEach>
                         </span>
-                       <a href="removeReview?companyName=${review.companyName}&id=${review.id}&reviewNumber=${review.reviewNumber}" 
-						   class="btn btn-danger" 
-						   onclick="return confirm('정말 삭제하시겠습니까?');">
-						   삭제
-						</a>
-						<a href="updateReview?reviewNumber=${review.reviewNumber}" 
-						class="btn btn-primary">수정</a>
+                       <c:if test="${id==review.id}">
+	                       <a href="updateReview?reviewNumber=${review.reviewNumber}" 
+	                       class="btn btn-primary">수정</a>
+	                       <a href="removeReview?companyName=${review.companyName}&id=${review.id}&reviewNumber=${review.reviewNumber}" 
+	                          class="btn btn-danger" 
+	                          onclick="return confirm('정말 삭제하시겠습니까?');">
+	                          삭제
+	                       </a>
+                        </c:if>
                     </li>
                 </c:forEach>
             </c:if>
@@ -51,10 +56,12 @@
             </c:if>
         </ul>
     </div>
+    <c:if test="${not empty id && empty sessionScope.businessNumber}">
+        <div class="mb-4">
+            <a href="ReviewForm?companyName=${companyName}" class="btn btn-success">리뷰 작성하기</a>
+        </div>
+    </c:if>
 
-    <div class="mb-4">
-        <a href="ReviewForm?companyName=${companyName}" class="btn btn-success">리뷰 작성하기</a>
-    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

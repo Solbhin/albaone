@@ -6,12 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>지원자 상세 정보</title>
+    <link rel="stylesheet" href="/albaone/resources/css/businesapplyview.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file="menu.jsp" %>
 
-    <div class="container mt-5">
+    <div class="container mt-5 main">
         <h2 class="text-center mb-4">지원자 상세 정보</h2>
 
         <!-- 카드 형태로 상세 정보 출력 -->
@@ -98,7 +99,7 @@
             <!-- 상태와 상관없이 버튼을 항상 표시합니다. -->
             <div class="text-center mt-4">
             	<!-- 계약서 폼 가기전 상태파라미터와 알바생 정보 파라미터 가지고 가기 -->
-                <a href="employmentcontract?apply_id=${businesview.apply_id}&status=accepted&postNumber=${postNumber}&parttimename=${businesview.name}&parttimephone=${businesview.contact}&parttimeaddress=${businesview.address}&id=${businesview.id}" class="btn btn-primary"  data-status="${businesview.status}" onclick="handleClick(event, this)">채용 하기</a>
+                <a href="employmentcontract?apply_id=${businesview.apply_id}&status=accepted&postNumber=${postNumber}&parttimename=${businesview.name}&parttimephone=${businesview.contact}&parttimeaddress=${businesview.address}&id=${businesview.id}&parttimeid=${id}" class="btn btn-primary"  data-status="${businesview.status}" onclick="handleClick(event, this)">채용 하기</a>
                 <a href="updateStatus?apply_id=${businesview.apply_id}&status=rejected&postNumber=${postNumber}" class="btn btn-danger">채용 거절</a>
             </div>
         </c:forEach>
@@ -108,6 +109,8 @@
             <button onclick="window.history.back();" class="btn btn-secondary">목록으로 돌아가기</button>
         </div>
     </div>
+    
+    <%@include file="footer.jsp"%>
 
     <!-- 부트스트랩 JS 및 의존성 -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

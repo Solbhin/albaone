@@ -197,6 +197,16 @@ function updateSubmitButtonState()
     document.getElementById("submitButton").disabled = !(idCheckPassed && verificationCheckPassed);
 }
 
+var countTime = 0;
+var intervalCall;
+
+//시간 함수
+$.time = function(time)
+{
+	countTime = time;
+	intervalCall = setInterval(alertFunc, 1000);
+}
+
 $.closeTime = function()
 {
 	clearInterval(intervalCall);

@@ -42,8 +42,10 @@ public class SalaryController {
 		int wage = 9860; // 시급
 		int workHours = salaryService.getPersonalSalary(id, firstDayOfMonth, lastDayOfMonth) / 60; // 근무시간(시간단위)
 		float workMinutes = salaryService.getPersonalSalary(id, firstDayOfMonth, lastDayOfMonth) % 60; // 근무시간(분단위)
-
-		if (workMinutes == 0) {
+		System.out.println("테스트1: "+workHours);
+		System.out.println("테스트2: "+workMinutes);
+		
+		if (workMinutes == 0 && workHours == 0) {
 			model.addAttribute("message", "근무 기록이 없습니다.");
 			return "errorPage";
 		}

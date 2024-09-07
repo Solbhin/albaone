@@ -1,6 +1,7 @@
 package com.springmvc.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -105,6 +106,7 @@ public class ResumeController {
 		model.addAttribute("mainWorks",mainWorks);
 		return "resumeview";
 	}
+	
 	// 이력서 수정 폼 표시
 	@GetMapping("/resumeupdate")
 	public String resumeUpdateForm(@RequestParam("number") String number, Model model) {
@@ -123,7 +125,7 @@ public class ResumeController {
 	    model.addAttribute("schools", schools);
 	    model.addAttribute("periods", periods);
 	    model.addAttribute("majors", majors);
-	    model.addAttribute("jopTitles", jopTitles);
+	    model.addAttribute("jobTitles", jopTitles);
 	    model.addAttribute("experiencePeriods", experiencePeriods);
 	    model.addAttribute("mainWorks", mainWorks);
 
@@ -133,41 +135,31 @@ public class ResumeController {
 	// 이력서 수정
 	@PostMapping("/resumeupdate")
 	public String resumeupdate(@ModelAttribute("updateResume") Resume resume,
-	                           @RequestParam("number") int number,
-	                           @RequestParam(value = "school", required = false) List<String> schools,
-	                           @RequestParam(value = "period", required = false) List<String> periods,
-	                           @RequestParam(value = "major", required = false) List<String> majors,
-	                           @RequestParam(value = "job_title", required = false) List<String> jobTitles,
-	                           @RequestParam(value = "experience_period", required = false) List<String> experiencePeriods,
-	                           @RequestParam(value = "main_work", required = false) List<String> mainWorks) {
-	    // 이미지 업로드 처리
-	    MultipartFile image = resume.getMyimg();
-	    if (image != null && !image.isEmpty()) {
-	        try {
-	            String fileName = image.getOriginalFilename();
-	            File uploadDir = new File("src/main/resources/static/images/");
-	            if (!uploadDir.exists()) {
-	                uploadDir.mkdirs();
-	            }
-	            File file = new File(uploadDir, fileName);
-	            image.transferTo(file);
-	            resume.setMyimgName(fileName);
-	        } catch (Exception e) {
-	            throw new RuntimeException("Image saving failed", e);
-	        }
-	    }
-
-	    // 학력사항과 경력사항 문자열로 변환
-	    if (schools != null) resume.setSchool(String.join(",", schools));
-	    if (periods != null) resume.setPeriod(String.join(",", periods));
-	    if (majors != null) resume.setMajor(String.join(",", majors));
-	    if (jobTitles != null) resume.setJob_title(String.join(",", jobTitles));
-	    if (experiencePeriods != null) resume.setExperience_period(String.join(",", experiencePeriods));
-	    if (mainWorks != null) resume.setMain_work(String.join(",", mainWorks));
-
-	    // 이력서 수정
+	                           @RequestParam("number") String number,
+	                           @RequestParam(value = "schools[]", required = false) List<String> schools,
+	                           @RequestParam(value = "periods[]", required = false) List<String> periods,
+	                           @RequestParam(value = "majors[]", required = false) List<String> majors,
+	                           @RequestParam(value = "jobTitles[]", required = false) List<String> jobTitles,
+	                           @RequestParam(value = "experiencePeriods[]", required = false) List<String> experiencePeriods,
+	                           @RequestParam(value = "mainWorks[]", required = false) List<String> mainWorks) {
+		
+	    System.out.println("schools: " + schools);
+	    System.out.println("periods: " + periods);
+	    System.out.println("majors: " + majors);
+	    System.out.println("jobTitles: " + jobTitles);
+	    System.out.println("experiencePeriods: " + experiencePeriods);
+	    System.out.println("mainWorks: " + mainWorks);
+		
+	    
+	    // 나머지 처리
+	    resume.setSchool(String.join(",", schools));
+	    resume.setPeriod(String.join(",", periods));
+	    resume.setMajor(String.join(",", majors));
+	    resume.setJob_title(String.join(",", jobTitles));
+	    resume.setExperience_period(String.join(",", experiencePeriods));
+	    resume.setMain_work(String.join(",", mainWorks));
+	    
 	    resumeService.setUpdateResume(resume);
-
 	    return "redirect:/resumereadAll";
 	}
 

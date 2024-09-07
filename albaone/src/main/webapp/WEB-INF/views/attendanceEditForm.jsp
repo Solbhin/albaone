@@ -32,18 +32,8 @@
                 <input type="time" class="form-control" name="outTime" value="${localOutTime}">
                 <input type="hidden" name="checkOutTime" value="${checkOutTime}">
             </div>
-            
-            <div class="form-group">
-                <label for="reason">결근사유</label>
-                <input type="checkbox" id="absenceCheckbox">
-                <textarea class="form-control" id="reason" name="reason" rows="4" placeholder="결근 사유를 입력하세요" style="display:none"></textarea>
-            </div>
-            
-            <input type="hidden" name="edit" value="edit">
             <button type="submit" class="btn btn-primary btn-block mt-3">수정</button>
         </form>
     </div>
-
-	<script type="text/javascript" src="/albaone/resources/js/attendanceAdd.js"></script>
 </body>
 </html>

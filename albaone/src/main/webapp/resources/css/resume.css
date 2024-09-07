@@ -34,23 +34,23 @@
 }
 
 .btn-primary {
-    background-color: #3b564d;
-    border-color: #3b564d;
+    background-color: #3b564d !important;
+    border-color: #3b564d !important;
 }
 
 .btn-primary:hover {
-    background-color: #2a3f3b;
-    border-color: #2a3f3b;
+    background-color: #2a3f3b !important;
+    border-color: #2a3f3b !important;
 }
 
 .btn-danger {
-    background-color: #d9534f;
-    border-color: #d9534f;
+    background-color: #D8A9A4 !important; /* 연한 붉은 와인색 */
+    border: 0px !important;
 }
 
 .btn-danger:hover {
-    background-color: #c9302c;
-    border-color: #c9302c;
+    background-color: #c9302c !important;
+    border-color: #c9302c !important;
 }
 
 .form-control {

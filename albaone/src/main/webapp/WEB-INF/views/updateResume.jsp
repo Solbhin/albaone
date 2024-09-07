@@ -15,7 +15,7 @@
         <div class="card-body">
             <i class="bi bi-file-earmark-fill"></i>
             <h2>지원서 수정</h2>
-            <form action="${pageContext.request.contextPath}/resumeupdate" method="post" enctype="multipart/form-data" onsubmit="return validateFile();">
+            <form action="resumeupdate?number=${resume.number}" method="post" enctype="multipart/form-data" modelAttribute="updateResume" onsubmit="return validateFile();">
                 <!-- 성명 및 사진 -->
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -78,38 +78,37 @@
                 <div class="form-group mb-3">
                     <label for="address">현 주소 (우편번호: - )</label>
                     <input type="text" class="form-control" id="address" name="address" value="${resume.address}" required>
-                </div>
-                
-                <!-- 학력사항 -->
-                <div class="form-group mb-3">
-                    <label for="education">학력사항</label>
-                    <div id="educationFields">
-                        <c:forEach var="edu" items="${schools}" varStatus="status">
-                            <div class="education-row mb-3">
-                                <input type="text" class="form-control" name="schools[${status.index}]" value="${edu}" placeholder="학교명" required>
-                                <input type="text" class="form-control mt-2" name="periods[${status.index}]" value="${periods[status.index]}" placeholder="기간" required>
-                                <input type="text" class="form-control mt-2" name="majors[${status.index}]" value="${majors[status.index]}" placeholder="전공" required>
-                            </div>
-                        </c:forEach>
-                        <button type="button" class="btn btn-secondary mt-3" onclick="addEducationField()">학력 추가</button>
-                    </div>
-                </div>
-                
-                <!-- 경력사항 -->
-                <div class="form-group mb-3">
-                    <label for="experience">아르바이트 경력사항</label>
-                    <div id="experienceFields">
-                        <c:forEach var="exp" items="${jopTitles}" varStatus="status">
-                            <div class="experience-row mb-3">
-                                <input type="text" class="form-control" name="jopTitles[${status.index}]" value="${exp}" placeholder="직장명" required>
-                                <input type="text" class="form-control mt-2" name="experiencePeriods[${status.index}]" value="${experiencePeriods[status.index]}" placeholder="기간" required>
-                                <input type="text" class="form-control mt-2" name="mainWorks[${status.index}]" value="${mainWorks[status.index]}" placeholder="주요 업무" required>
-                            </div>
-                        </c:forEach>
-                        <button type="button" class="btn btn-secondary mt-3" onclick="addExperienceField()">경력 추가</button>
-                    </div>
-                </div>
-                
+                </div>                
+				<!-- 학력사항 -->
+				<div class="form-group mb-3">
+				    <label for="education">학력사항</label>
+				    <div id="educationFields">
+				        <c:forEach var="edu" items="${schools}" varStatus="status">
+				            <div class="education-row mb-3">
+				                <input type="text" class="form-control" name="schools[]" value="${edu}" placeholder="학교명" required>
+				                <input type="text" class="form-control mt-2" name="periods[]" value="${periods[status.index]}" placeholder="기간" required>
+				                <input type="text" class="form-control mt-2" name="majors[]" value="${majors[status.index]}" placeholder="전공" required>
+				            </div>
+				        </c:forEach>
+				        <button type="button" class="btn btn-secondary mt-3" onclick="addEducationField()">학력 추가</button>
+				    </div>
+				</div>
+				
+				<!-- 경력사항 -->
+				<div class="form-group mb-3">
+				    <label for="experience">아르바이트 경력사항</label>
+				    <div id="experienceFields">
+						<c:forEach var="exp" items="${jobTitles}" varStatus="status">
+						    <div class="experience-row mb-3">
+						        <input type="text" class="form-control" name="jobTitles[]" value="${exp}" placeholder="직장명" required>
+						        <input type="text" class="form-control mt-2" name="experiencePeriods[]" value="${experiencePeriods[status.index]}" placeholder="기간" required>
+						        <input type="text" class="form-control mt-2" name="mainWorks[]" value="${mainWorks[status.index]}" placeholder="주요 업무" required>
+						    </div>
+						</c:forEach>
+				        <button type="button" class="btn btn-secondary mt-3" onclick="addExperienceField()">경력 추가</button>
+				    </div>
+				</div>
+
                 <!-- 지원동기 -->
                 <div class="form-group mb-3">
                     <label for="reason">지원동기</label>

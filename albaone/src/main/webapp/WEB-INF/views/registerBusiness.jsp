@@ -63,50 +63,9 @@
         </div>
     </div>
     
-	<script>
-	   	var idck = 0;
-	   	const submitButton = document.getElementById('submitButton');
-	    function checkId() {
-	        var userId = document.querySelector('input[name="id"]').value;
-	        
-	        $.ajax({
-	        	url : "idcheck.do",
-	        	type : "post",
-	        	data : userId,
-	        	dataType : "json",
-	        	contentType : "application/json; charset=UTF-8",
-	        	success : function(data) {
-	        		if(data.cnt > 0) {
-	        			alert("아이디가 존재합니다. 다른 아이디를 입력해주세요");
-	        			submitButton.disabled = true;
-	        		} else {
-	        			alert("사용 가능한 아이디입니다.");
-	        			idck = 1;
-	        			submitButton.disabled = false;
-	        		}
-	        	},
-	        	error : function(error) {
-	        		alert("error : " + error);		
-	        	}
-	        });
-	    }
-	    
-        function validateForm() {
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
-
-            if (password !== confirmPassword) {
-                alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
-                return false; // 제출 요청을 거절
-            }
-            return true; // 제출 요청 허용
-        }
-        
-        
-	</script>
 	<!-- 본인 인증 테스트시 위에 자바스크립트를 주석처리하고 아래 링크를 주석 해제하고 사용 -->
 	<!-- 유료 api, 테스트시 유의 - key를 깃에 올리지 말것 -->
-	<!-- <script type="text/javascript" src="/albaone/resources/js/registerBusiness.js"></script> -->
+	<script type="text/javascript" src="/albaone/resources/js/registerBusiness.js"></script>
 	<%@include file="footer.jsp"%>
 </body>
 </html>

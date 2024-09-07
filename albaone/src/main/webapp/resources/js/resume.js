@@ -18,9 +18,9 @@ function addEducationField() {
     var newField = document.createElement('div');
     newField.className = 'mb-3';
     newField.innerHTML = `
-        <input type="text" class="form-control" name="school[]" placeholder="학교명" required>
-        <input type="text" class="form-control mt-2" name="period[]" placeholder="기간" required>
-        <input type="text" class="form-control mt-2" name="major[]" placeholder="전공" required>
+        <input type="text" class="form-control" name="schools[]" placeholder="학교명" required>
+        <input type="text" class="form-control mt-2" name="periods[]" placeholder="기간" required>
+        <input type="text" class="form-control mt-2" name="majors[]" placeholder="전공" required>
     `;
     container.appendChild(newField);
 }
@@ -31,9 +31,9 @@ function addExperienceField() {
     var newField = document.createElement('div');
     newField.className = 'mb-3';
     newField.innerHTML = `
-        <input type="text" class="form-control" name="job_title[]" placeholder="직장명" required>
-        <input type="text" class="form-control mt-2" name="experience_period[]" placeholder="기간" required>
-        <input type="text" class="form-control mt-2" name="main_work[]" placeholder="주요 업무" required>
+        <input type="text" class="form-control" name="jobTitles[]" placeholder="직장명" required>
+        <input type="text" class="form-control mt-2" name="experiencePeriods[]" placeholder="기간" required>
+        <input type="text" class="form-control mt-2" name="mainWorks[]" placeholder="주요 업무" required>
     `;
     container.appendChild(newField);
 }

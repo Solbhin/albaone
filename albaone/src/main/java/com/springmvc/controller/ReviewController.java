@@ -1,6 +1,8 @@
 package com.springmvc.controller;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +24,8 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewServiceImpl reviewService;
+	
+	String encodedCompanyName = null;
 	
 	@GetMapping("/reviewList")
 	public String showReviewList(@RequestParam("companyName") String companyName,Model model,HttpSession session) {
@@ -62,7 +66,14 @@ public class ReviewController {
 
 	    double averageRating = reviewService.getRatingAverage(companyName);
 	    
-	    return "redirect:/reviewList?companyName=" + companyName + "&averageRating=" + averageRating;
+	    try {
+			encodedCompanyName = URLEncoder.encode(companyName, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    return "redirect:/reviewList?companyName=" + encodedCompanyName + "&averageRating=" + averageRating;
 	}
 	@GetMapping("/removeReview")
 	public String removeReview(@RequestParam("id") String id,
@@ -71,7 +82,14 @@ public class ReviewController {
 		
 		reviewService.removeReview(id,companyName,reviewNumber);
 		
-		return "redirect:/reviewList?companyName=" + companyName ;
+		try {
+			encodedCompanyName = URLEncoder.encode(companyName, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/reviewList?companyName=" + encodedCompanyName ;
 	}
 	@GetMapping("/updateReview")
 	public String updateReviewForm(@RequestParam("reviewNumber") int reviewNumber, Model model) {

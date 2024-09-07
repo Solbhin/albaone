@@ -1,0 +1,16 @@
+.card {
+	margin: 20px auto !important;
+	max-width: 600px !important;
+}
+
+.btn-style {
+	background-color: #D3BEB9 !important;
+	color: white !important;
+	border: none !important;
+}
+
+.main
+{
+	margin-top : 20%;
+	margin-bottom : 5%;
+}

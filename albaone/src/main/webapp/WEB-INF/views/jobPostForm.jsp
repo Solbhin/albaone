@@ -10,10 +10,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>직업 공고 등록</title>
 </head>
+<style>
+	.main
+	{
+		margin-bottom : 5%;
+	}
+</style>
 <body>
     <%@include file="menu.jsp" %>
     
-    <div class="container mt-4">
+    <div class="container mt-4 main">
         <h2 class="text-center">직업 공고 등록</h2>
         <div id="map" style="width:100%;height:400px;"></div>
         <form action="./jobposting" method="post" modelAttribute="jobPost" id="jobPostingForm">
@@ -57,7 +63,7 @@
             <button type="submit" class="btn btn-primary btn-block">등록하기</button>
         </form>
     </div>
-
+    
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7dae7fbe3ec02d481fe913a5d0874e98&libraries=services,clusterer,drawing"></script>
     <script type="text/javascript">
         var container = document.getElementById('map');

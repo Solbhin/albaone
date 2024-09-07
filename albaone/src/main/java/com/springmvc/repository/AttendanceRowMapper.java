@@ -28,8 +28,6 @@ public class AttendanceRowMapper implements RowMapper<Attendance> {
 	    } else {
 	        attendance.setCheckOutTime(null);
 	    }
-	    attendance.setReason(rs.getString("reason"));
-	    attendance.setEdit(rs.getString("edit"));
 		return attendance;
 	}
 

@@ -172,32 +172,32 @@
                 <label for="workday">주 근무일</label>
                 <br>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="workday" name="workday" value="월" checked>
-                    <label class="form-check-label" for="workday">월</label>
+                    <input type="checkbox" class="form-check-input" id="monday" name="workday" value="월" checked>
+                    <label class="form-check-label" for="monday">월</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="workday" name="workday" value="화">
-                    <label class="form-check-label" for="workday">화</label>
+                    <input type="checkbox" class="form-check-input" id="tuseday" name="workday" value="화">
+                    <label class="form-check-label" for="tuseday">화</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="workday" name="workday" value="수">
-                    <label class="form-check-label" for="workday">수</label>
+                    <input type="checkbox" class="form-check-input" id="wednesday" name="workday" value="수">
+                    <label class="form-check-label" for="wednesday">수</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="workday" name="workday" value="목">
-                    <label class="form-check-label" for="workday">목</label>
+                    <input type="checkbox" class="form-check-input" id="thursday" name="workday" value="목">
+                    <label class="form-check-label" for="thursday">목</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="workday" name="workday" value="금">
-                    <label class="form-check-label" for="workday">금</label>
+                    <input type="checkbox" class="form-check-input" id="friday" name="workday" value="금">
+                    <label class="form-check-label" for="friday">금</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="workday" name="workday" value="토">
-                    <label class="form-check-label" for="workday">토</label>
+                    <input type="checkbox" class="form-check-input" id="saturday" name="workday" value="토">
+                    <label class="form-check-label" for="saturday">토</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="workday" name="workday" value="일">
-                    <label class="form-check-label" for="workday">일</label>
+                    <input type="checkbox" class="form-check-input" id="sunday" name="workday" value="일">
+                    <label class="form-check-label" for="sunday">일</label>
                 </div>
             </div>
             

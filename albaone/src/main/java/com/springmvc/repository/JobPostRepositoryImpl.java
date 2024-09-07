@@ -23,10 +23,10 @@ public class JobPostRepositoryImpl implements JobPostRepository {
 
 	@Override
 	public void jobPosting(JobPost jobPost, String id) {
-		String SQL = "insert into jobpost(companyName, workLocation, contactNumber, salary, workHours, workDays, workDuration, jobDescription, id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "insert into jobpost(companyName, workLocation, contactNumber, salary, workHours, workDays, workDuration, jobDescription, id, businessNumber) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		template.update(SQL, jobPost.getCompanyName(), jobPost.getWorkLocation(), jobPost.getContactNumber(),
 				jobPost.getSalary(), jobPost.getWorkHours(), jobPost.getWorkDays(), jobPost.getWorkDuration(),
-				jobPost.getJobDescription(), id);
+				jobPost.getJobDescription(), id, jobPost.getBusinessNumber());
 	}
 
 	@Override
