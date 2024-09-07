@@ -2,15 +2,13 @@ package com.springmvc.service;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.springmvc.domain.QRdto;
+import com.springmvc.domain.Attendance;
 
+public interface QRCodeService {
 
-public interface QRCodeService
-{
-    
-    public void create(QRdto qrdto);
+	Attendance getLastAttendance(String id);
 
-	public QRdto read(String id);
+	void checkIn(String id, String datetime, String businessNumber);
 
-	void generateQRCode(String text, HttpServletResponse response) throws Exception;
+	void checkOut(String id, String time, long flooredMinutes);
 }

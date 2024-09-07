@@ -1,0 +1,28 @@
+@charset "UTF-8";
+    body {
+        background-color: #f8f9fa; /* 배경색을 밝게 설정하여 깔끔한 느낌 */
+    }
+    .input-group {
+        width: 100%;
+    }
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 카드에 약간의 그림자 효과를 추가하여 입체감을 줌 */
+        border-radius: 15px; /* 카드 모서리를 둥글게 */
+    }
+    .form-group {
+        margin-bottom: 1.5rem; /* 각 폼 그룹 사이의 간격을 넓게 */
+    }
+    #submitButton {
+        font-size: 1.25rem; /* 버튼 글꼴 크기 조정 */
+        padding: 10px 20px; /* 버튼 크기 확대 */
+        width: 100%; /* 버튼을 가로로 꽉 채움 */
+        background-color: #d3beb9 !important;
+        border : 0px;
+    }
+    .input-group-append {
+        margin-left: -1px; /* 버튼과 경계가 겹치지 않도록 조정 */
+    }
+    .update-btn{
+    	background-color: #b5a09a !important;
+   		border : 0px !important;
+    }

@@ -1,0 +1,62 @@
+@charset "UTF-8";
+        body {
+            background-color: #f8f9fa;
+        }
+        .resume-table {
+            border: 1px solid #dee2e6;
+            background-color: #fff;
+            font-size: 16px;
+            width: 100%; /* 테이블 전체 너비 설정 */
+            max-width: 1200px; /* 최대 너비 설정 */
+            margin: 0 auto; /* 가운데 정렬 */
+        }
+        .resume-table th, .resume-table td {            
+            vertical-align: middle;
+            padding: 10px;
+        }
+        .resume-table th {
+            background-color: #EDE6D2;
+            color: #000;
+            width: 150px;
+            text-align: center;
+        }
+        .resume-table td {
+            width: 250px;
+            text-align: left;
+        }
+        .resume-table img {
+            width: 200px;  /* 사진 너비 고정 */
+            height: 260px; /* 사진 높이 고정 */
+            margin: 0 auto;
+            display: block;
+        }
+        .header {
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+        .photo-cell {
+            text-align: center;
+        }
+        .table th {
+            background-color: #D3D3D3 !important;
+            color : black;
+        }
+        .row {
+          	margin-bottom: 200px !important;
+        }
+
+        .btn-secondary {
+            background-color: #C1B69F !important; /* 부드러운 카키색 */
+            border: 0px !important;
+        }
+        .btn-danger {
+            background-color: #D8A9A4 !important; /* 연한 붉은 와인색 */
+            border: 0px !important;
+        }
+        .btn-primary {
+            background-color: #9C9A6C !important; /* 소프트 올리브색 */
+            border: 0px !important;
+        }

@@ -17,7 +17,7 @@
         <p>임금 : <input type="text" name="money"></p>
         <p>상여금 : <input type="text" name="bonus"></p>
         <p>보험 : <input type="text" name="insurance"></p>
-        <p>작성 날짜 : <input type="date" name="data"></p>
+        <p>작성 날짜 : <input type="date" name="createdate"></p>
         <p><input type="submit" value="등록"></p>
     </form>
 </body>

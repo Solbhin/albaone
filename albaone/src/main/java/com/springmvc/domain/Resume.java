@@ -5,6 +5,8 @@ import java.sql.Date;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Resume {
+	private String resume_id;		// 아이디
+	private Integer number; 		//이력서 글 번호
     private String name;   			// 성명
     private Date birthdate;			// 생년월일
     private MultipartFile myimg;		// 증명사진
@@ -131,6 +133,18 @@ public class Resume {
 	}
 	public void setMyimgName(String myimgName) {
 		this.MyimgName = myimgName;
+	}
+	public Integer getNumber() {
+		return number;
+	}
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+	public String getResume_id() {
+		return resume_id;
+	}
+	public void setResume_id(String resume_id) {
+		this.resume_id = resume_id;
 	}
     
 }

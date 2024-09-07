@@ -1,0 +1,27 @@
+/* 디폴트 값 */
+* {    list-style: none;    text-decoration: none;    box-sizing: border-box;    padding: 0;    margin: 0;	}
+
+h2	{    padding-bottom: 5%;}
+
+form
+{
+    padding: 2%;
+    /* background-color: #E0D4C1; */
+
+    margin-bottom: 5%;
+}
+
+label
+{
+    margin-top: 2%;
+}
+
+#button
+{
+    margin-top: 1%; 
+}
+
+button
+{
+	background-color: #D8CAB8 !important;
+}

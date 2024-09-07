@@ -7,10 +7,10 @@ import com.springmvc.domain.User;
 import com.springmvc.repository.UserRepositoryImpl;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepositoryImpl userRepository;
-	
+
 	@Override
 	public void setNewUser(User user) {
 		userRepository.setNewUser(user);
@@ -29,6 +29,26 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User findUserById(String id) {
 		return userRepository.finUserById(id);
+	}
+
+	@Override
+	public int idcheck(String userId) {
+		return userRepository.idcheck(userId);
+	}
+
+	@Override
+	public void updateUser(User user) {
+		userRepository.updateUser(user);
+	}
+
+	@Override
+	public void deleteUser(String id) {
+		userRepository.deleteUser(id);
+	}
+
+	@Override
+	public String getUserName(String id) {
+		return userRepository.getUserName(id);
 	}
 
 }

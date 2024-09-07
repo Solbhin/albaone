@@ -1,0 +1,40 @@
+    body {
+        background-color: #f8f9fa; /* 밝은 배경 */
+    }
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 카드에 그림자 효과 */
+        border-radius: 15px; /* 카드 모서리를 둥글게 */
+        padding: 20px;
+        width: 100%;
+        max-width: 400px; /* 카드의 최대 너비 설정 */
+    }
+    .form-group {
+        margin-bottom: 1.2rem; /* 폼 그룹 간의 간격을 적당히 */
+    }
+    .btn-primary {
+        font-size: 1.1rem; /* 로그인 버튼 크기 조정 */
+        padding: 8px 16px; /* 버튼의 내부 여백 조정 */
+        width: 100%; /* 버튼을 가로 전체 차지 */
+        background-color : #b9c5b1 !important;
+        color : black !important;
+        border : 0px !important;
+    }
+    .btn-link {
+        font-size: 0.5rem; /* 회원가입 링크 크기 조정 */
+    }
+    h5.card-title {
+        font-size: 1rem; /* 제목 크기 적당히 조정 */
+        font-weight: bold; /* 제목을 두껍게 */
+        margin-bottom: 20px;
+    }
+    
+    .btn-secondary{
+    	margin-top : 10px;
+    	font-size: 1.1rem; /* 로그인 버튼 크기 조정 */
+        padding: 8px 16px; /* 버튼의 내부 여백 조정 */
+        width: 100%; /* 버튼을 가로 전체 차지 */
+        background-color : #d3beb9 !important;
+        color : black !important;
+        border : 0px !important;
+    }
+    
