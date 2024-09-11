@@ -8,5 +8,6 @@
 http://albaone.cafe24.com/
 https가 아니라 http인 이유는 따로 도메인을 구입하지 않았기 때문이며 만약 따로 기간 연장을 하지 않는다면 해당 사이트는 25년 9월까지 유지될 것입니다.
 
+참조
 사업자등록정보 api : https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15081808 <br>
 coolsms 개발 문서 : https://docs.coolsms.co.kr/
